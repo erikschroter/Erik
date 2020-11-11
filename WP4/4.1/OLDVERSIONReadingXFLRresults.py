@@ -1,10 +1,4 @@
-"""Function to read XFLR Results in a CSV Format which has as an output:
-CL, yspan, Chord, Ai, Cl, ICd, CmAirfquarterchord
-If questions ask Christoph Pabsch"""
-
 def ReadingXFLR(filename):
-    """Input for function: filename
-    Output of function: CL, yspan, Chord, Ai, Cl, ICd, CmAirfquarterchord"""
 
     # Creating empty lists for all output columns
     yspan = []
@@ -25,9 +19,9 @@ def ReadingXFLR(filename):
         del lines[40:]
 
         # Read the lift coefficient value which is always in line 10
-        pickedline = lines[0]
-        pickedline = pickedline.split(',')
-        CLintermediate = pickedline[1]
+        linefur = lines[0]
+        linefur = linefur.split(',')
+        CLintermediate = linefur[1]
         NewCLlist = CLintermediate.split(' ')
         if '' in NewCLlist:
             NewCLlist.remove('')
@@ -44,11 +38,11 @@ def ReadingXFLR(filename):
         for i in range(39):
             line = []
             line.append(lines[i])
-            pickedline = line[0]
-            pickedline = pickedline.split(',')
-            lines[i] = pickedline
+            linefur = line[0]
+            linefur = linefur.split(',')
+            lines[i] = linefur
 
-        # Obtain the values for yspan, Chord, Ai, Cl, ICd, CmAirfquarterchord as lists of floats
+        # Obtain the values for yspan, Chord, Ai, Cl, ICd, CmAirfquarterchord
         del lines[0]
         for k in range(len(lines)):
             yspan.append(lines[k][0])
@@ -60,33 +54,30 @@ def ReadingXFLR(filename):
         for j in range(len(yspan)):
             value = yspan[j]
             value = value.split(' ')
-            yspan[j] = float(value[-1])
+            yspan[j] = value[-1]
         for j in range(len(Chord)):
             value = Chord[j]
             value = value.split(' ')
-            Chord[j] = float(value[-1])
+            Chord[j] = value[-1]
         for j in range(len(Ai)):
             value = Ai[j]
             value = value.split(' ')
-            Ai[j] = float(value[-1])
+            Ai[j] = value[-1]
         for j in range(len(Cl)):
             value = Cl[j]
             value = value.split(' ')
-            Cl[j] = float(value[-1])
+            Cl[j] = value[-1]
         for j in range(len(ICd)):
             value = ICd[j]
             value = value.split(' ')
-            ICd[j] = float(value[-1])
+            ICd[j] = value[-1]
         for j in range(len(CmAirfquarterchord)):
             value = CmAirfquarterchord[j]
             value = value.split(' ')
-            CmAirfquarterchord[j] = float(value[-1])
+            CmAirfquarterchord[j] = value[-1]
 
     return [CL, yspan, Chord, Ai, Cl, ICd, CmAirfquarterchord]
 
-"""
-
-USE THE FOLLOWING LINES TO TEST THE FUNTION
 
 CL, yspan, Chord, Ai, Cl, ICd, CmAirfquarterchord = ReadingXFLR('MainWing_a0.00_v10.00ms.csv')
 
@@ -96,4 +87,4 @@ print(Chord)
 print(Ai)
 print(Cl)
 print(ICd)
-print(CmAirfquarterchord)"""
+print(CmAirfquarterchord)
