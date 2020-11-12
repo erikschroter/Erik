@@ -91,10 +91,8 @@ USE THE FOLLOWING LINES TO TEST THE FUNTION
 
 CL, yspan, Chord, Ai, Cl, ICd, CmAirfquarterchord = ReadingXFLR('MainWing_a0.00_v10.00ms.csv')
 
-print(CL)
-print(yspan)
-print(Chord)
-print(Ai)
+
+
 print(Cl)
 print(ICd)
 print(CmAirfquarterchord)
