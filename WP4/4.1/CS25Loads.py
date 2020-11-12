@@ -2,6 +2,7 @@ import numpy as np, scipy as sp
 
 
 def ReferenceGustVelocity(altitude, velocity):
+    
     return
     
 
