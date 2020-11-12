@@ -1,4 +1,6 @@
 import numpy as np, scipy as sp
-import Project_Github
+import _main_
+MaxFuelWeight = _main_.MaxFuelWeight
 
-print(Project_Github.ZFW)
+
+
