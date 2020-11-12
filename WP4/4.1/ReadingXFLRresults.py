@@ -15,7 +15,8 @@ def ReadingXFLR(filename):
     CmAirfquarterchord = []
 
     # Open Datafiles
-    with open(filename, 'r') as csv_file:
+    #Latin-1 encoding
+    with open(filename, 'r', encoding='latin-1') as csv_file:
 
         lines = csv_file.readlines()
 
