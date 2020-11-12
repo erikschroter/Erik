@@ -21,8 +21,8 @@ def ReadingXFLR(filename):
 
         # Delete the lines which are not needed
         del lines[:9]
-        del lines[2:12]
-        del lines[40:]
+        del lines[2:31]
+        del lines[21:]
 
         # Read the lift coefficient value which is always in line 10
         pickedline = lines[0]
@@ -41,7 +41,7 @@ def ReadingXFLR(filename):
 
         # Create split lists for each line in the table
         del lines[0]
-        for i in range(39):
+        for i in range(20):
             line = []
             line.append(lines[i])
             pickedline = line[0]
@@ -84,10 +84,10 @@ def ReadingXFLR(filename):
 
     return [CL, yspan, Chord, Ai, Cl, ICd, CmAirfquarterchord]
 
+
 """
-
 USE THE FOLLOWING LINES TO TEST THE FUNTION
-
+"""
 CL, yspan, Chord, Ai, Cl, ICd, CmAirfquarterchord = ReadingXFLR('MainWing_a0.00_v10.00ms.csv')
 
 print(CL)
@@ -96,4 +96,4 @@ print(Chord)
 print(Ai)
 print(Cl)
 print(ICd)
-print(CmAirfquarterchord)"""
+print(CmAirfquarterchord)
