@@ -100,7 +100,7 @@ def gendistribution(file, rho, v, span, accuracy):
 # Graphing
     
     # interpolating the data in a cubic manner
-    g = interp1d(x,Mlst,kind="cubic", fill_value="extrapolate")
+    g = interp1d(x,Mlst,kind="linear", fill_value="extrapolate")
 
     #determining over which range the interpolation needs to be determined, here num= determines the accuracy of the interpolation.
     xnew = np.linspace(0, (span/2), num=accuracy, endpoint=True)
