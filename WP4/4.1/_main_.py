@@ -27,7 +27,7 @@ W_uc_MLG = 7_569.349
 WingWeight = 3210.55
 
 from intigrate import *
-from interpolate import *
+from torquedistribution import *
 from ReadingXFLRresults import *
 from TorqueFromThrust import *
 
