@@ -17,7 +17,7 @@ wingSpan = Constants.wingSpan
 
 beginFuelTank = 2
 endFuelTank  = 32
-lengthFuelTank = 0.85 * wingSpan
+lengthFuelTank = .97.5 * wingSpan
 fuelPackingFactorinWingbox = 0.9
 fuelDensity = 800 #kg / m^3
 
@@ -35,19 +35,23 @@ def WingStructuralWeight (spanValue):
 def fuelLoading (spanValue, fuelMass):
     #fuel in half wing
     wingFuelWeight = 0.5 * fuelMass
-    requiredFuelVolume = fuelMass / fuelDensity
+    requiredFuelVolume = 0.5 * fuelMass / fuelDensity
 
     totalAvailableFuelVolume = 0
-    for i in range (0, int(wingSpan / 2 * 1000) ):
-        totalAvailableFuelVolume += localWingboxArea(spanValue) * fuelPackingFactorinWingbox * 1/1000
-    #print(requiredFuelVolume)
-    #print(totalAvailableFuelVolume)
-    #print(requiredFuelVolume / totalAvailableFuelVolume)
+
+    resolution = 10
+    for i in range (0, int(wingSpan / 2 * resolution)):
+        totalAvailableFuelVolume += localWingboxArea(i / resolution) * fuelPackingFactorinWingbox * 1/resolution
+
+    print(requiredFuelVolume)
+    print(totalAvailableFuelVolume)
+    print(requiredFuelVolume / totalAvailableFuelVolume)
+
     return
 
 
 
-    #find values
+
 
 
 
@@ -67,23 +71,17 @@ def localWingboxArea (spanValue):
         localChord = 0
 
 
-    #area of trapezoid)
+    #area of trapezoid
     areaBetweenSparsOverChordSquared = (.1347 + .1091)/2 * .45
     areaBetweenSpars = areaBetweenSparsOverChordSquared * localChord**2
-    print("center: ", countCenter)
-    print("Outer: ", countOuter)
+
+
     return areaBetweenSpars
 
 
-volume = 0
-for i in range(0, int(wingSpan /2 * 1000)):
-    volume += localWingboxArea(i/1000) * 1/ (1000)
-#print(volume)
-
-#print(localWingboxArea(0))
 
 
 
 
 
-#print(fuelLoading(0,207251))
+print(fuelLoading(0,207251))
