@@ -16,7 +16,7 @@ t=0.005
 tS=0.005
 aS=10*tS
 bS=aS
-n=4
+n=4                   #number of stringers, change is needed
 
 #values trapezoid
 Cchord=(h/3)*((2*a+b)/(a+b))
