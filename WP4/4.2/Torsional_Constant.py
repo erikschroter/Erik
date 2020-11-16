@@ -1,12 +1,18 @@
 import Moment_of_Inertia_Wingbox as WB
+from matplotlib import pyplot as plt
 
 t = WB.t
+G = 1 #Change
 
-def Torsional_Constant_J(spanwise_location):
+def Torsional_Constant_J(spanwise_location_iny):
+    b = 69.92
+
     WB_chord = 0.45
     WB_front_height = 0.1347
     WB_aft_height = 0.1091
 
+
+    spanwise_location = spanwise_location_iny / (b / 2)
     chord = WB.chord_length(spanwise_location)
     h = WB_chord * chord
     a = WB_aft_height * chord
@@ -14,9 +20,29 @@ def Torsional_Constant_J(spanwise_location):
     c = 0.0163 * chord
     hpt = (h**2 + ((b-a)/2)**2)**0.5
 
-    G = 1 #to be changed
+
     A = 0.5*(a+b)*h
     s = a + b + 2 * hpt
     J = 4*A**2/(s/t)
 
     return J
+
+def Torsional_Stiffness(spanwise_location_iny):
+    b = 69.92
+
+    GJ_L = G*Torsional_Constant_J(spanwise_location_iny)/(b/2)
+
+    return GJ_L
+
+def Torsional_Stiffness_graph(ystart=0, yendmaxb=69.92):
+    Xaxis_lst = []  # spanwise_location in y
+    Yaxis_lst = []  # Ixx
+    for point in range(1, 501):
+        spanwise_location_iny = point / 500 * (yendmaxb - ystart) / 2
+        Xaxis_lst.append(spanwise_location_iny)
+        Yaxis_lst.append(Torsional_Stiffness(spanwise_location_iny))
+
+    plt.plot(Xaxis_lst, Yaxis_lst)
+    plt.title('Torsional Stiffness')
+    plt.show()
+
