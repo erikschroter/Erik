@@ -20,6 +20,7 @@ def chord_length(spanwise_location): #Spanwise location is y/(b/2)
 
 def Moment_of_Inertia_y(spanwise_location):
     chord = chord_length(spanwise_location)
+    #Geometrical parameters
     h = WB_chord * chord
     a = WB_aft_height * chord
     b = WB_front_height * chord
