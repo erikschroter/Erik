@@ -19,7 +19,8 @@ def chord_length(spanwise_location): #Spanwise location is y/(b/2)
 
     return c
 
-def Moment_of_Inertia_y(spanwise_location):
+def Moment_of_Inertia_y(spanwise_location_iny):
+    spanwise_location = spanwise_location_iny/(b/2)
     chord = chord_length(spanwise_location)
     #Geometrical parameters
     h = WB_chord * chord
@@ -46,24 +47,8 @@ def Moment_of_Inertia_y(spanwise_location):
     return I_chord_wingbox
 
 
-def Ixx_in_y(spanwise_location):
-    Mx = Moment_of_Inertia_y(spanwise_location)+Ixx_stringers(spanwise_location) #error waiting for function
+def Ixx_in_y(spanwise_location_iny):
+    Mx = Moment_of_Inertia_y(spanwise_location_iny)+Ixx_stringers(spanwise_location_iny) #error waiting for function
 
     return Mx
 
-def Deflection(span_position_in_y):
-    spanwise_location = span_position_in_y/(b/2)     #spanwise_location is in y/(b/2)
-
-    Mx_y =  Mx(span_position_in_y)  #error waiting for function
-    Ixx_y = Ixx_in_y(span_position_in_y)
-
-    Span = 69.92
-    y2 = Span/2
-    y1 = -Span/2
-
-    d2v_dy2_y = -Mx_y/(E*Ixx_y)
-    dv_dy_y = sp.integrate.quad(d2v_dy2_y,y1,y2)
-
-    v_y = sp.integrate.quad(dv_dy_y,y1,y2)
-
-    return v_y
