@@ -32,6 +32,4 @@ def fuelLoading (spanValue, fuelMass):
 
 
 
-print(CalculateWingWeight(69.92/2))
-
 
