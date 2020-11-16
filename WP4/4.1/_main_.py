@@ -28,6 +28,8 @@ WingWeight = 3210.55
 
 from intigrate import *
 from interpolate import *
+from ReadingXFLRresults import *
+from TorqueFromThrust import *
 
 
 f, xdist = liftdistribution(filename, rho, v, span, accuracy)
