@@ -1,5 +1,6 @@
 import scipy as sp
 
+
 # Wing Box outer geometry (in chord length)
 WB_chord = 0.45
 WB_front_height = 0.1347
@@ -44,21 +45,6 @@ def Moment_of_Inertia_y(spanwise_location):
 
     return I_chord_wingbox
 
-
-def Torsional_Constant_J(spanwise_location):
-
-    chord = chord_length(spanwise_location)
-    h = WB_chord * chord
-    a = WB_aft_height * chord
-    b = WB_front_height * chord
-    c = 0.0163 * chord
-    hpt = (h**2 + ((b-a)/2)**2)**0.5
-
-    A = 0.5*(a+b)*h
-    s = a + b + 2 * hpt
-    J = 4*A**2/(s/t)
-
-    return J
 
 def Ixx_in_y(spanwise_location):
     Mx = Moment_of_Inertia_y(spanwise_location)+Ixx_stringers(spanwise_location) #error waiting for function
