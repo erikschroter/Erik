@@ -17,7 +17,7 @@ wingSpan = Constants.wingSpan
 
 beginFuelTank = 2
 endFuelTank  = 32
-lengthFuelTank = .97.5 * wingSpan
+lengthFuelTank = .975 * wingSpan
 fuelPackingFactorinWingbox = 0.9
 fuelDensity = 800 #kg / m^3
 
@@ -39,7 +39,7 @@ def fuelLoading (spanValue, fuelMass):
 
     totalAvailableFuelVolume = 0
 
-    resolution = 10
+    resolution = 500
     for i in range (0, int(wingSpan / 2 * resolution)):
         totalAvailableFuelVolume += localWingboxArea(i / resolution) * fuelPackingFactorinWingbox * 1/resolution
 
