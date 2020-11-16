@@ -124,3 +124,4 @@ def gendistribution(file, rho, v, span, accuracy):
 
 g, xdist = gendistribution('MainWing_a0.00_v10.00ms.csv', 1.225, 70, 69.92, 100)
 # print(g(9.23))
+
