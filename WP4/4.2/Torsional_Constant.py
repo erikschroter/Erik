@@ -1,22 +1,13 @@
-import Moment of Inertia
+import Moment_of_Inertia_Wingbox as WB
 
-#Thickness To be determined
-t = 0.005
-
-def chord_length(spanwise_location): #Spanwise location is y/(b/2)
-    Cr = 11.95
-    Ct = 3.59
-    Taper = 0.3
-    c = Cr - Cr*(1-Taper)*(spanwise_location)
-
-    return c
+t = WB.t
 
 def Torsional_Constant_J(spanwise_location):
     WB_chord = 0.45
     WB_front_height = 0.1347
     WB_aft_height = 0.1091
 
-    chord = chord_length(spanwise_location)
+    chord = WB.chord_length(spanwise_location)
     h = WB_chord * chord
     a = WB_aft_height * chord
     b = WB_front_height * chord
