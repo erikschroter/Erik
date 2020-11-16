@@ -26,7 +26,8 @@ def fuelLoading (spanValue, fuelMass):
     localFuelWeight = 0
     beginFuelTank = 2
     endFuelTank  = 32
-    if spanValue <= beginFuelTank:
+    if spanValue <= D_fuselageOuter:
+        widthTank
         localFuelWeight =
 
 
