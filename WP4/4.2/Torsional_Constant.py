@@ -14,6 +14,7 @@ def Torsional_Constant_J(spanwise_location):
     c = 0.0163 * chord
     hpt = (h**2 + ((b-a)/2)**2)**0.5
 
+    G = 1 #to be changed
     A = 0.5*(a+b)*h
     s = a + b + 2 * hpt
     J = 4*A**2/(s/t)
