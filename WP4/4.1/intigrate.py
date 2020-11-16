@@ -16,7 +16,7 @@ def ShearForce(LoadingFunction,x,Maxx):
 def DrawShearForce(LoadingFunction,Maxx):
     Xlist = [0]
     Ylist = [0]
-    dt=0.01
+    dt=0.1
     while Xlist[-1]<=Maxx:
         Xlist.append(Xlist[-1]+dt)
         Ylist.append(ShearForce(LoadingFunction,Xlist[-1],Maxx))
@@ -25,23 +25,31 @@ def DrawShearForce(LoadingFunction,Maxx):
     plt.show()
     
 def BendingMoment(LoadingFunction,x,Maxx):
-   # def tempfunc(xtemp):
-   #     return ShearForce(LoadingFunction, xtemp, Maxx)
-   # return sp.integrate.quad(tempfunc, 0, x)[0]-sp.integrate.quad(tempfunc, 0, Maxx)[0]
-   return sp.integrate.quad(lambda x: sp.integrate.quad(LoadingFunction,0,x)[0],0,x)[0]-sp.integrate.quad(lambda x: sp.integrate.quad(LoadingFunction,0,x)[0],0,Maxx)[0]
-    
+   global c
+
+   if c == 0:
+       c = sp.integrate.quad(lambda x: sp.integrate.quad(LoadingFunction,0,x)[0],0,Maxx)[0] 
+       
+   
+
+   print("bending moment calculation: ",round(100*x/Maxx),"%")
+   return sp.integrate.quad(lambda x: sp.integrate.quad(LoadingFunction,0,x)[0],0,x)[0]-c
+
  
     
 def DrawBendingMoment(LoadingFunction,Maxx):
     Xlist = [0]
     Ylist = [0]
-    dt=0.01
+    dt=0.1
+    global c
+    c = 0
     while Xlist[-1]<=Maxx:
         Xlist.append(Xlist[-1]+dt)
         Ylist.append(BendingMoment(LoadingFunction,Xlist[-1],Maxx))
     plt.plot(Xlist,Ylist)
     plt.title('Bending Moment diagram')
-    plt.show()   
+    plt.show()  
+    
 
 def f(x):
     return x**2

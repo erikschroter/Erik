@@ -6,6 +6,7 @@ rho = 1.225
 v = 70
 span = 69.92
 accuracy = 41 
+ 
 
 #Maximum takeoff weight [kg]
 MTOW = 291_509.2
