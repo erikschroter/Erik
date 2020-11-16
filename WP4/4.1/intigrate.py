@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 Created on Mon Nov  9 16:21:58 2020
 
@@ -25,10 +24,20 @@ def DrawShearForce(LoadingFunction,Maxx):
     plt.show()
     
 def BendingMoment(LoadingFunction,x,Maxx):
+
     def tempfunc(xtemp):
         return ShearForce(LoadingFunction, xtemp, Maxx)
     return sp.integrate.quad(tempfunc, 0, x)[0]-sp.integrate.quad(tempfunc, 0, Maxx)[0]
  
+=
+   # def tempfunc(xtemp):
+   #     return ShearForce(LoadingFunction, xtemp, Maxx)
+   # return sp.integrate.quad(tempfunc, 0, x)[0]-sp.integrate.quad(tempfunc, 0, Maxx)[0]
+   #return sp.integrate.quad(lambda x: sp.integrate.quad(LoadingFunction,0,x)[0],0,x)[0]-sp.integrate.quad(lambda x: sp.integrate.quad(LoadingFunction,0,x)[0],0,Maxx)[0]
+    
+ 
+    
+
 def DrawBendingMoment(LoadingFunction,Maxx):
     Xlist = [0]
     Ylist = [0]
@@ -39,10 +48,7 @@ def DrawBendingMoment(LoadingFunction,Maxx):
     plt.plot(Xlist,Ylist)
     plt.title('Bending Moment diagram')
     plt.show()   
-    
+
 def f(x):
     return x
-
-
-
 
