@@ -30,14 +30,19 @@ from intigrate import *
 from torquedistribution import *
 from ReadingXFLRresults import *
 from TorqueFromThrust import *
+from liftdistribution import *
 
 
-f, xdist = liftdistribution(filename, rho, v, span, accuracy)
+x, Llst, xnew, f, xdist = liftdistribution(filename, rho, v, span, accuracy)
 
-DrawShearForce(f,xdist)
-DrawBendingMoment(f,xdist)
+#DrawShearForce(f,xdist)
+#DrawBendingMoment(f,xdist)
+
+def moment(x):
+    return BendingMoment(f,x,xdist,0,False)
+print(moment(5))
 
 #Draw Torque Diagram
-chordwise_location_centroid = 0.367  # *c
-height_from_chordline_centroid = 0.1  # *c
-torque_contribution_engine, miscellaneous = TorqueFromThrust(chordwise_location_centroid, height_from_chordline_centroid)
+#chordwise_location_centroid = 0.367  # *c
+#height_from_chordline_centroid = 0.1  # *c
+#torque_contribution_engine, miscellaneous = TorqueFromThrust(chordwise_location_centroid, height_from_chordline_centroid)

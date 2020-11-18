@@ -6,7 +6,7 @@ def Deflection(span_position_in_y):
     b = WB.b
     E = WB.E
 
-    spanwise_location = WB.span_position_in_y/(b/2)     #spanwise_location is in y/(b/2)
+    spanwise_location = span_position_in_y/(b/2)     #spanwise_location is in y/(b/2)
 
     Mx_y =  WB.Mx(span_position_in_y)  #error waiting for function
     Ixx_y = WB.Ixx_in_y(span_position_in_y)
