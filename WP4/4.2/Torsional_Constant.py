@@ -55,5 +55,5 @@ def Torsional_Constant_graph(ystart=0.5, yendmaxb=69.92):
         Yaxis_lst.append(Torsional_Constant_J(spanwise_location_iny))
 
     plt.plot(Xaxis_lst, Yaxis_lst)
-    plt.title('Torsional Stiffness')
+    plt.title('Torsional Constant')
     plt.show()
