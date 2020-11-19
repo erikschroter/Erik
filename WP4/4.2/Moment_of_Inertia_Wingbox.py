@@ -7,6 +7,7 @@ WB_front_height = 0.1347
 WB_aft_height = 0.1091
 
 #Thickness To be determined
+b = 69.92
 t = 0.005
 E = 1   #To be changed
 
