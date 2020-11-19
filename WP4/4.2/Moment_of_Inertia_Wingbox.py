@@ -97,11 +97,11 @@ def Ixx_in_y(spanwise_location_iny):
     return Ixx
 
 
-def Ixx_graph(ystart=0,yendmaxb=69.92):
+def Ixx_graph(ystart=0.5,yendmaxb=69.92):
     Xaxis_lst = []  #spanwise_location in y
     Yaxis_lst = []  #Ixx
     for point in range(1, 501):
-        spanwise_location_iny = point/500*(yendmaxb-ystart)/2
+        spanwise_location_iny = point/500*(yendmaxb-ystart)/2 +ystart
         Xaxis_lst.append(spanwise_location_iny)
         Yaxis_lst.append(Ixx_in_y(spanwise_location_iny))
 

@@ -30,15 +30,15 @@ def Torsional_Constant_J(spanwise_location_iny):
 def Torsional_Stiffness(spanwise_location_iny):
     b = 69.92
 
-    GJ_L = G*Torsional_Constant_J(spanwise_location_iny)/(b/2)
+    GJ_L = G*Torsional_Constant_J(spanwise_location_iny)/(spanwise_location_iny)
 
     return GJ_L
 
-def Torsional_Stiffness_graph(ystart=0, yendmaxb=69.92):
+def Torsional_Stiffness_graph(ystart=0.5, yendmaxb=69.92):
     Xaxis_lst = []  # spanwise_location in y
     Yaxis_lst = []  # Ixx
     for point in range(1, 501):
-        spanwise_location_iny = point / 500 * (yendmaxb - ystart) / 2
+        spanwise_location_iny = point / 500 * (yendmaxb - ystart) / 2 + ystart
         Xaxis_lst.append(spanwise_location_iny)
         Yaxis_lst.append(Torsional_Stiffness(spanwise_location_iny))
 
