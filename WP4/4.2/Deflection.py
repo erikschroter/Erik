@@ -1,15 +1,16 @@
 import Moment_of_Inertia_Wingbox as WB
 from matplotlib import pyplot as plt
 import scipy as sp
+from _main_ import moment
 
 
-def Deflection(span_position_in_y):
+def Deflection(span_position_in_y=69.92/2):
     b = WB.b
     E = WB.E
 
     spanwise_location = span_position_in_y/(b/2)     #spanwise_location is in y/(b/2)
 
-    Mx_y =  WB.Mx(span_position_in_y)  #error waiting for function
+    Mx_y =  moment(span_position_in_y)  #error waiting for function
     Ixx_y = WB.Ixx_in_y(span_position_in_y)
 
     Span = 69.92
