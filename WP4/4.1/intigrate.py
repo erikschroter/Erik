@@ -45,7 +45,7 @@ def DrawBendingMoment(LoadingFunction,Maxx):
     c = 0
     while Xlist[-1]<=Maxx:
         Xlist.append(Xlist[-1]+dt)
-        Ylist.append(BendingMoment(LoadingFunction,Xlist[-1],Maxx),c,True)
+        Ylist.append(BendingMoment(LoadingFunction,Xlist[-1],Maxx,c,True))
     plt.plot(Xlist,Ylist)
     plt.title('Bending Moment diagram')
     plt.show()  
