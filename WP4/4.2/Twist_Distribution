@@ -11,12 +11,13 @@ def Twist(span_position_in_y):
 
     T_y =  TC.T(span_position_in_y)  #error waiting for function
     J_y = TC.J                       #_in_y(span_position_in_y)
+    GJ_L_y = TC.GJ_L
 
     Span = 69.92
     y2 = Span/2
     y1 = -Span/2
 
-    dO_dy = T_y/(G*J_y)                     #O is theta
+    dO_dy = T_y/(GJ_L_y)                     #O is theta
     O_y = sp.integrate.quad(dO_dy,y1,y2)
     
     return O_y

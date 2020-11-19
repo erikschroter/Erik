@@ -35,8 +35,8 @@ from liftdistribution import *
 
 x, Llst, xnew, f, xdist = liftdistribution(filename, rho, v, span, accuracy)
 
-#DrawShearForce(f,xdist)
-#DrawBendingMoment(f,xdist)
+DrawShearForce(f,xdist)
+DrawBendingMoment(f,xdist)
 
 def moment(x):
     return BendingMoment(f,x,xdist,0,False)
