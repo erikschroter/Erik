@@ -7,6 +7,7 @@ WB_front_height = 0.1347
 WB_aft_height = 0.1091
 
 #Thickness To be determined
+b = 69.92
 t = 0.005
 E = 1   #To be changed
 
@@ -64,7 +65,7 @@ def Ixx_stringers(spanwise_location_iny):
     tS=0.005
     aS=10*tS
     bS=aS
-    n=4
+    n= 20     #number of stringers
 
     #values trapezoid
     Cchord=(h/3)*((2*a+b)/(a+b))
