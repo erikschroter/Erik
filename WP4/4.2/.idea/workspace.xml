@@ -20,11 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dc6a473a-ac80-4419-8976-4cb74e06d58a" name="Default Changelist" comment="4.2">
-      <change afterPath="$PROJECT_DIR$/Twist.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Moment_of_Inertia_Wingbox.py" beforeDir="false" afterPath="$PROJECT_DIR$/Moment_of_Inertia_Wingbox.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Torsional_Constant.py" beforeDir="false" afterPath="$PROJECT_DIR$/Torsional_Constant.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -165,9 +162,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.Deliverables" />
+        <item itemvalue="Python.Moment_of_Inertia_Wingbox" />
         <item itemvalue="Python.Twist" />
         <item itemvalue="Python.Deflection" />
-        <item itemvalue="Python.Moment_of_Inertia_Wingbox" />
         <item itemvalue="Python.Torsional_Constant" />
       </list>
     </recent_temporary>
@@ -260,7 +257,21 @@
       <option name="project" value="LOCAL" />
       <updated>1605797574298</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="4.2">
+      <created>1605802236069</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1605802236069</updated>
+    </task>
+    <task id="LOCAL-00013" summary="4.2">
+      <created>1605802352075</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1605802352075</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -292,22 +303,22 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="548" y="166" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1605707245848" />
-    <state width="1515" height="191" key="GridCell.Tab.0.bottom" timestamp="1605801952583">
+    <state width="1515" height="191" key="GridCell.Tab.0.bottom" timestamp="1605802306283">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="191" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1605801952583" />
-    <state width="1515" height="191" key="GridCell.Tab.0.center" timestamp="1605801952583">
+    <state width="1515" height="191" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1605802306283" />
+    <state width="1515" height="191" key="GridCell.Tab.0.center" timestamp="1605802306283">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="191" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1605801952583" />
-    <state width="1515" height="191" key="GridCell.Tab.0.left" timestamp="1605801952582">
+    <state width="1515" height="191" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1605802306283" />
+    <state width="1515" height="191" key="GridCell.Tab.0.left" timestamp="1605802306283">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="191" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1605801952582" />
-    <state width="1515" height="191" key="GridCell.Tab.0.right" timestamp="1605801952583">
+    <state width="1515" height="191" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1605802306283" />
+    <state width="1515" height="191" key="GridCell.Tab.0.right" timestamp="1605802306283">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="191" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1605801952583" />
+    <state width="1515" height="191" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1605802306283" />
     <state x="657" y="280" width="388" height="263" key="MultipleFileMergeDialog" timestamp="1605793785725">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -320,18 +331,18 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="555" y="128" key="VCS.ChangeListViewerDialog/0.0.1536.824@0.0.1536.824" timestamp="1605797372743" />
-    <state x="361" y="132" key="Vcs.Push.Dialog.v2" timestamp="1605797644379">
+    <state x="361" y="132" key="Vcs.Push.Dialog.v2" timestamp="1605802355200">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="132" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1605797644379" />
+    <state x="361" y="132" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1605802355200" />
     <state x="93" y="93" width="1350" height="638" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1605797420786">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="93" y="93" width="1350" height="638" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1536.824@0.0.1536.824" timestamp="1605797420786" />
-    <state x="578" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1605797659025">
+    <state x="578" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1605802220010">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="578" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1605797659025" />
+    <state x="578" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1605802220010" />
     <state x="569" y="314" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1605542333875">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
