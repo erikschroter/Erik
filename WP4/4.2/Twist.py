@@ -3,8 +3,7 @@ from matplotlib import pyplot as plt
 import scipy as sp
 import torquedistribution as TD
 
-M_thrust = TD.M_thrust
-TD.torquedistribution('MainWing_a0.00_v10.00ms.csv', 1.225, 70, 69.92, 100, 11.5, M_thrust)
+
 
 def Twist(spanwise_location_iny=69.92):
     b = 69.92
