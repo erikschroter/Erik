@@ -7,6 +7,7 @@ WB_front_height = 0.1347
 WB_aft_height = 0.1091
 
 #Thickness To be determined
+b = 69.92
 t = 0.005
 E = 1   #To be changed
 
@@ -64,7 +65,7 @@ def Ixx_stringers(spanwise_location_iny):
     tS=0.005
     aS=10*tS
     bS=aS
-    n=4
+    n= 20     #number of stringers
 
     #values trapezoid
     Cchord=(h/3)*((2*a+b)/(a+b))
@@ -97,11 +98,11 @@ def Ixx_in_y(spanwise_location_iny):
     return Ixx
 
 
-def Ixx_graph(ystart=0,yendmaxb=69.92):
+def Ixx_graph(ystart=0.5,yendmaxb=69.92):
     Xaxis_lst = []  #spanwise_location in y
     Yaxis_lst = []  #Ixx
     for point in range(1, 501):
-        spanwise_location_iny = point/500*(yendmaxb-ystart)/2
+        spanwise_location_iny = point/500*(yendmaxb-ystart)/2 +ystart
         Xaxis_lst.append(spanwise_location_iny)
         Yaxis_lst.append(Ixx_in_y(spanwise_location_iny))
 
