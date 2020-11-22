@@ -30,7 +30,7 @@ def Torsional_Constant_J(spanwise_location_iny):
 def Torsional_Stiffness(spanwise_location_iny):
     b = 69.92
 
-    GJ_L = G*Torsional_Constant_J(spanwise_location_iny)/(spanwise_location_iny)
+    GJ_L = G*Torsional_Constant_J(spanwise_location_iny)/b
 
     return GJ_L
 

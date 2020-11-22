@@ -4,7 +4,10 @@
     <list default="true" id="6b78a6b7-bab7-439d-b8a0-912b9f6b5ff7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WP4/4.2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/WP4/4.2/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WP4/4.2/Deflection.py" beforeDir="false" afterPath="$PROJECT_DIR$/WP4/4.2/Deflection.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WP4/4.2/Moment_of_Inertia_Wingbox.py" beforeDir="false" afterPath="$PROJECT_DIR$/WP4/4.2/Moment_of_Inertia_Wingbox.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WP4/4.2/Torsional_Constant.py" beforeDir="false" afterPath="$PROJECT_DIR$/WP4/4.2/Torsional_Constant.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WP4/4.2/Twist.py" beforeDir="false" afterPath="$PROJECT_DIR$/WP4/4.2/Twist.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,21 +117,21 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state width="757" height="210" key="GridCell.Tab.0.bottom" timestamp="1605802522909">
+    <state width="1515" height="210" key="GridCell.Tab.0.bottom" timestamp="1606079632522">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="757" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1605802522909" />
-    <state width="757" height="210" key="GridCell.Tab.0.center" timestamp="1605802522909">
+    <state width="1515" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1606079632522" />
+    <state width="1515" height="210" key="GridCell.Tab.0.center" timestamp="1606079632522">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="757" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1605802522909" />
-    <state width="757" height="210" key="GridCell.Tab.0.left" timestamp="1605802522909">
+    <state width="1515" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1606079632522" />
+    <state width="1515" height="210" key="GridCell.Tab.0.left" timestamp="1606079632522">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="757" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1605802522909" />
-    <state width="757" height="210" key="GridCell.Tab.0.right" timestamp="1605802522909">
+    <state width="1515" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1606079632522" />
+    <state width="1515" height="210" key="GridCell.Tab.0.right" timestamp="1606079632522">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="757" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1605802522909" />
+    <state width="1515" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1606079632522" />
   </component>
 </project>

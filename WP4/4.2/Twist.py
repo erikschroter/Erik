@@ -15,7 +15,7 @@ def Twist(spanwise_location_iny=69.92):
 
     Span = 69.92
     y2 = Span / 2
-    y1 = -Span / 2
+    y1 = 0
 
     dth_dy = T/G/J
     th_y = sp.integrate.quad(dth_dy,y1,y2)

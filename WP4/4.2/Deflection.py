@@ -1,7 +1,8 @@
 import Moment_of_Inertia_Wingbox as WB
 from matplotlib import pyplot as plt
 import scipy as sp
-from _main_ import moment
+
+import Moment as M
 
 
 def Deflection(span_position_in_y=69.92/2):
@@ -10,7 +11,7 @@ def Deflection(span_position_in_y=69.92/2):
 
     spanwise_location = span_position_in_y/(b/2)     #spanwise_location is in y/(b/2)
 
-    Mx_y =  moment(span_position_in_y)  #error waiting for function
+    Mx_y =  M.moment(span_position_in_y)  #error waiting for function
     Ixx_y = WB.Ixx_in_y(span_position_in_y)
 
     Span = 69.92
@@ -33,5 +34,6 @@ def Deflection_graph(ystart=0.5, yendmaxb=69.92):
         Yaxis_lst.append(Deflection(spanwise_location_iny))
 
     plt.plot(Xaxis_lst, Yaxis_lst)
-    plt.title('Torsional Constant')
+    plt.title('Deflection')
     plt.show()
+
