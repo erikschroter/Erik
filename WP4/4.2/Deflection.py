@@ -32,7 +32,7 @@ def Deflection_graph(ystart=0, yendmaxb=69.92):
     Xaxis_lst = []  # spanwise_location in y
     Yaxis_lst = []  # Ixx
     for point in range(1, 101):
-        spanwise_location_iny = point / 500 * (yendmaxb - ystart) / 2 + ystart
+        spanwise_location_iny = point / 100 * (yendmaxb - ystart) / 2 + ystart
         Xaxis_lst.append(spanwise_location_iny)
         Yaxis_lst.append(Deflection(spanwise_location_iny))
 
