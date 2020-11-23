@@ -1,4 +1,4 @@
-
+import matplotlib.pyplot as plt
 #define constants
 
 filename = 'MainWing_a0.00_v10.00ms.csv'
@@ -34,9 +34,11 @@ from liftdistribution import *
 
 
 x, Llst, xnew, f, xdist = liftdistribution(filename, rho, v, span, accuracy)
-
-#DrawShearForce(f,xdist)
-#DrawBendingMoment(f,xdist)
+"""
+t
+"""
+DrawShearForce(f,xdist)
+DrawBendingMoment(f,xdist)
 
 def moment(x):
     return BendingMoment(f,x,xdist,0,False)
