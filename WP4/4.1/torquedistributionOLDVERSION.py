@@ -17,11 +17,10 @@ from TorqueFromThrust import TorqueFromThrust
 # Torque Distribution
 # =============================================================================
 
-def torquedistribution(file, rho, v, span, accuracy, y_thrust):
+def torquedistribution(file, rho, v, span, accuracy, y_thrust, M_thrust):
 
     # The code below fetches the various aerodynamic data from the XFLR analysis
     CL, yspan, Chord, Ai, Cl, ICd, CmAirfquarterchord = ReadingXFLR(file)
-    M_thrust, Misc = TorqueFromThrust(0.367, 0.1)  # 1106769.7 was old value if needed
     
     # setting variables for wing dimensions and flight conditions
     rho=rho
@@ -60,42 +59,51 @@ def torquedistribution(file, rho, v, span, accuracy, y_thrust):
     #determining over which range the interpolation needs to be determined, here num= determines the accuracy of the interpolation.
     xnew = np.linspace(0, (span/2), num=accuracy, endpoint=True)
 
-    # superposition of aerodynamic torque and thrust torque
+    return x, Mlst, xnew, g, span/2, x_T, Tlst, h
 
-    final_integration_result = []
 
-    # Create list with contribution of aerodynamic torque only
-
-    for j in range(len(xnew)):
-        start = xnew[j]
-        final_integration_result.append(sp.integrate.quad(g, start, 34.96))
-
-    # Add contribution of thrust torque for a distance up to 11.5m from the root chord
-
-    for j in range(len(xnew)):
-        if xnew[j] < 11.5:
-            torque_aerodynamic = final_integration_result[j][0]
-            final_integration_result[j] = M_thrust + torque_aerodynamic
-        else:
-            final_integration_result[j] = final_integration_result[j][0]
-
-    torque_function = interp1d(xnew, final_integration_result, kind="linear", fill_value="extrapolate")
-
-    return xnew, final_integration_result, torque_function
+M_thrust, Misc = TorqueFromThrust(0.367, 0.1) # 1106769.7 was old value if needed
 
 # setting outside function
-xnew, final_integration_result, torque_function = torquedistribution('MainWing_a0.00_v10.00ms.csv', 1.225, 70, 69.92, 100, 11.5)
+TDist = torquedistribution('MainWing_a0.00_v10.00ms.csv', 1.225, 70, 69.92, 100, 11.5, M_thrust)
 
-# print(torque_function)
+x = TDist[0]
+Mlst = TDist[1]
+xnew = TDist[2]
+g = TDist[3]
+
+x_T = TDist[5]
+Tlst = TDist[6]
+h = TDist[7]
+
+# superposition of aerodynamic torque and thrust torque
+
+final_integration_result = []
+
+# Create list with contribution of aerodynamic torque only
+
+for j in range(len(xnew)):
+    start = xnew[j]
+    final_integration_result.append(sp.integrate.quad(g,start,34.96))
+
+# Add contribution of thrust torque for a distance up to 11.5m from the root chord
+
+for j in range(len(xnew)):
+    if xnew[j]<11.5:
+        torque_aerodynamic = final_integration_result[j][0]
+        final_integration_result[j] = M_thrust + torque_aerodynamic
+    else:
+        final_integration_result[j] = final_integration_result[j][0]
+
+print(xnew)
+print(final_integration_result)
 
 # plotting the datapoints and interpolation because it looks nice
 
 # plt.plot(x,Mlst,"o", xnew, g(xnew), "-")
 # plt.plot(x_T,Tlst,"o", xnew, h(xnew), "-")
 
-plt.plot(xnew, torque_function(xnew), "-")
-
-# plt.plot(xnew, final_integration_result, "r")
+plt.plot(xnew, final_integration_result, "-")
 
 
 # plot formatting
