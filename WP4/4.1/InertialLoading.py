@@ -25,6 +25,7 @@ fuelPackingFactorinWingbox = 0.75
 fuelDensity = 800 #kg / m^3
 enginePosition = 0.33 * wingSpan / 2 #m
 engineMass = 7549 #kg
+propulsionGroupMass = 20487.986 #kg
 
 
 def calculateInertialLoading (spanValue):
@@ -54,7 +55,7 @@ def landingGearWeight(spanValue):
     distanceToFuselageInner1x4 = 0  # [m]
     distanceToFuselageOuter2x4 = 7.8  # [m]
     distanceToFuselageOuter2x4Num2 = 6  # [m]
-    mainLandingGearMassPerWheel = mainLandingGearMass / (2 *  (8 + 8 + 4 + 8))
+    mainLandingGearMassPerWheel = mainLandingGearMass / (2 * (8 + 8 + 4 + 8))
     massInner2x4 = 8 * mainLandingGearMassPerWheel
     massInner1x4 = 4 * mainLandingGearMassPerWheel
     massOuter2x4 = 8 * mainLandingGearMassPerWheel
@@ -80,7 +81,7 @@ def landingGearWeight(spanValue):
 def engineWeight(spanValue):
     localEngineWeight = 0
     if spanValue <= enginePosition:
-        localEngineWeight = engineMass * g
+        localEngineWeight = engineMass * g /2
     else:
         localEngineWeight = 0
 
