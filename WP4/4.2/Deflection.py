@@ -1,3 +1,8 @@
+import sys
+import os
+
+directory = os.path.dirname(os.path.dirname(__file__))+"\\4.1"
+sys.path.insert(-1,directory)
 import Moment_of_Inertia_Wingbox as WB
 from matplotlib import pyplot as plt
 
