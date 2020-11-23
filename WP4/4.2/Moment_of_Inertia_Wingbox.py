@@ -9,7 +9,7 @@ WB_aft_height = 0.1091
 
 #Thickness To be determined
 b = 69.92
-t = 0.010
+t = 0.05
 E = 68.9*10**9   #To be changed
 
 
