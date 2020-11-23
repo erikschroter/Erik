@@ -33,6 +33,7 @@ WingWeight = 3210.55
 import numpy as np
 from scipy import integrate
 import sys
+import matplotlib.patches as mpatches
 import os
 import scipy as sp
 import matplotlib.pyplot as plt
@@ -61,6 +62,12 @@ plt.plot(a,Aerosheer,'r')
 plt.plot(a,inertialForce,'g')
 plt.plot(a,totalsheer,'b')
 plt.hlines(-5,0,40)
+plt.title("Shear forces")
+red_patch = mpatches.Patch(color='r', label='Aerodynamic forces')
+green_patch = mpatches.Patch(color='g', label='Inertial forces')
+blue_patch = mpatches.Patch(color='b', label='Total Shear force')
+plt.legend(handles=[red_patch,green_patch,blue_patch])
+
 plt.show()
 
 i = 0
@@ -71,6 +78,7 @@ while i < len(a):
         print("bending moment calculation: (1/2) ",round(100*a[i]/xdist),"%")
     i += 1
 plt.plot(a,Moment)
+plt.title("Bending Moment diagram")
 plt.show()
 
 i=1
@@ -106,5 +114,7 @@ while i < len(a):
     i+=1
 
 plt.plot(a,deflection)
+plt.title("Deflection")
+plt.show()
 
 
