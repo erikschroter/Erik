@@ -31,6 +31,24 @@ def calculateInertialLoading (spanValue):
     inertialLoading = -1 * wingStructuralWeight(spanValue) + -1 * engineWeight(spanValue) + -1 * fuelLoading(spanValue) + -1 * landingGearWeight(spanValue)
     return inertialLoading
 
+def calculateInertialLoadingonGround (spanValue):
+    inertialLoadingonGround =calculateInertialLoading(spanValue) + landingGearForceonGround(spanValue)
+    return inertialLoadingonGround
+
+def landingGearForceonGround(spanValue):
+    distanceToFuselageInner2x4 = 1.8  # [m]
+    distanceToFuselageInner1x4 = 0  # [m]
+    distanceToFuselageOuter2x4 = 7.8  # [m]
+    distanceToFuselageOuter2x4Num2 = 6  # [m]
+    mainLandingGearMassPerWheel = mainLandingGearMass / (2 * (8 + 8 + 4 + 8))
+    massInner2x4 = 8 * mainLandingGearMassPerWheel
+    massInner1x4 = 4 * mainLandingGearMassPerWheel
+    massOuter2x4 = 8 * mainLandingGearMassPerWheel
+    massOuter2x4Num2 = 8 * mainLandingGearMassPerWheel
+
+    return
+
+
 def landingGearWeight(spanValue):
     distanceToFuselageInner2x4 = 1.8 #[m]
     distanceToFuselageInner1x4 = 0  # [m]
@@ -90,7 +108,7 @@ def localChord(spanValue):
 def containedWingboxVolume(spanValue):
     resolution = 100
     volume = 0
-    for i in range (0, int(spanValue) *resolution):
+    for i in range (0, round(spanValue) *resolution):
         volume += wingArea(i/resolution) * 1 /(resolution)
     return volume
 
@@ -108,7 +126,7 @@ def fuelVolume (spanValue, fuelMass):
 
     totalAvailableFuelVolume = 0
     resolution = 500
-    for i in range(0, int(wingSpan / 2 * resolution)):
+    for i in range(0, round(wingSpan / 2 * resolution)):
         totalAvailableFuelVolume += localWingboxArea(i / resolution) * fuelPackingFactorinWingbox * 1 / resolution
 
     return totalAvailableFuelVolume, requiredFuelVolume
@@ -139,11 +157,27 @@ xList = []
 yList = []
 
 
-for i in range(0, int(wingSpan / 2) * 10):
+for i in range(0, round(wingSpan / 2) * 10):
     xList.append(i/10)
     yList.append(calculateInertialLoading(i / 10))
 
 plt.title('Inertial Loading vs Span [N], [m] ')
 plt.plot(xList, yList)
 plt.show()
+
+dx = wingSpan /2 / len(xList)
+dy = np.diff(yList)/ dx
+xList2 = xList
+del xList2[-1]
+
+plt.title('Inertial Loading vs Span [N], [m] ')
+plt.plot(xList2, dy)
+plt.show()
+
+
+
+inertialForce = []
+for i in range(-1, round(wingSpan/2) * 10):
+    inertialForce.append(calculateInertialLoading(wingSpan /10))
+
 
