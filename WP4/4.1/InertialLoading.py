@@ -28,13 +28,35 @@ engineMass = 7549 #kg
 
 
 def calculateInertialLoading (spanValue):
-    inertialLoading = -1 * wingStructuralWeight(spanValue) + -1 * engineWeight(spanValue) + -1 * fuelLoading(spanValue)
+    inertialLoading = -1 * wingStructuralWeight(spanValue) + -1 * engineWeight(spanValue) + -1 * fuelLoading(spanValue) + -1 * landingGearWeight(spanValue)
     return inertialLoading
 
-def landingGear(spanValue):
-    distanceToFuselageInner = 0
+def landingGearWeight(spanValue):
+    distanceToFuselageInner2x4 = 1.8 #[m]
+    distanceToFuselageInner1x4 = 0  # [m]
+    distanceToFuselageOuter2x4 = 7.8  # [m]
+    distanceToFuselageOuter2x4Num2 = 6  # [m]
+    mainLandingGearMassPerWheel = mainLandingGearMass / (2 *  (8 + 8 + 4 + 8))
+    massInner2x4 = 8 * mainLandingGearMassPerWheel
+    massInner1x4 = 4 * mainLandingGearMassPerWheel
+    massOuter2x4 = 8 * mainLandingGearMassPerWheel
+    massOuter2x4Num2 = 8 * mainLandingGearMassPerWheel
 
-    return
+    if spanValue == 0:
+        landingGearWeight = g * mainLandingGearMass / 2
+
+    elif spanValue < distanceToFuselageInner2x4:
+        landingGearWeight = g * mainLandingGearMass / 2 - g * massInner1x4
+
+    elif spanValue < distanceToFuselageOuter2x4Num2:
+        landingGearWeight = g * mainLandingGearMass/2  - g * (massInner1x4 + massInner2x4)
+    elif spanValue < distanceToFuselageOuter2x4:
+        landingGearWeight = g * mainLandingGearMass/2 - g * (massInner1x4 + massInner2x4 + massOuter2x4Num2)
+    elif spanValue <= wingSpan /2:
+        landingGearWeight = g * mainLandingGearMass/2 - g * (massInner1x4 + massInner2x4 + massOuter2x4Num2 + massOuter2x4)
+
+    return landingGearWeight
+
 
 
 def engineWeight(spanValue):
@@ -124,8 +146,4 @@ for i in range(0, int(wingSpan / 2) * 10):
 plt.title('Inertial Loading vs Span [N], [m] ')
 plt.plot(xList, yList)
 plt.show()
-
-
-
-
 
