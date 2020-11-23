@@ -66,7 +66,7 @@ def Ixx_stringers(spanwise_location_iny):
     tS=0.005
     aS=10*tS
     bS=aS
-    n= 20     #number of stringers
+    n= 10     #number of stringers
 
     #values trapezoid
     Cchord=(h/3)*((2*a+b)/(a+b))
@@ -125,9 +125,6 @@ def Ixxstringers(span_position_in_y=69.92/2):
     v_y, error2 = sp.integrate.quad(Ixx_stringers, y1, span_position_in_y)
     return v_y
 
-print(Ixxstringers(69.92/2))
-print(Moment_of_Inertia_y(0))
-print(Ixx(69.92/2))
 
 
 
