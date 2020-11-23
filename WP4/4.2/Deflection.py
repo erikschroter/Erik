@@ -41,4 +41,5 @@ def Deflection_graph(ystart=0, yendmaxb=69.92):
     plt.show()
 
 
+
 print(Deflection(69.92/2))
