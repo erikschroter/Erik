@@ -8,5 +8,6 @@ rootChord = 11.95 #[m]
 wingSpan = 69.92 #[m]
 wingWeight = 33_640.77171 #[kg]
 maxFuelMass = 51_936.2788 #[kg]
+mainLandingGearMass = 28277.3 #[kg]
 g = 9.80665 #m/s^2
 avgThicknessToChord = .15 #ADJUST

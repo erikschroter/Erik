@@ -15,6 +15,7 @@ rootChord= Constants.rootChord
 wingSpan = Constants.wingSpan
 wingWeight = Constants.wingWeight
 maxFuelMass = Constants.maxFuelMass
+mainLandingGearMass = Constants.mainLandingGearMass
 g = Constants.g
 
 beginFuelTank = 2
@@ -27,8 +28,36 @@ engineMass = 7549 #kg
 
 
 def calculateInertialLoading (spanValue):
-    inertialLoading = wingStructuralWeight(spanValue)  + engineWeight(spanValue)
+    inertialLoading = -1 * wingStructuralWeight(spanValue) + -1 * engineWeight(spanValue) + -1 * fuelLoading(spanValue) + -1 * landingGearWeight(spanValue)
     return inertialLoading
+
+def landingGearWeight(spanValue):
+    distanceToFuselageInner2x4 = 1.8 #[m]
+    distanceToFuselageInner1x4 = 0  # [m]
+    distanceToFuselageOuter2x4 = 7.8  # [m]
+    distanceToFuselageOuter2x4Num2 = 6  # [m]
+    mainLandingGearMassPerWheel = mainLandingGearMass / (2 *  (8 + 8 + 4 + 8))
+    massInner2x4 = 8 * mainLandingGearMassPerWheel
+    massInner1x4 = 4 * mainLandingGearMassPerWheel
+    massOuter2x4 = 8 * mainLandingGearMassPerWheel
+    massOuter2x4Num2 = 8 * mainLandingGearMassPerWheel
+
+    if spanValue == 0:
+        landingGearWeight = g * mainLandingGearMass / 2
+
+    elif spanValue < distanceToFuselageInner2x4:
+        landingGearWeight = g * mainLandingGearMass / 2 - g * massInner1x4
+
+    elif spanValue < distanceToFuselageOuter2x4Num2:
+        landingGearWeight = g * mainLandingGearMass/2  - g * (massInner1x4 + massInner2x4)
+    elif spanValue < distanceToFuselageOuter2x4:
+        landingGearWeight = g * mainLandingGearMass/2 - g * (massInner1x4 + massInner2x4 + massOuter2x4Num2)
+    elif spanValue <= wingSpan /2:
+        landingGearWeight = g * mainLandingGearMass/2 - g * (massInner1x4 + massInner2x4 + massOuter2x4Num2 + massOuter2x4)
+
+    return landingGearWeight
+
+
 
 def engineWeight(spanValue):
     localEngineWeight = 0
@@ -41,21 +70,31 @@ def engineWeight(spanValue):
 
 def wingStructuralWeight (spanValue):
     #structural weight in [N]
-    specificWingWeight = wingWeight / 2 / wingVolume(0) * g
-    localWingWeight = wingWeight / 2 * g - (wingVolume(spanValue) * specificWingWeight)
+    specificWingWeight = wingWeight / 2 / wingArea(0) * g
+    localWingWeight = wingWeight / 2 * g - (wingArea(wingSpan/2 - spanValue) * specificWingWeight)
     return localWingWeight
 
 def fuelLoading (spanValue):
     #structural weight in [N]
     specificFuelWeight = maxFuelMass / 2 / halfWingRequiredFuelVolume * g
-    localFuelWeight = maxFuelMass / 2 * g - (wingVolume(spanValue) *fuelPackingFactorinWingbox * specificFuelWeight)
+    localFuelWeight = maxFuelMass / 2 * g  - ((containedWingboxVolume(spanValue)) *fuelPackingFactorinWingbox * specificFuelWeight) * g
+    if localFuelWeight <= 0:
+        localFuelWeight = 0
+
     return localFuelWeight
 
 def localChord(spanValue):
     localChord = rootChord - (rootChord - taperRatio * rootChord) / (wingSpan / 2) * spanValue
     return localChord
 
-def wingVolume(spanValue):
+def containedWingboxVolume(spanValue):
+    resolution = 100
+    volume = 0
+    for i in range (0, int(spanValue) *resolution):
+        volume += wingArea(i/resolution) * 1 /(resolution)
+    return volume
+
+def wingArea(spanValue):
     #approximate trapezoidal structural volume in half wing
     # area of trapezoid
     areaBetweenSparsOverChordSquared = (.1347 + .1091) / 2 * .45
@@ -104,9 +143,7 @@ for i in range(0, int(wingSpan / 2) * 10):
     xList.append(i/10)
     yList.append(calculateInertialLoading(i / 10))
 
-plt.title(' ')
+plt.title('Inertial Loading vs Span [N], [m] ')
 plt.plot(xList, yList)
 plt.show()
-
-print(wingStructuralWeight(0))
 
