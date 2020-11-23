@@ -35,17 +35,7 @@ from liftdistribution import *
 
 x, Llst, xnew, f, xdist = liftdistribution(filename, rho, v, span, accuracy)
 """
-a = [0]
-force = [0]
-while a[-1] < xdist:
-    a.append(a[-1]+0.1)
-    force.append(f(a[-1]))
-    print(a[-1]/xdist)
-plt.title("aireodynamic forces")
-plt.plot(a,force)
-plt.show()
-print("test")
-
+t
 """
 DrawShearForce(f,xdist)
 DrawBendingMoment(f,xdist)

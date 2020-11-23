@@ -49,3 +49,5 @@ while a[-1] <= xdist:
     
 plt.plot(a,Aerosheer)
 plt.show()
+print(a)
+print(len(a))
