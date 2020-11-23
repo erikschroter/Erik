@@ -88,7 +88,11 @@ def Manoeuvre_Envelope(altitude, Weight_kg):
 
     # Calculation Dive Speed
     M_c = 0.77
-    V_D = M_c * a /0.8
+    M_d = M_c / 0.8
+    if M_d > 1.0:
+        V_D = M_c * 1.05 * a
+    else:
+        V_D = M_d * a
 
     # Definition n_min
     n_min = -1
@@ -108,9 +112,9 @@ def Manoeuvre_Envelope(altitude, Weight_kg):
     # Definition design cruise speed
     V_C = 232.46
 
-    return V_D, n_max, n_stall_speed_clean, n_min_stall_speed_clean, V_A, V_A_min, V_C, n_stall_speed_flaps, V_A_flaps, V_F
+    return M_d, V_D, n_max, n_stall_speed_clean, n_min_stall_speed_clean, V_A, V_A_min, V_C, n_stall_speed_flaps, V_A_flaps, V_F
 
-V_D, n_max, n_stall_speed_clean, n_min_stall_speed_clean, V_A, V_A_min, V_C, n_stall_speed_flaps, V_A_flaps, V_F = Manoeuvre_Envelope(altitude, Weight_kg)
+M_d, V_D, n_max, n_stall_speed_clean, n_min_stall_speed_clean, V_A, V_A_min, V_C, n_stall_speed_flaps, V_A_flaps, V_F = Manoeuvre_Envelope(altitude, Weight_kg)
 
 plt.plot(n_stall_speed_clean, "b")
 plt.plot(n_min_stall_speed_clean, "b")
