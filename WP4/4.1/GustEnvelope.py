@@ -105,7 +105,7 @@ def ISA(h):
     return rho
 
 # Computation of gust design velocity
-def H(MAC):
+def Hdef(MAC):
     if 12.5 * MAC >= 107:
         H = 12.5 * MAC
     elif 12.5 * MAC < 107:
@@ -113,7 +113,7 @@ def H(MAC):
     return H
 
 # Computation of gust reference velocity
-def U_ref(altitude, V_D=False):
+def U_refdef(altitude, V_D=False):
     if V_D==False:
         print("false...")
         if altitude <= 4572:
@@ -133,58 +133,58 @@ def U_ref(altitude, V_D=False):
     return U_ref
 
 # Computation of design speed for maximum gust intensity
-def V_s1(W, rho, S, C_L):
+def V_s1def(W, rho, S, C_L):
     V_s1 = (2*W/(rho*S*C_L))**0.5
     return V_s1
 
-def V_cEAS(rho, rho_0, V_c):
+def V_cEASdef(rho, rho_0, V_c):
     V_cEAS = V_c * (rho/rho_0)**0.5
     return V_cEAS
 
-def Wloading(W, S):
+def Wloadingdef(W, S):
     Wloading = W / S
     return Wloading
 
-def Kg(Wloading, rho, c, dCLdalpha, g):
+def Kgdef(Wloading, rho, c, dCLdalpha, g):
     mu = 2 * Wloading / (rho * c * dCLdalpha * g)
     Kg = 0.88 * mu / (5.3 + mu)
     return mu, Kg
 
-def Vb(V_s1, Kg, rho_0, U_ref, V_cEAS, dCLdalpha, Wloading):
+def Vbdef(V_s1, Kg, rho_0, U_ref, V_cEAS, dCLdalpha, Wloading):
     Vb = V_s1 * (1 + Kg * rho_0 * U_ref * V_cEAS * dCLdalpha / (2 * Wloading))**0.5
     return Vb
 
 # Computation of flight profile alleviation factor
-def Fgm(MLW, MTOW, MZFW):
+def Fgmdef(MLW, MTOW, MZFW):
     R1 = MLW / MTOW
     R2 = MZFW / MTOW
     Fgm = (R2 * np.tan(np.pi * R1 / 4))**0.5
     return R1, R2, Fgm
 
-def Fg(Fgz, Fgm, Zmo, altitude):
+def Fgdef(Fgz, Fgm, Zmo, altitude):
     Fg0 = 0.5 * (Fgz + Fgm)
     Fg = (1 - Fg0)/(Zmo - 0) * altitude + Fg0
     return Fg0, Fg
 
 # Computation of load factor change
-def V_TAS(rho, rho_0, V_EAS):
+def V_TASdef(rho, rho_0, V_EAS):
     V_TAS = V_EAS * (rho/rho_0)**-0.5
     return V_TAS
 
-def omega(V_TAS, H):
+def omegadef(V_TAS, H):
     omega = np.pi * V_TAS / H
     return omega
 
-def timeconstant(Wloading, dCLdalpha, rho, V_TAS, g):
+def timeconstantdef(Wloading, dCLdalpha, rho, V_TAS, g):
     timeconstant = 2 * Wloading / (dCLdalpha * rho * V_TAS * g)
     return timeconstant
 
-def deltaN(U_ds, g, omega, t, timeconstant):
+def deltaNdef(U_ds, g, omega, t, timeconstant):
     deltaN = U_ds / (2 * g) * (omega * np.sin(omega * t) + 1 / (1 + (omega * timeconstant) ** -2) * (1 / timeconstant * np.exp(-t / timeconstant) - 1 / timeconstant * np.cos(omega * t)  - omega * np.sin(omega * t)))
     return deltaN
 
 # Debug 
-def debug(Name, Variable, p=False):
+def debugdef(Name, Variable, p=False):
     if p==True:
         return print(Name, " is ", Variable)
     if p==False:
@@ -219,56 +219,56 @@ for i in range(9900, 11001):
     
     V = V_c # m/s
     
-    H = H(MAC)
-    debug("H", H, dbug)
+    H = Hdef(MAC)
+    debugdef("H", H, dbug)
     
-    U_ref = U_ref(altitude, False)
-    debug("Uref", U_ref, dbug)
+    U_ref = U_refdef(altitude, False)
+    debugdef("Uref", U_ref, dbug)
     
-    V_s1 = V_s1(MTOW, rho_0, S, C_L) # (EAS)
-    debug("V_s1", V_s1, dbug)
+    V_s1 = V_s1def(MTOW, rho_0, S, C_L) # (EAS)
+    debugdef("V_s1", V_s1, dbug)
     
-    V_cEAS = V_cEAS(rho, rho_0, V_c)
-    debug("Vc", V_cEAS, dbug)
+    V_cEAS = V_cEASdef(rho, rho_0, V_c)
+    debugdef("Vc", V_cEAS, dbug)
     
-    Wloading = Wloading(MZFW, S)
-    debug("W/S", Wloading, dbug)
+    Wloading = Wloadingdef(MZFW, S)
+    debugdef("W/S", Wloading, dbug)
     
-    Kg = Kg(Wloading, rho, MAC, dCLdalpha, 9.80665)[1]
-    debug("Kg", Kg, dbug)
+    Kg = Kgdef(Wloading, rho, MAC, dCLdalpha, 9.80665)[1]
+    debugdef("Kg", Kg, dbug)
     
-    Vb = Vb(V_s1, Kg, rho_0, U_ref, V_cEAS, dCLdalpha, Wloading)
-    debug("Vb", Vb, dbug)
+    Vb = Vbdef(V_s1, Kg, rho_0, U_ref, V_cEAS, dCLdalpha, Wloading)
+    debugdef("Vb", Vb, dbug)
     
-    Fgm = Fgm(MLW, MTOW, MZFW)[2]
-    debug("Fgm", Fgm, dbug)
+    Fgm = Fgmdef(MLW, MTOW, MZFW)[2]
+    debugdef("Fgm", Fgm, dbug)
     
-    Fg = Fg(Fgz, Fgm, Zmo, altitude)[1]
-    debug("Fg", Fg, dbug)
+    Fg = Fgdef(Fgz, Fgm, Zmo, altitude)[1]
+    debugdef("Fg", Fg, dbug)
     
     # Calculate U_ds
     U_ds = DesignGustVelocity(U_ref, Fg, H)
-    debug("U_ds", U_ds, dbug)
+    debugdef("U_ds", U_ds, dbug)
     
     # Calculate U
     s = np.arange(0, 2*H+1)
-    debug("s", s, dbug)
+    debugdef("s", s, dbug)
     
     U = GustVelocity(U_ds, s, H)
-    debug("U", U, dbug)
+    debugdef("U", U, dbug)
     
     # Calculate load factor change deltaN
-    omega = omega(V, H)
-    debug("omega", omega, dbug)
+    omega = omegadef(V, H)
+    debugdef("omega", omega, dbug)
     
     t = np.arange(0, 2*np.pi/omega + 1, 0.01)
-    debug("t", t, dbug)
+    debugdef("t", t, dbug)
     
-    timeconstant = timeconstant(Wloading, dCLdalpha, rho, V, 9.80665)
-    debug("lambda", timeconstant, dbug)
+    timeconstant = timeconstantdef(Wloading, dCLdalpha, rho, V, 9.80665)
+    debugdef("lambda", timeconstant, dbug)
     
-    deltaN = deltaN(V_TAS(rho, rho_0, U_ds), 9.80655, omega, t, timeconstant)
-    debug("deltaN", deltaN, dbug)
+    deltaN = deltaNdef(V_TASdef(rho, rho_0, U_ds), 9.80655, omega, t, timeconstant)
+    debugdef("deltaN", deltaN, dbug)
     
     
     print(max(deltaN))
