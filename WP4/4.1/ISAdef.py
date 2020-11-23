@@ -96,4 +96,4 @@ def ISA(h):
 
     return rho, T
 
-print(ISA(18400))
+print(ISA(31000*0.3048))
