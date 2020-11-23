@@ -2,7 +2,7 @@ import Moment_of_Inertia_Wingbox as WB
 from matplotlib import pyplot as plt
 
 t = WB.t
-G = 24*10**9 #Change
+G = 24*10**9
 
 def Torsional_Constant_J(spanwise_location_iny):
     b = 69.92
@@ -30,7 +30,7 @@ def Torsional_Constant_J(spanwise_location_iny):
 def Torsional_Stiffness(spanwise_location_iny):
     b = 69.92
 
-    GJ_L = G*Torsional_Constant_J(spanwise_location_iny)/(spanwise_location_iny)
+    GJ_L = G*Torsional_Constant_J(spanwise_location_iny)/b
 
     return GJ_L
 

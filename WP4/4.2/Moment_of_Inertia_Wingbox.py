@@ -1,4 +1,5 @@
 import scipy as sp
+from scipy import integrate
 import matplotlib.pyplot as plt
 
 # Wing Box outer geometry (in chord length)
@@ -7,8 +8,9 @@ WB_front_height = 0.1347
 WB_aft_height = 0.1091
 
 #Thickness To be determined
-t = 0.005
-E = 1   #To be changed
+b = 69.92
+t = 0.010
+E = 68.9*10**9   #To be changed
 
 
 def chord_length(spanwise_location): #Spanwise location is y/(b/2)
@@ -64,7 +66,7 @@ def Ixx_stringers(spanwise_location_iny):
     tS=0.005
     aS=10*tS
     bS=aS
-    n=4
+    n= 20     #number of stringers
 
     #values trapezoid
     Cchord=(h/3)*((2*a+b)/(a+b))
@@ -92,7 +94,7 @@ def Ixx_stringers(spanwise_location_iny):
 
 
 def Ixx_in_y(spanwise_location_iny):
-    Ixx = Moment_of_Inertia_y(spanwise_location_iny)+Ixx_stringers(spanwise_location_iny) #error waiting for function
+    Ixx = Moment_of_Inertia_y(spanwise_location_iny)+Ixx_stringers(spanwise_location_iny)
 
     return Ixx
 
@@ -110,6 +112,22 @@ def Ixx_graph(ystart=0.5,yendmaxb=69.92):
     plt.show()
 
 
+#Total values
+def Ixx(span_position_in_y=69.92/2):
+    Span = 69.92
+    y1 = 0
+    v_y,error2 = sp.integrate.quad(Ixx_in_y,y1, span_position_in_y)
+    return v_y
+
+def Ixxstringers(span_position_in_y=69.92/2):
+    Span = 69.92
+    y1 = 0
+    v_y, error2 = sp.integrate.quad(Ixx_stringers, y1, span_position_in_y)
+    return v_y
+
+print(Ixxstringers(69.92/2))
+print(Moment_of_Inertia_y(0))
+print(Ixx(69.92/2))
 
 
 

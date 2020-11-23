@@ -20,8 +20,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dc6a473a-ac80-4419-8976-4cb74e06d58a" name="Default Changelist" comment="4.2">
+      <change beforePath="$PROJECT_DIR$/../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Deflection.py" beforeDir="false" afterPath="$PROJECT_DIR$/Deflection.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Torsional_Constant.py" beforeDir="false" afterPath="$PROJECT_DIR$/Torsional_Constant.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Moment.py" beforeDir="false" afterPath="$PROJECT_DIR$/Moment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Moment_of_Inertia_Wingbox.py" beforeDir="false" afterPath="$PROJECT_DIR$/Moment_of_Inertia_Wingbox.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +40,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="ProjectId" id="1kNGtCnrQcPk5s3Dun4y9VHMACe" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -49,10 +53,10 @@
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../4.1" />
+    <property name="last_opened_file_path" value="D:/Python/Venv/Lib/site-packages/scipy/integrate" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.Deliverables">
+  <component name="RunManager" selected="Python.Deflection">
     <configuration name="Deflection" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="4.2" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -95,28 +99,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Moment_of_Inertia_Wingbox" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="4.2" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Moment_of_Inertia_Wingbox.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Torsional_Constant" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="Moment" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="4.2" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -128,7 +111,49 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Torsional_Constant.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Moment.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Moment_of_Inertia_Wingbox" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="4.2" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Moment_of_Inertia_Wingbox.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="4.2" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Test.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -139,10 +164,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.Deliverables" />
-        <item itemvalue="Python.Torsional_Constant" />
         <item itemvalue="Python.Deflection" />
         <item itemvalue="Python.Moment_of_Inertia_Wingbox" />
+        <item itemvalue="Python.Deliverables" />
+        <item itemvalue="Python.Moment" />
+        <item itemvalue="Python.Test" />
       </list>
     </recent_temporary>
   </component>
@@ -206,7 +232,70 @@
       <option name="project" value="LOCAL" />
       <updated>1605795039485</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="4.2">
+      <created>1605795462207</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1605795462207</updated>
+    </task>
+    <task id="LOCAL-00009" summary="4.2">
+      <created>1605797351346</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1605797351346</updated>
+    </task>
+    <task id="LOCAL-00010" summary="4.2">
+      <created>1605797428967</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1605797428967</updated>
+    </task>
+    <task id="LOCAL-00011" summary="4.2">
+      <created>1605797574298</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1605797574298</updated>
+    </task>
+    <task id="LOCAL-00012" summary="4.2">
+      <created>1605802236069</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1605802236069</updated>
+    </task>
+    <task id="LOCAL-00013" summary="4.2">
+      <created>1605802352075</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1605802352075</updated>
+    </task>
+    <task id="LOCAL-00014" summary="4.2">
+      <created>1606072270502</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1606072270502</updated>
+    </task>
+    <task id="LOCAL-00015" summary="4.2">
+      <created>1606079654608</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1606079654608</updated>
+    </task>
+    <task id="LOCAL-00016" summary="4.2">
+      <created>1606079749434</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1606079749435</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -230,46 +319,58 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="484" y="0" key="#Moment_of_Inertia_Wingbox/0.0.1536.824@0.0.1536.824" timestamp="1605540750017" />
-    <state x="548" y="166" key="FileChooserDialogImpl" timestamp="1605707245848">
+    <state x="744" y="255" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1606078188461">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="548" y="166" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1605707245848" />
-    <state width="757" height="210" key="GridCell.Tab.0.bottom" timestamp="1605794409754">
+    <state x="744" y="255" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1606078188461" />
+    <state x="147" y="65" key="DiffContextDialog" timestamp="1605797597749">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="757" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1605794409754" />
-    <state width="757" height="210" key="GridCell.Tab.0.center" timestamp="1605794409754">
+    <state x="147" y="65" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1605797597749" />
+    <state x="548" y="166" key="FileChooserDialogImpl" timestamp="1606078385142">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="757" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1605794409754" />
-    <state width="757" height="210" key="GridCell.Tab.0.left" timestamp="1605794409754">
+    <state x="548" y="166" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1606078385142" />
+    <state width="1515" height="151" key="GridCell.Tab.0.bottom" timestamp="1606134024546">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="757" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1605794409754" />
-    <state width="757" height="210" key="GridCell.Tab.0.right" timestamp="1605794409754">
+    <state width="1515" height="151" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1606134024546" />
+    <state width="1515" height="151" key="GridCell.Tab.0.center" timestamp="1606134024545">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="757" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1605794409754" />
+    <state width="1515" height="151" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1606134024545" />
+    <state width="1515" height="151" key="GridCell.Tab.0.left" timestamp="1606134024545">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1515" height="151" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1606134024545" />
+    <state width="1515" height="151" key="GridCell.Tab.0.right" timestamp="1606134024545">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1515" height="151" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1606134024545" />
     <state x="657" y="280" width="388" height="263" key="MultipleFileMergeDialog" timestamp="1605793785725">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="657" y="280" width="388" height="263" key="MultipleFileMergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1605793785725" />
-    <state x="277" y="57" key="SettingsEditor" timestamp="1605707250599">
+    <state x="277" y="57" key="SettingsEditor" timestamp="1606078430701">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="277" y="57" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1605707250599" />
-    <state x="361" y="132" key="Vcs.Push.Dialog.v2" timestamp="1605795041938">
+    <state x="277" y="57" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1606078430701" />
+    <state x="555" y="128" key="VCS.ChangeListViewerDialog" timestamp="1605797372743">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="132" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1605795041938" />
-    <state x="93" y="93" width="1350" height="638" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1605794050291">
+    <state x="555" y="128" key="VCS.ChangeListViewerDialog/0.0.1536.824@0.0.1536.824" timestamp="1605797372743" />
+    <state x="361" y="132" key="Vcs.Push.Dialog.v2" timestamp="1606079751100">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="93" y="93" width="1350" height="638" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1536.824@0.0.1536.824" timestamp="1605794050291" />
-    <state x="578" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1605795026315">
+    <state x="361" y="132" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1606079751100" />
+    <state x="93" y="93" width="1350" height="638" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1605797420786">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="578" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1605795026315" />
+    <state x="93" y="93" width="1350" height="638" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1536.824@0.0.1536.824" timestamp="1605797420786" />
+    <state x="578" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606072292597">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="578" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1606072292597" />
     <state x="569" y="314" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1605542333875">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
