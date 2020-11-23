@@ -3,13 +3,8 @@ from matplotlib import pyplot as plt
 import scipy as sp
 import torquedistribution as TD
 
-
-
-def Twist(spanwise_location_iny=69.92):
-    b = 69.92
-
-    M_thrust = TD.M_thrust
-    T = TD.torquedistribution('MainWing_a0.00_v10.00ms.csv', 1.225, 70, 69.92, 100, 11.5, M_thrust)
+def dth_dy(spanwise_location_iny=69.92):
+    T = TD.torque_function(spanwise_location_iny)
     G = TC.G
     J = TC.Torsional_Constant_J(spanwise_location_iny)
 
@@ -17,11 +12,18 @@ def Twist(spanwise_location_iny=69.92):
     y2 = Span / 2
     y1 = 0
 
-    dth_dy = T/G/J
+    dth_dy = T / G / J
+    return  dth_dy
+
+def Twist(spanwise_location_iny=69.92):
+    b = 69.92
+    Span = 69.92
+    y2 = Span / 2
+    y1 = 0
+
     th_y = sp.integrate.quad(dth_dy,y1,y2)
 
     return th_y
-
 
 def Twist_graph(ystart=0.5, yendmaxb=69.92):
     Xaxis_lst = []  # spanwise_location in y
@@ -36,3 +38,5 @@ def Twist_graph(ystart=0.5, yendmaxb=69.92):
     plt.show()
 
 Twist_graph()
+
+
