@@ -5,9 +5,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WP4/4.2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/WP4/4.2/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WP4/4.2/Deflection.py" beforeDir="false" afterPath="$PROJECT_DIR$/WP4/4.2/Deflection.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WP4/4.2/Moment.py" beforeDir="false" afterPath="$PROJECT_DIR$/WP4/4.2/Moment.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WP4/4.2/Moment_of_Inertia_Wingbox.py" beforeDir="false" afterPath="$PROJECT_DIR$/WP4/4.2/Moment_of_Inertia_Wingbox.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WP4/4.2/Torsional_Constant.py" beforeDir="false" afterPath="$PROJECT_DIR$/WP4/4.2/Torsional_Constant.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WP4/4.2/Twist.py" beforeDir="false" afterPath="$PROJECT_DIR$/WP4/4.2/Twist.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
