@@ -1,5 +1,6 @@
 import Moment_of_Inertia_Wingbox as WB
 from matplotlib import pyplot as plt
+import scipy as sp
 
 t = WB.t
 G = 24*10**9
@@ -30,7 +31,7 @@ def Torsional_Constant_J(spanwise_location_iny):
 def Torsional_Stiffness(spanwise_location_iny):
     b = 69.92
 
-    GJ_L = G*Torsional_Constant_J(spanwise_location_iny)/b
+    GJ_L = G*Torsional_Constant_J(spanwise_location_iny)/(b/2)
 
     return GJ_L
 
@@ -57,3 +58,6 @@ def Torsional_Constant_graph(ystart=0.5, yendmaxb=69.92):
     plt.plot(Xaxis_lst, Yaxis_lst)
     plt.title('Torsional Constant')
     plt.show()
+
+a = sp.integrate.quad(Torsional_Stiffness,0,34.96, limit=100)
+print(a)
