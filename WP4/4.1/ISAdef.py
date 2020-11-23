@@ -26,6 +26,7 @@ def ISA(h):
         p_1 = (p_0 * ((T_1 / T_0) ** (-((g_0) / (a_1 * R)))))
         rho_1 = (p_1) / (R * T_1)
         rho=rho_1
+        T=T_1
     else:
         T_1 = T_0 + a_1 * (11000 - h_0)
         p_1 = p_0 * ((T_1 / T_0) ** (-((g_0) / (a_1 * R))))
@@ -35,6 +36,7 @@ def ISA(h):
         p_2 = p_1 * (math.exp((-(g_0) / (R * T_2)) * (h - 11000)))
         rho_2 = (p_2) / (R * T_2)
         rho=rho_2
+        T=T_2
     else:
         T_2 = T_1 + a_2 * (20000 - 11000)
         p_2 = p_1 * (math.exp((-(g_0) / (R * T_2)) * (20000 - 11000)))
@@ -44,6 +46,7 @@ def ISA(h):
         p_3 = p_2 * ((T_3 / T_2) ** (-((g_0) / (a_3 * R))))
         rho_3 = (p_3) / (R * T_3)
         rho=rho_3
+        T=T_3
     else:
         T_3 = T_2 + a_3 * (32000 - 20000)
         p_3 = p_2 * ((T_3 / T_2) ** (-((g_0) / (a_3 * R))))
@@ -53,6 +56,7 @@ def ISA(h):
         p_4 = p_3 * ((T_4 / T_3) ** (-((g_0) / (a_4 * R))))
         rho_4 = (p_4) / (R * T_4)
         rho=rho_4
+        T=T_4
     else:
         T_4 = T_3 + a_4 * (47000 - 32000)
         p_4 = p_3 * ((T_4 / T_3) ** (-((g_0) / (a_4 * R))))
@@ -62,6 +66,7 @@ def ISA(h):
         p_5 = p_4 * (math.exp((-(g_0) / (R * T_5)) * (h - 47000)))
         rho_5 = (p_5) / (R * T_5)
         rho=rho_5
+        T=T_5
     else:
         T_5 = T_4 + a_5 * (51000 - 47000)
         p_5 = p_4 * (math.exp((-(g_0) / (R * T_2)) * (51000 - 47000)))
@@ -71,6 +76,7 @@ def ISA(h):
         p_6 = p_5 * ((T_6 / T_5) ** (-((g_0) / (a_6 * R))))
         rho_6 = (p_6) / (R * T_6)
         rho=rho_6
+        T=T_6
     else:
         T_6 = T_5 + a_6 * (71000 - 51000)
         p_6 = p_5 * ((T_6 / T_5) ** (-((g_0) / (a_6 * R))))
@@ -80,6 +86,7 @@ def ISA(h):
         p_7 = p_6 * ((T_7 / T_6) ** (-((g_0) / (a_7 * R))))
         rho_7 = (p_7) / (R * T_7)
         rho=rho_7
+        T=T_7
     else:
         T_7 = T_6 + a_7 * (86000 - 71000)
         p_7 = p_6 * ((T_7 / T_6) ** (-((g_0) / (a_7 * R))))
@@ -87,6 +94,6 @@ def ISA(h):
     if h > 86000:
         print('You have reached space sadly, we cannot speak of any pressure here try again.')
 
-    return rho
+    return rho, T
 
-print(ISA(11))
+print(ISA(31000*0.3048))
