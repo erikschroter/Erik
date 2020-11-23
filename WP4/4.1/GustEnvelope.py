@@ -8,14 +8,20 @@ Created on Thu Nov 19 15:19:16 2020
 
 from CS25Loads import DesignGustVelocity, GustVelocity
 import numpy as np
+from scipy.interpolate import interp1d
+import matplotlib.pyplot as plt
+
+# =============================================================================
+# Function defintions
+# =============================================================================
 
 # Computation of gust design velocity
-MAC = 8.51495 # m
-
-if 12.5 * MAC >= 107:
-    H = 12.5 * MAC
-elif 12.5 * MAC < 107:
-    H = 107
+def H(MAC):
+    if 12.5 * MAC >= 107:
+        H = 12.5 * MAC
+    elif 12.5 * MAC < 107:
+        H = 107
+    return H
 
 # Computation of gust reference velocity
 def U_ref(altitude, V_D=False):
@@ -73,26 +79,96 @@ def Fg(Fgz, Fgm, Zmo, altitude):
     Fg = (1 - Fg0)/(Zmo - 0) * altitude + Fg0
     return Fg0, Fg
 
+def debug(Name, Variable, p=False):
+    if p==True:
+        return print(Name, " is ", Variable)
+    if p==False:
+        return 
+
 # =============================================================================
-# 
+# Calculations
+dbug=False
 # =============================================================================
+
+MAC = 8.51495 # m
+
 rho_0 = 1.225 # kg/m^3
 V_c = 232.46 # m/s
 dCLdalpha = 0.095 * 180/ np.pi # 1/rad
 S = 543.25 # m^2
 
 
-altitude = 18288 # m 
-W = 304636.2789 # kg
-rho = 1.225 # kg/m^3
+altitude = 10000 # m 
+MTOW = 304636.2789 # kg
+rho = 0.4135 # kg/m^3
 C_L = 2.3 # (maximum C_L)
+
+MLW = 161394.7263 # kg (!!!CHECK THIS!!!)
+MZFW = 161394.7263 # kg
+
 
 Zmo = 40000 * 0.3048 # m
 Fgz = 1 - Zmo / 76200
 
+H = H(MAC)
+debug("H", H, dbug)
+
 U_ref = U_ref(altitude, False)
-print("Uref is ", U_ref)
+debug("Uref", U_ref, dbug)
 
-V_s1 = V_s1(W, rho, S, C_L)
-print("V_s1 is ", V_s1)
+V_s1 = V_s1(MTOW, rho, S, C_L)
+debug("V_s1", V_s1, dbug)
 
+V_cEAS = V_cEAS(rho, rho_0, V_c)
+debug("Vc", V_cEAS, dbug)
+
+Kg = Kg(MTOW/S, rho, MAC, dCLdalpha, 9.80665)[1]
+debug("Kg", Kg, dbug)
+
+Vb = Vb(V_s1, Kg, rho_0, U_ref, V_cEAS, dCLdalpha, MTOW/S)
+debug("Vb", Vb, dbug)
+
+Fgm = Fgm(MLW, MTOW, MZFW)[2]
+debug("Fgm", Fgm, dbug)
+
+Fg = Fg(Fgz, Fgm, Zmo, altitude)[1]
+debug("Fg", Fg, dbug)
+
+# Calculate U_ds
+U_ds = DesignGustVelocity(U_ref, Fg, H)
+debug("U_ds", U_ds, dbug)
+
+# Calculate U
+s = np.arange(0, 2*H+1)
+debug("s", s, dbug)
+
+U = GustVelocity(U_ds, s, H)
+debug("U", U, dbug)
+
+# =============================================================================
+# Graphing
+# =============================================================================
+
+# plotting the datapoints and interpolation because it looks nice
+g = interp1d(s,U,kind="cubic", fill_value="extrapolate")
+
+# plt.plot(s,U,"o", s, g(s), "-")
+# plt.plot(s,U,"o")
+plt.plot(s, g(s), "-")
+
+
+# plot formatting
+
+plt.title('Gust Velocity as function of s')
+
+plt.xlabel('s [m]')
+plt.ylabel('Gust velocity, U [m/s]')
+
+plt.grid(True, which='both')
+plt.axhline(y=0, color='k')
+
+plt.show()
+
+# =============================================================================
+# FIN
+# =============================================================================

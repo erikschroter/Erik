@@ -54,4 +54,4 @@ def GustVelocity(U_ds, s, H):
 
 
 
-print(FlightAlleviationFactor(0.8, .6,20000 ))
+# print(FlightAlleviationFactor(0.8, .6,20000 ))
