@@ -20,7 +20,7 @@ g = Constants.g
 
 beginFuelTank = 2
 endFuelTank  = 32
-lengthFuelTank =  .46 * wingSpan
+lengthFuelTank =  .95 * wingSpan
 fuelPackingFactorinWingbox = 0.75
 fuelDensity = 800 #kg / m^3
 enginePosition = 0.33 * wingSpan / 2 #m
@@ -135,7 +135,7 @@ def fuelVolume (spanValue, fuelMass):
 def localWingboxArea (spanValue):
     localChord = 0
     if spanValue <= D_fuselageOuter:
-        localChord = 0
+        localChord = rootChord
 
     elif spanValue < wingSpan / 2 * lengthFuelTank / wingSpan:
         localChord = rootChord - (rootChord - taperRatio * rootChord) / (wingSpan / 2 ) * spanValue
@@ -178,6 +178,5 @@ plt.show()
 
 inertialForce = []
 for i in range(-1, round(wingSpan/2) * 10):
-    inertialForce.append(calculateInertialLoading(wingSpan /10))
-
+    inertialForce.append(calculateInertialLoading(i /10))
 
