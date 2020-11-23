@@ -28,11 +28,11 @@ def Deflection(span_position_in_y=69.92/2):
     return v_y
 
 
-def Deflection_graph(ystart=0.5, yendmaxb=69.92):
+def Deflection_graph(ystart=0, yendmaxb=69.92):
     Xaxis_lst = []  # spanwise_location in y
     Yaxis_lst = []  # Ixx
-    for point in range(1, 501):
-        spanwise_location_iny = point / 500 * (yendmaxb - ystart) / 2 + ystart
+    for point in range(1, 101):
+        spanwise_location_iny = point / 100 * (yendmaxb - ystart) / 2 + ystart
         Xaxis_lst.append(spanwise_location_iny)
         Yaxis_lst.append(Deflection(spanwise_location_iny))
 
@@ -40,5 +40,6 @@ def Deflection_graph(ystart=0.5, yendmaxb=69.92):
     plt.title('Deflection')
     plt.show()
 
-print(dv_dy_y(5))
-print(Deflection(5))
+
+
+print(Deflection(69.92/2))

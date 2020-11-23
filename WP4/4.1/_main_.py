@@ -1,4 +1,4 @@
-
+import matplotlib.pyplot as plt
 #define constants
 
 filename = 'MainWing_a0.00_v10.00ms.csv'
@@ -34,7 +34,19 @@ from liftdistribution import *
 
 
 x, Llst, xnew, f, xdist = liftdistribution(filename, rho, v, span, accuracy)
+"""
+a = [0]
+force = [0]
+while a[-1] < xdist:
+    a.append(a[-1]+0.1)
+    force.append(f(a[-1]))
+    print(a[-1]/xdist)
+plt.title("aireodynamic forces")
+plt.plot(a,force)
+plt.show()
+print("test")
 
+"""
 DrawShearForce(f,xdist)
 DrawBendingMoment(f,xdist)
 
