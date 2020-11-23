@@ -32,7 +32,7 @@ def calculateInertialLoading (spanValue):
     return inertialLoading
 
 def landingGear(spanValue):
-
+    distanceToFuselageInner = 0
 
     return
 
