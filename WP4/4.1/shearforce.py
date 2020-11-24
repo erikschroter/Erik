@@ -117,4 +117,9 @@ plt.plot(a,deflection)
 plt.title("Deflection")
 plt.show()
 
+plt.plot(a,deflection)
+plt.title("Deflection to scale")
+plt.xlim(0, xdist)
+plt.ylim(0, xdist)
+plt.gca().set_aspect('equal', adjustable='box')
 
