@@ -12,6 +12,7 @@ x, Llst, xnew, f, xdist = liftdistribution(filename, rho, v, span, accuracy)
 def moment(x):
     return BendingMoment(f,x,xdist,0,False)
 
+print(moment(34.9))
 
 
 

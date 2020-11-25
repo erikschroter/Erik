@@ -109,6 +109,8 @@ def Ixx_graph(ystart=0.5,yendmaxb=69.92):
 
     plt.plot(Xaxis_lst, Yaxis_lst)
     plt.title('Ixx diagram')
+    plt.xlabel('Span')
+    plt.ylabel('Ixx')
     plt.show()
 
 
@@ -124,8 +126,3 @@ def Ixxstringers(span_position_in_y=69.92/2):
     y1 = 0
     v_y, error2 = sp.integrate.quad(Ixx_stringers, y1, span_position_in_y)
     return v_y
-
-
-
-
-
