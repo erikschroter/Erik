@@ -72,7 +72,7 @@ def Manoeuvre_Envelope(altitude, Weight_kg):
     return T, M_d, V_D, n_max, n_stall_speed_clean, n_min_stall_speed_clean, V_A, V_A_min, V_C, n_stall_speed_flaps, V_A_flaps, V_F
 
 T, M_d, V_D, n_max, n_stall_speed_clean, n_min_stall_speed_clean, V_A, V_A_min, V_C, n_stall_speed_flaps, V_A_flaps, V_F = Manoeuvre_Envelope(altitude, Weight_kg)
-print(T)
+
 plt.plot(n_stall_speed_clean, "b")
 plt.plot(n_min_stall_speed_clean, "b")
 plt.plot([m.floor(V_A), V_A], [n_stall_speed_clean[-1], 2.5], "b")
