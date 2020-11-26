@@ -2,8 +2,8 @@ import math as m
 import matplotlib.pyplot as plt
 from ISAdef import ISA
 
-altitude = 9449/0.3048  # ft
-Weight_kg = 304636.2789  # kg
+altitude = 31000  # ft
+Weight_kg = 147780.3631  # kg
 
 def Manoeuvre_Envelope(altitude, Weight_kg):
     

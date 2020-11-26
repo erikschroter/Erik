@@ -166,7 +166,7 @@ Nmaxlst = []
 
 # Flight condition for all altitudes till cruise altitude
 for i in range(0, int(h_cruise) + 1, 250):
-# for i in range(9250, 9250 + 1, 250):
+# for i in range(0, 0 + 1, 250):
     altitude = i
     
     # Initialising datalists
@@ -253,7 +253,7 @@ for i in range(0, int(h_cruise) + 1, 250):
         deltaN = deltaNdef(V_TASdef(rho, rho_0, U_ds), 9.80655, omega, t, timeconstant)
         debug("deltaN", deltaN, dbug)
         
-        deltaNlst2.append((max(deltaN), altitude, Vb, V))
+        deltaNlst2.append((max(deltaN), altitude, Vb, V, V_D, V_s1))
         debug("iterate", (altitude, V, max(deltaN)), dbug)
         
         Nlst1p.append(1 + max(deltaN))
@@ -269,7 +269,7 @@ for i in range(0, int(h_cruise) + 1, 250):
     del Nlst1n[-1]
 
     # Append to list the maximum load factors
-    Nmaxlst.append((max(deltaNlst2)[0] + 1, max(deltaNlst2)[1], Vlst1, Vlst2, Nlst1p, Nlst2p, Nlst1n, Nlst2n, max(deltaNlst2)[2]))
+    Nmaxlst.append((max(deltaNlst2)[0] + 1, max(deltaNlst2)[1], Vlst1, Vlst2, Nlst1p, Nlst2p, Nlst1n, Nlst2n, max(deltaNlst2)[2], max(deltaNlst2)[4], max(deltaNlst2)[5]))
     
     print("Considered Flight Condition : Altitude ", altitude, " [m] | Weight ", W, " [kg]")
     print("    Max Load Factor ", round(max(deltaNlst2)[0] + 1, 3), " [-] | Vb ", max(deltaNlst2)[2], " [m/s] | V ", max(deltaNlst2)[3], " [m/s] =============================================================================")
@@ -286,6 +286,8 @@ MaxN1n = max(Nmaxlst)[6]
 MaxN2n = max(Nmaxlst)[7]
 
 MaxVb = max(Nmaxlst)[8]
+MaxVd = max(Nmaxlst)[9]
+MaxVs = max(Nmaxlst)[10]
 
 # =============================================================================
 # Graphing
@@ -311,13 +313,13 @@ plt.ylabel('Load factor, n [-]')
 plt.grid(True, which='both')
 plt.axhline(y=0, color='k')
 
-plt.axvline(x=V_s1, color='k', linestyle="-.")
+plt.axvline(x=MaxVs, color='k', linestyle="-.")
 plt.text(5,-1.8,'V_S',rotation=0)
 plt.axvline(x=MaxVb, color='k', linestyle="-.")
 plt.text(50.1,3.5,'V_B',rotation=0)
 plt.axvline(x=V_c, color='k', linestyle="-.")
 plt.text(205.1,3.5,'V_C',rotation=0)
-plt.axvline(x=V_D, color='k', linestyle="-.")
+plt.axvline(x=MaxVd, color='k', linestyle="-.")
 plt.text(300.1,3.5,'V_D',rotation=0)
 
 plt.ylim(-1.5, 4.0)
