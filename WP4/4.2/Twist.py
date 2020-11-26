@@ -40,9 +40,9 @@ def Twist_graph(ystart=0.5, yendmaxb=69.92):
         Yaxis_lst.append(Twist(spanwise_location_iny))
 
     plt.plot(Xaxis_lst, Yaxis_lst)
-    plt.title('Twist')
-    plt.xlabel('Span')
-    plt.ylabel('Twist')
+    plt.title('Twist Distribution')
+    plt.xlabel('Span [m]')
+    plt.ylabel('Twist [rad]')
     plt.show()
 
 
