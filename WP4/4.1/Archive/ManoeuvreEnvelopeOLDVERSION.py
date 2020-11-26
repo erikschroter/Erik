@@ -6,11 +6,59 @@ altitude = 31000  # ft
 Weight_kg = 304636  # kg
 
 def Manoeuvre_Envelope(altitude, Weight_kg):
-    
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # ISA Calculator
+
+    alt = altitude * 0.3048
+
+    T0 = 288.15
+    T = T0
+    h0 = 0
+    p0 = 101325
+    p = p0
+    g0 = 9.80665
+    R = 287
+
+    height = [0, 11000, 20000, 32000, 47000, 51000, 71000, 86000]
+    grad = [-0.0065, 0, 0.0010, 0.0028, 0, -0.0028, -0.0020]
+
+    # for command to allow calculate the temperature, pressure and density at the given altitude.
+
+    for i in range(len(height) - 1):
+        a = grad[i]
+        minimum = height[i]
+        maximum = height[i + 1]
+
+        if minimum <= alt <= maximum:
+            difference = alt - minimum
+
+        else:
+            if alt <= minimum:
+                break
+            else:
+                if maximum <= alt:
+                    difference = maximum - minimum
+
+        if abs(a) <= 0.0001:
+            T = T
+            p = p * exp(-g0 / (R * T) * (difference))
+            rho = p / (R * T)
+
+
+        else:
+            Tmin = T
+            T = T + a * difference
+            p = p * (T / Tmin) ** (-g0 / (a * R))
+            rho = p / (R * T)
+    a = 20.05 * m.sqrt(T)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    """
     alt = altitude * 0.3048
     rho, T = ISA(alt)
     a = 20.05 * m.sqrt(T)
-
+    """
     # Calculation n_max
     Weight_lb = Weight_kg / 0.454
     n_max = 2.1 + 24000 / (Weight_lb + 10000)
@@ -72,7 +120,7 @@ def Manoeuvre_Envelope(altitude, Weight_kg):
     return T, M_d, V_D, n_max, n_stall_speed_clean, n_min_stall_speed_clean, V_A, V_A_min, V_C, n_stall_speed_flaps, V_A_flaps, V_F
 
 T, M_d, V_D, n_max, n_stall_speed_clean, n_min_stall_speed_clean, V_A, V_A_min, V_C, n_stall_speed_flaps, V_A_flaps, V_F = Manoeuvre_Envelope(altitude, Weight_kg)
-
+print(T)
 plt.plot(n_stall_speed_clean, "b")
 plt.plot(n_min_stall_speed_clean, "b")
 plt.plot([m.floor(V_A), V_A], [n_stall_speed_clean[-1], 2.5], "b")

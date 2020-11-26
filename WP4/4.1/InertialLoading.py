@@ -25,6 +25,7 @@ fuelPackingFactorinWingbox = 0.75
 fuelDensity = 800 #kg / m^3
 enginePosition = 0.33 * wingSpan / 2 #m
 engineMass = 7549 #kg
+propulsionGroupMass = 20487.986 #kg
 
 
 def calculateInertialLoading (spanValue):
@@ -54,11 +55,13 @@ def landingGearWeight(spanValue):
     distanceToFuselageInner1x4 = 0  # [m]
     distanceToFuselageOuter2x4 = 7.8  # [m]
     distanceToFuselageOuter2x4Num2 = 6  # [m]
-    mainLandingGearMassPerWheel = mainLandingGearMass / (2 *  (8 + 8 + 4 + 8))
+    mainLandingGearMassPerWheel = mainLandingGearMass / (2 * (8 + 8 + 4 + 8))
     massInner2x4 = 8 * mainLandingGearMassPerWheel
     massInner1x4 = 4 * mainLandingGearMassPerWheel
     massOuter2x4 = 8 * mainLandingGearMassPerWheel
     massOuter2x4Num2 = 8 * mainLandingGearMassPerWheel
+
+    landingGearWeight = 0
 
     if spanValue == 0:
         landingGearWeight = g * mainLandingGearMass / 2
@@ -80,7 +83,7 @@ def landingGearWeight(spanValue):
 def engineWeight(spanValue):
     localEngineWeight = 0
     if spanValue <= enginePosition:
-        localEngineWeight = engineMass * g
+        localEngineWeight = engineMass * g /2
     else:
         localEngineWeight = 0
 
@@ -94,9 +97,16 @@ def wingStructuralWeight (spanValue):
 
 def fuelLoading (spanValue):
     #structural weight in [N]
-    specificFuelWeight = maxFuelMass / 2 / halfWingRequiredFuelVolume * g
-    localFuelWeight = maxFuelMass / 2 * g  - ((containedWingboxVolume(spanValue)) *fuelPackingFactorinWingbox * specificFuelWeight) * g
-    if localFuelWeight <= 0:
+    fuelVolumeInWing = halfWingRequiredFuelVolume
+    if halfWingRequiredFuelVolume > halfWingAvailableFuelVolume:
+        fuelVolumeInWing = halfWingAvailableFuelVolume
+
+    specificFuelWeight = maxFuelMass / 2 / fuelVolumeInWing * g
+
+#edit next line
+    localFuelWeight = maxFuelMass / 2 * g  - ((containedFuelVolume(spanValue)) *fuelPackingFactorinWingbox * specificFuelWeight)
+
+    if localFuelWeight < 0:
         localFuelWeight = 0
 
     return localFuelWeight
@@ -105,11 +115,18 @@ def localChord(spanValue):
     localChord = rootChord - (rootChord - taperRatio * rootChord) / (wingSpan / 2) * spanValue
     return localChord
 
-def containedWingboxVolume(spanValue):
-    resolution = 100
+def containedFuelVolume(spanValue):
+    newresolution = 50
     volume = 0
-    for i in range (0, round(spanValue) *resolution):
-        volume += wingArea(i/resolution) * 1 /(resolution)
+    for i in range (0, round(spanValue * newresolution)):
+        volume += localWingboxArea(i/ newresolution) * 1 /(newresolution)
+    return volume
+
+def containedWingboxVolume(spanValue):
+    resolution = 50
+    volume = 0
+    for i in range (0, round(spanValue *resolution)):
+        volume += wingArea(i/resolution) * 1 / (resolution)
     return volume
 
 def wingArea(spanValue):
@@ -125,7 +142,7 @@ def fuelVolume (spanValue, fuelMass):
     requiredFuelVolume = 0.5 * fuelMass / fuelDensity
 
     totalAvailableFuelVolume = 0
-    resolution = 500
+    resolution = 40
     for i in range(0, round(wingSpan / 2 * resolution)):
         totalAvailableFuelVolume += localWingboxArea(i / resolution) * fuelPackingFactorinWingbox * 1 / resolution
 
@@ -136,10 +153,8 @@ def localWingboxArea (spanValue):
     localChord = 0
     if spanValue <= D_fuselageOuter:
         localChord = rootChord
-
     elif spanValue < wingSpan / 2 * lengthFuelTank / wingSpan:
         localChord = rootChord - (rootChord - taperRatio * rootChord) / (wingSpan / 2 ) * spanValue
-
     else:
         localChord = 0
 
@@ -153,13 +168,17 @@ def localWingboxArea (spanValue):
 
 halfWingAvailableFuelVolume, halfWingRequiredFuelVolume = fuelVolume(0, maxFuelMass)
 fuelVolumeOutsideWing = 2 * (halfWingRequiredFuelVolume - halfWingAvailableFuelVolume)
+
+
+listResolution = 80
 xList = []
 yList = []
 
 
-for i in range(0, round(wingSpan / 2) * 10):
-    xList.append(i/10)
-    yList.append(calculateInertialLoading(i / 10))
+"""
+for i in range(0, round(wingSpan / 2) * listResolution):
+    xList.append(i/listResolution)
+    yList.append(calculateInertialLoading(i / listResolution))
 
 plt.title('Inertial Loading vs Span [N], [m] ')
 plt.plot(xList, yList)
@@ -177,6 +196,50 @@ plt.show()
 
 
 inertialForce = []
-for i in range(-1, round(wingSpan/2) * 10):
-    inertialForce.append(calculateInertialLoading(i /10))
+for i in range(-1, round(wingSpan/2) * listResolution):
+    inertialForce.append(calculateInertialLoading(i /listResolution))
 
+
+
+fuelList = []
+for i in range(1, round(wingSpan / 2) * listResolution):
+    fuelList.append(fuelLoading(i / listResolution))
+
+plt.title('Fuel Loading vs Span [N], [m] ')
+plt.plot(xList, fuelList)
+plt.show()
+
+wingList = []
+for i in range(1, round(wingSpan / 2) * listResolution):
+    wingList.append(wingStructuralWeight(i / listResolution))
+
+plt.title('wing Loading vs Span [N], [m] ')
+plt.plot(xList, wingList)
+plt.show()
+
+propList = []
+for i in range(1, round(wingSpan / 2) * listResolution):
+    propList.append(engineWeight(i / listResolution))
+
+plt.title('propulsion Loading vs Span [N], [m] ')
+plt.plot(xList, propList)
+plt.show()
+
+landingGearList = []
+for i in range(1, round(wingSpan / 2) * listResolution):
+    landingGearList.append(landingGearWeight(i / listResolution))
+
+plt.title('landing gear Loading vs Span [N], [m] ')
+plt.plot(xList, landingGearList)
+plt.show()
+
+
+
+fuelVolumeList = []
+for i in range(1, round(wingSpan / 2) * listResolution):
+    fuelVolumeList.append(containedFuelVolume(i / listResolution))
+
+plt.title('fuel vol  vs Span [N], [m] ')
+plt.plot(xList, fuelVolumeList)
+plt.show()
+"""
