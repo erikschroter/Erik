@@ -13,7 +13,7 @@ def Torsional_Constant_J(spanwise_location_iny):
     WB_aft_height = 0.1091
 
 
-    spanwise_location = spanwise_location_iny / (b / 2)
+    spanwise_location = spanwise_location_iny / b
     chord = WB.chord_length(spanwise_location)
     h = WB_chord * chord
     a = WB_aft_height * chord
