@@ -194,11 +194,11 @@ plt.plot(xList2, dy)
 plt.show()
 
 
-
+"""
 inertialForce = []
-for i in range(-1, round(wingSpan/2) * listResolution):
-    inertialForce.append(calculateInertialLoading(i /listResolution))
-
+for i in range(-1, round(wingSpan/2) * 10):
+    inertialForce.append(calculateInertialLoading(i /10))
+"""
 
 
 fuelList = []

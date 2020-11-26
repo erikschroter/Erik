@@ -21,7 +21,7 @@ def torquedistribution(file, rho, v, span, accuracy, y_thrust):
 
     # The code below fetches the various aerodynamic data from the XFLR analysis
     CL, yspan, Chord, Ai, Cl, ICd, CmAirfquarterchord = ReadingXFLR(file)
-    M_thrust, Misc = TorqueFromThrust(0.367, 0.1)  # 1106769.7 was old value if needed
+    M_thrust, Misc = TorqueFromThrust(0.367, 0.01254)  # 1106769.7 was old value if needed
     
     # setting variables for wing dimensions and flight conditions
     rho=rho

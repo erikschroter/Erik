@@ -12,6 +12,8 @@ v = 232
 span = 69.92
 accuracy = 41 
  
+#Loading factor [-]
+n=5
 
 #Maximum takeoff weight [kg]
 MTOW = 291_509.2
@@ -43,7 +45,7 @@ sys.path.insert(-1,directory)
 from liftdistribution import liftdistribution
 from Moment_of_Inertia_Wingbox import Ixx_in_y
 
-x, Llst, xnew, f, xdist = liftdistribution(filename, rho, v, span, accuracy)
+x, Llst, xnew, f, xdist = liftdistribution(filename, rho, v, span, accuracy,MTOW*9.81,n)
 a = [0]
 Aerosheer = [-sp.integrate.quad(f,0,0)[0]+sp.integrate.quad(f,0,xdist)[0]]
 while a[-1] <= xdist:
@@ -114,6 +116,7 @@ while i < len(a):
     i+=1
 
 plt.plot(a,deflection)
+plt.hlines(xdist*0.3,-5,40)
 plt.title("Deflection")
 plt.show()
 
