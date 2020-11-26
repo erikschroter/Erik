@@ -66,7 +66,7 @@ def Ixx_stringers(spanwise_location_iny):
     tS=0.005    #Thickness
     aS=10*tS    #Length
     bS=aS
-    n= 20     #number of stringers
+    n= 12     #number of stringers
 
     #values trapezoid
     Cchord=(h/3)*((2*a+b)/(a+b))
