@@ -126,19 +126,24 @@ def debug(Name, Variable, p=False):
 
 # =============================================================================
 # Calculations
-dbug=False
 # =============================================================================
+
 MAC = 8.51495 # m
 
 rho_0 = 1.225 # kg/m^3
+
 V_c = 232.46 # m/s
+
 dCLdalpha = 0.095 * 180/ np.pi # 1/rad
+
 S = 543.25 # m^2
 
 MTOW = 304636.2789 # kg
+
 C_L = 1.3962 # (maximum C_L with flaps retracted)
 
 MLW = 0.85 * MTOW # kg (!!!CHECK THIS!!!)
+
 MZFW = 161394.7263 # kg
 
 OEW = 147780.3631 # kg
@@ -146,25 +151,29 @@ OEW = 147780.3631 # kg
 Zmo = 40000 * 0.3048 # ft (-> m)
 Fgz = 1 - Zmo / 76200
 
-M_c = 0.77
+M_c = 0.77 # Mach
+h_cruise = 31000 * 0.3048 # m
 
-W = OEW
+W = MTOW # Flight condition being evaluated
+
+dbug = False
 
 # =============================================================================
-# Iterations for speed
+# Iterations for to find most critical condition
 # =============================================================================
 
 Nmaxlst = []
 
-# Initialising
-for i in range(0, int(31000*0.3048) +1, 250):
+# Flight condition for all altitudes till cruise altitude
+for i in range(0, int(h_cruise) + 1, 250):
+# for i in range(9250, 9250 + 1, 250):
     altitude = i
     
+    # Initialising datalists
     deltaNlst2 = []
     
     Vlst1 = []
     Vlst2 = []
-    
     
     Nlst1p = []
     Nlst1n = []
@@ -172,6 +181,7 @@ for i in range(0, int(31000*0.3048) +1, 250):
     Nlst2p = []
     Nlst2n = []
 
+    # Begin Calculations
     
     rho, T = ISA(altitude)
     debug("rho", rho, dbug)
@@ -203,8 +213,10 @@ for i in range(0, int(31000*0.3048) +1, 250):
     Vb = Vbdef(V_s1, Kg, rho_0, U_initial, V_cEAS, dCLdalpha, Wloading)
     debug("Vb", Vb, dbug)
     
+    
+    # Flight condition for the 3 Velocities
     for i in [Vb, V_c, V_D]:
-        V = i # m/s (max @ 63 m/s)
+        V = i # m/s
         
         Vlst1.append(V)
         
@@ -247,6 +259,7 @@ for i in range(0, int(31000*0.3048) +1, 250):
         Nlst1p.append(1 + max(deltaN))
         Nlst1n.append(1 - max(deltaN))
         
+    # Appending V_D to different list and removing from old list
     Vlst2.append(Vlst1[-1])
     Nlst2p.append(Nlst1p[-1])
     Nlst2n.append(Nlst1n[-1])
@@ -255,39 +268,64 @@ for i in range(0, int(31000*0.3048) +1, 250):
     del Nlst1p[-1]
     del Nlst1n[-1]
 
-    Nmaxlst.append((max(deltaNlst2)[0] + 1, max(deltaNlst2)[1]))
+    # Append to list the maximum load factors
+    Nmaxlst.append((max(deltaNlst2)[0] + 1, max(deltaNlst2)[1], Vlst1, Vlst2, Nlst1p, Nlst2p, Nlst1n, Nlst2n, max(deltaNlst2)[2]))
     
     print("Considered Flight Condition : Altitude ", altitude, " [m] | Weight ", W, " [kg]")
-    print("max load factor: ", round(max(deltaNlst2)[0] + 1, 3), " [-] | altitude: ", max(deltaNlst2)[1], " [m] | Vb ", max(deltaNlst2)[2], " [m/s] | V ", max(deltaNlst2)[3], " [m/s]")
+    print("    Max Load Factor ", round(max(deltaNlst2)[0] + 1, 3), " [-] | Vb ", max(deltaNlst2)[2], " [m/s] | V ", max(deltaNlst2)[3], " [m/s] =============================================================================")
 
-print("Maximum Nmaxlst ", max(Nmaxlst))
+print("\n Maximum N ", max(Nmaxlst)[0], " at ", max(Nmaxlst)[1], " m ")
+
+MaxV1 = max(Nmaxlst)[2]
+MaxV2 = max(Nmaxlst)[3]
+
+MaxN1p = max(Nmaxlst)[4]
+MaxN2p = max(Nmaxlst)[5]
+
+MaxN1n = max(Nmaxlst)[6]
+MaxN2n = max(Nmaxlst)[7]
+
+MaxVb = max(Nmaxlst)[8]
+
 # =============================================================================
 # Graphing
 # =============================================================================
 
-# # plotting the datapoints and interpolation because it looks nice
-# plt.plot(Vlst1, Nlst1p)
-# plt.plot(Vlst1, Nlst1n)
-# plt.plot(Vlst2, Nlst2p, "x")
-# plt.plot(Vlst2, Nlst2n, "x")
+# Plotting the datapoints and interpolation because it looks nice
+# plt.plot(Vlst1, Nlst1p, color='r')
+# plt.plot(Vlst1, Nlst1n, color='r')
+# plt.plot(Vlst2, Nlst2p, "o", color='r')
+# plt.plot(Vlst2, Nlst2n, "o", color='r')
 
+plt.plot(MaxV1, MaxN1p, label = 'V - n Diagram', color='r')
+plt.plot(MaxV1, MaxN1n, color='r')
+plt.plot(MaxV2, MaxN2p, "x", color='r')
+plt.plot(MaxV2, MaxN2n, "x", color='r')
 
-# # plot formatting
-# plt.title('Gust envelope')
+# Plot formatting
+plt.title('V - n Diagram')
 
-# plt.xlabel('Flight velocity [m/s]')
-# plt.ylabel('Load factor, n [-]')
+plt.xlabel('Flight velocity (EAS) [m/s]')
+plt.ylabel('Load factor, n [-]')
 
-# plt.grid(True, which='both')
-# plt.axhline(y=0, color='k')
-# plt.axvline(x=Vb, color='k')
-# plt.axvline(x=V_c, color='k')
-# plt.axvline(x=V_D, color='k')
+plt.grid(True, which='both')
+plt.axhline(y=0, color='k')
 
-# # plt.ylim(1, 3)
+plt.axvline(x=V_s1, color='k', linestyle="-.")
+plt.text(5,-1.8,'V_S',rotation=0)
+plt.axvline(x=MaxVb, color='k', linestyle="-.")
+plt.text(50.1,3.5,'V_B',rotation=0)
+plt.axvline(x=V_c, color='k', linestyle="-.")
+plt.text(205.1,3.5,'V_C',rotation=0)
+plt.axvline(x=V_D, color='k', linestyle="-.")
+plt.text(300.1,3.5,'V_D',rotation=0)
 
+plt.ylim(-1.5, 4.0)
+plt.xlim(0, 350)
 
-# plt.show()
+# plt.legend(loc = "upper right")
+
+plt.show()
 
 # =============================================================================
 # FIN
