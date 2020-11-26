@@ -1,7 +1,7 @@
 import Torsional_Constant as TC
 from matplotlib import pyplot as plt
 import scipy as sp
-from torquedistribution import torquedistribution as TD
+from torquedistribution import torque_function as TD
 
 def dth_dy(spanwise_location_iny=34.96):
     T = TD(spanwise_location_iny)
