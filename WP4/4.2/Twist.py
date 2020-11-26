@@ -1,10 +1,10 @@
 import Torsional_Constant as TC
 from matplotlib import pyplot as plt
 import scipy as sp
-import torquedistribution as TD
+from torquedistribution import torque_function as TD
 
-def dth_dy(spanwise_location_iny=69.92):
-    T = TD.torque_function(spanwise_location_iny)
+def dth_dy(spanwise_location_iny=34.96):
+    T = TD(spanwise_location_iny)
     G = TC.G
     J = TC.Torsional_Constant_J(spanwise_location_iny)
 
@@ -15,7 +15,7 @@ def dth_dy(spanwise_location_iny=69.92):
     dth_dy = T / G / J
     return  dth_dy
 
-def Twist(spanwise_location_iny=69.92):
+def Twist(spanwise_location_iny=34.96):
     b = 69.92
     Span = 69.92
     y2 = Span / 2
@@ -47,7 +47,7 @@ def Twist_graph(ystart=0.5, yendmaxb=69.92):
 
 
 
-print(Twist(34.96))
+
 Twist_graph()
 
 

@@ -35,8 +35,8 @@ def V_Ddef(M_c, a):
     return V_D
 
 # Computation of gust reference velocity
-def U_refdef(altitude, V_D=False):
-    if V_D==False:
+def U_refdef(altitude, V, V_D):
+    if V < V_D:
         # print("false...")
         if altitude <= 4572:
             # print("below...")
@@ -44,10 +44,10 @@ def U_refdef(altitude, V_D=False):
         elif altitude > 4572:
             # print("above...")
             U_ref = (6.36 - 13.41)/(18288 - 4572) * (altitude - 4572) + 13.41
-    elif V_D==True:
+    elif V >= V_D:
         # print("true...")
         if altitude <= 4572:
-            print("below...")
+            # print("below...")
             U_ref = 0.5 * ((13.41 - 17.07)/(4572 - 0) * altitude + 17.07)
         elif altitude > 4572:
             # print("above...")
@@ -160,7 +160,7 @@ for i in range(0,int(Zmo+1)):
     H = Hdef(MAC)
     debug("H", H, dbug)
     
-    U_ref = U_refdef(altitude, False)
+    U_ref = U_refdef(altitude, V, V_D)
     debug("Uref", U_ref, dbug)
     
     V_s1 = V_s1def(MTOW, rho_0, S, C_L) # (EAS)
@@ -219,15 +219,16 @@ print("max load factor: ", round(max(deltaNlst1)[0], 3), " [-] | altitude: ", ma
 
 deltaNlst2 = []
 
-Vlst = np.array([0])
+Vlst = [0]
 
-deltaNlstp = np.array([0])
-deltaNlstn = np.array([0])
+Nlstp = [1]
 
-for i in range(1,int(max(deltaNlst1)[2])):
+Nlstn = [1]
+
+for i in range(1,200):
     V = i # m/s (max @ 63 m/s)
     
-    np.append(Vlst, i)
+    Vlst.append(V)
     
     altitude = max(deltaNlst1)[1] # m (max @ 10146 m)
     
@@ -238,10 +239,13 @@ for i in range(1,int(max(deltaNlst1)[2])):
     a = (1.4 * 287 * T)**0.5
     debug("a", a, dbug)
     
+    V_D = V_Ddef(M_c, a)
+    debug("V_D", V_D, dbug)
+    
     H = Hdef(MAC)
     debug("H", H, dbug)
     
-    U_ref = U_refdef(altitude, False)
+    U_ref = U_refdef(altitude, V, V_D)
     debug("Uref", U_ref, dbug)
     
     V_s1 = V_s1def(MTOW, rho_0, S, C_L) # (EAS)
@@ -292,8 +296,8 @@ for i in range(1,int(max(deltaNlst1)[2])):
     deltaNlst2.append((max(deltaN), altitude, Vb, V))
     debug("iterate", (altitude, max(deltaN)), dbug)
     
-    np.append(deltaNlstp, 1 + deltaN)
-    np.append(deltaNlstn, 1 - deltaN)
+    Nlstp.append(1 + max(deltaN))
+    Nlstn.append(1 - max(deltaN))
     
     
 print("max load factor: ", round(max(deltaNlst2)[0], 3), " [-] | altitude: ", max(deltaNlst2)[1], " [m] | Vb ", max(deltaNlst2)[2], " [m/s] | V ", max(deltaNlst2)[3], " [m/s]")\
@@ -313,7 +317,8 @@ i = interp1d(t, 1 - deltaN, kind="cubic", fill_value="extrapolate")
 # plt.plot(s, g(s), "-")
 # plt.plot(t, h(t), "-")
 # plt.plot(t, i(t), "-")
-plt.plot(Vlst, deltaNlstp, "-")
+plt.plot(Vlst, Nlstp)
+plt.plot(Vlst, Nlstn)
 
 
 # plot formatting
