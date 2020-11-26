@@ -34,8 +34,8 @@ def V_Ddef(M_c, a):
     return V_D
 
 # Computation of gust reference velocity
-def U_refdef(altitude, V, V_D):
-    if V < V_D:
+def U_refdef(altitude, V, Vb, V_c, V_D):
+    if V >= Vb and V <= V_c:
         # print("false...")
         if altitude <= 4572:
             # print("below...")
@@ -43,7 +43,7 @@ def U_refdef(altitude, V, V_D):
         elif altitude > 4572:
             # print("above...")
             U_ref = (6.36 - 13.41)/(18288 - 4572) * (altitude - 4572) + 13.41
-    elif V >= V_D:
+    elif V == V_D:
         # print("true...")
         if altitude <= 4572:
             # print("below...")
@@ -51,6 +51,19 @@ def U_refdef(altitude, V, V_D):
         elif altitude > 4572:
             # print("above...")
             U_ref = 0.5 * ((6.36 - 13.41)/(18288 - 4572) * (altitude - 4572) + 13.41)
+    else:
+        print("U_ref undefined over this interval, taking U_ref as 0")
+        U_ref = 0
+    return U_ref
+
+# Compute initial U_ref
+def U_initialdef(altitude):
+    if altitude <= 4572:
+        # print("below...")
+        U_ref = (13.41 - 17.07)/(4572 - 0) * altitude + 17.07
+    elif altitude > 4572:
+        # print("above...")
+        U_ref = (6.36 - 13.41)/(18288 - 4572) * (altitude - 4572) + 13.41
     return U_ref
 
 # Computation of design speed for maximum gust intensity
@@ -63,7 +76,7 @@ def V_cEASdef(rho, rho_0, V_c):
     return V_cEAS
 
 def Wloadingdef(W, S):
-    Wloading = W / S
+    Wloading = W / S * 9.80665
     return Wloading
 
 def Kgdef(Wloading, rho, c, dCLdalpha, g):
@@ -135,105 +148,30 @@ Fgz = 1 - Zmo / 76200
 
 M_c = 0.77
 
-W = MTOW
-print("Considered Flight condition, ", W)
-
-# =============================================================================
-# Iterations for altitude
-# =============================================================================
-
-deltaNlst1 = []
-
-# for i in range(0,int(Zmo+1)):
-#     V = 287 # m/s (max @ 63 m/s)
-    
-#     altitude = i # m (max @ 10146 m)
-
-#     rho, T = ISA(altitude)
-#     debug("rho", rho, dbug)
-#     debug("T", T, dbug)
-    
-#     a = (1.4 * 287 * T)**0.5
-#     debug("a", a, dbug)
-    
-#     V_D = V_Ddef(M_c, a)
-#     debug("V_D", V_D, dbug)
-    
-#     H = Hdef(MAC)
-#     debug("H", H, dbug)
-    
-#     U_ref = U_refdef(altitude, V, V_D)
-#     debug("Uref", U_ref, dbug)
-    
-#     V_s1 = V_s1def(W, rho_0, S, C_L) # (EAS)
-#     debug("V_s1", V_s1, dbug)
-    
-#     V_cEAS = V_cEASdef(rho, rho_0, V_c)
-#     debug("Vc", V_cEAS, dbug)
-    
-#     Wloading = Wloadingdef(W, S) # changes with weight
-#     debug("W/S", Wloading, dbug)
-    
-#     Kg = Kgdef(Wloading, rho, MAC, dCLdalpha, 9.80665)[1]
-#     debug("Kg", Kg, dbug)
-    
-#     Vb = Vbdef(V_s1, Kg, rho_0, U_ref, V_cEAS, dCLdalpha, Wloading)
-#     debug("Vb", Vb, dbug)
-    
-#     Fgm = Fgmdef(MLW, MTOW, MZFW)[2]
-#     debug("Fgm", Fgm, dbug)
-    
-#     Fg = Fgdef(Fgz, Fgm, Zmo, altitude)[1]
-#     debug("Fg", Fg, dbug)
-    
-#     # Calculate U_ds
-#     U_ds = DesignGustVelocity(U_ref, Fg, H)
-#     debug("U_ds", U_ds, dbug)
-    
-#     # Calculate U
-#     s = np.arange(0, 2*H+1)
-#     debug("s", s, dbug)
-    
-#     U = GustVelocity(U_ds, s, H)
-#     debug("U", U, dbug)
-    
-#     # Calculate load factor change deltaN
-#     omega = omegadef(V, H)
-#     debug("omega", omega, dbug)
-    
-#     t = np.arange(0, 2*np.pi/omega + 1, 0.01)
-#     debug("t", t, dbug)
-    
-#     timeconstant = timeconstantdef(Wloading, dCLdalpha, rho, V, 9.80665)
-#     debug("lambda", timeconstant, dbug)
-    
-#     deltaN = deltaNdef(V_TASdef(rho, rho_0, U_ds), 9.80655, omega, t, timeconstant)
-#     debug("deltaN", deltaN, dbug)
-    
-#     deltaNlst1.append((max(deltaN), altitude, Vb, V))
-#     debug("iterate", (altitude, max(deltaN)), dbug)
-    
-# print("max load factor: ", round(max(deltaNlst1)[0], 3), " [-] | altitude: ", max(deltaNlst1)[1], " [m] | Vb ", max(deltaNlst1)[2], " [m/s] | V ", max(deltaNlst1)[3], " [m/s]")
+W = OEW
 
 # =============================================================================
 # Iterations for speed
 # =============================================================================
 
-deltaNlst2 = []
+Nmaxlst = []
 
-Vlst = [0]
-
-Nlstp = [1]
-
-Nlstn = [1]
-
-for i in range(1,400):
-    V = i # m/s (max @ 63 m/s)
+# Initialising
+for i in range(0, int(31000*0.3048) +1, 250):
+    altitude = i
     
-    Vlst.append(V)
+    deltaNlst2 = []
     
-    altitude = Zmo
-    # max(deltaNlst1)[1] # m (max @ 10146 m)
+    Vlst1 = []
+    Vlst2 = []
+    
+    
+    Nlst1p = []
+    Nlst1n = []
+    
+    Nlst2p = []
+    Nlst2n = []
+
     
     rho, T = ISA(altitude)
     debug("rho", rho, dbug)
@@ -248,9 +186,6 @@ for i in range(1,400):
     H = Hdef(MAC)
     debug("H", H, dbug)
     
-    U_ref = U_refdef(altitude, V, V_D)
-    debug("Uref", U_ref, dbug)
-    
     V_s1 = V_s1def(W, rho_0, S, C_L) # (EAS) changes with weight
     debug("V_s1", V_s1, dbug)
     
@@ -263,78 +198,96 @@ for i in range(1,400):
     Kg = Kgdef(Wloading, rho, MAC, dCLdalpha, 9.80665)[1]
     debug("Kg", Kg, dbug)
     
-    Vb = Vbdef(V_s1, Kg, rho_0, U_ref, V_cEAS, dCLdalpha, Wloading)
+    U_initial = U_initialdef(altitude)
+    
+    Vb = Vbdef(V_s1, Kg, rho_0, U_initial, V_cEAS, dCLdalpha, Wloading)
     debug("Vb", Vb, dbug)
     
-    Fgm = Fgmdef(MLW, MTOW, MZFW)[2]
-    debug("Fgm", Fgm, dbug)
+    for i in [Vb, V_c, V_D]:
+        V = i # m/s (max @ 63 m/s)
+        
+        Vlst1.append(V)
+        
+        U_ref = U_refdef(altitude, V, Vb, V_c, V_D)
+        debug("Uref", U_ref, dbug)
+        
+        Fgm = Fgmdef(MLW, MTOW, MZFW)[2]
+        debug("Fgm", Fgm, dbug)
+        
+        Fg = Fgdef(Fgz, Fgm, Zmo, altitude)[1]
+        debug("Fg", Fg, dbug)
+        
+        # Calculate U_ds
+        U_ds = DesignGustVelocity(U_ref, Fg, H)
+        debug("U_ds", U_ds, dbug)
+        
+        # Calculate U
+        s = np.arange(0, 2*H+1)
+        debug("s", s, dbug)
+        
+        U = GustVelocity(U_ds, s, H)
+        debug("U", U, dbug)
+        
+        # Calculate load factor change deltaN
+        omega = omegadef(V, H)
+        debug("omega", omega, dbug)
+        
+        t = np.arange(0, 2*np.pi/omega + 1, 0.01)
+        debug("t", t, dbug)
+        
+        timeconstant = timeconstantdef(Wloading, dCLdalpha, rho, V, 9.80665)
+        debug("lambda", timeconstant, dbug)
+        
+        deltaN = deltaNdef(V_TASdef(rho, rho_0, U_ds), 9.80655, omega, t, timeconstant)
+        debug("deltaN", deltaN, dbug)
+        
+        deltaNlst2.append((max(deltaN), altitude, Vb, V))
+        debug("iterate", (altitude, V, max(deltaN)), dbug)
+        
+        Nlst1p.append(1 + max(deltaN))
+        Nlst1n.append(1 - max(deltaN))
+        
+    Vlst2.append(Vlst1[-1])
+    Nlst2p.append(Nlst1p[-1])
+    Nlst2n.append(Nlst1n[-1])
     
-    Fg = Fgdef(Fgz, Fgm, Zmo, altitude)[1]
-    debug("Fg", Fg, dbug)
+    del Vlst1[-1]
+    del Nlst1p[-1]
+    del Nlst1n[-1]
+
+    Nmaxlst.append((max(deltaNlst2)[0] + 1, max(deltaNlst2)[1]))
     
-    # Calculate U_ds
-    U_ds = DesignGustVelocity(U_ref, Fg, H)
-    debug("U_ds", U_ds, dbug)
-    
-    # Calculate U
-    s = np.arange(0, 2*H+1)
-    debug("s", s, dbug)
-    
-    U = GustVelocity(U_ds, s, H)
-    debug("U", U, dbug)
-    
-    # Calculate load factor change deltaN
-    omega = omegadef(V, H)
-    debug("omega", omega, dbug)
-    
-    t = np.arange(0, 2*np.pi/omega + 1, 0.01)
-    debug("t", t, dbug)
-    
-    timeconstant = timeconstantdef(Wloading, dCLdalpha, rho, V, 9.80665)
-    debug("lambda", timeconstant, dbug)
-    
-    deltaN = deltaNdef(V_TASdef(rho, rho_0, U_ds), 9.80655, omega, t, timeconstant)
-    debug("deltaN", deltaN, dbug)
-    
-    deltaNlst2.append((max(deltaN), altitude, Vb, V))
-    debug("iterate", (altitude, max(deltaN)), dbug)
-    
-    Nlstp.append(1 + max(deltaN))
-    Nlstn.append(1 - max(deltaN))
-    
-    
-print("max load factor: ", round(max(deltaNlst2)[0], 3), " [-] | altitude: ", max(deltaNlst2)[1], " [m] | Vb ", max(deltaNlst2)[2], " [m/s] | V ", max(deltaNlst2)[3], " [m/s]")\
-    
+    print("Considered Flight Condition : Altitude ", altitude, " [m] | Weight ", W, " [kg]")
+    print("max load factor: ", round(max(deltaNlst2)[0] + 1, 3), " [-] | altitude: ", max(deltaNlst2)[1], " [m] | Vb ", max(deltaNlst2)[2], " [m/s] | V ", max(deltaNlst2)[3], " [m/s]")
+
+print("Maximum Nmaxlst ", max(Nmaxlst))
 # =============================================================================
 # Graphing
 # =============================================================================
 
-# plotting the datapoints and interpolation because it looks nice
-g = interp1d(s,U,kind="cubic", fill_value="extrapolate")
-h = interp1d(t, 1 + deltaN, kind="cubic", fill_value="extrapolate")
-i = interp1d(t, 1 - deltaN, kind="cubic", fill_value="extrapolate")
-
-# plt.plot(s,U,"o", s, g(s), "-")
-# plt.plot(s,U,"o")
-
-# plt.plot(s, g(s), "-")
-# plt.plot(t, h(t), "-")
-# plt.plot(t, i(t), "-")
-plt.plot(Vlst, Nlstp)
-plt.plot(Vlst, Nlstn)
+# # plotting the datapoints and interpolation because it looks nice
+# plt.plot(Vlst1, Nlst1p)
+# plt.plot(Vlst1, Nlst1n)
+# plt.plot(Vlst2, Nlst2p, "x")
+# plt.plot(Vlst2, Nlst2n, "x")
 
 
-# plot formatting
+# # plot formatting
+# plt.title('Gust envelope')
 
-plt.title('Gust envelope')
+# plt.xlabel('Flight velocity [m/s]')
+# plt.ylabel('Load factor, n [-]')
 
-plt.xlabel('Flight velocity [m/s]')
-plt.ylabel('Load factor, n [-]')
+# plt.grid(True, which='both')
+# plt.axhline(y=0, color='k')
+# plt.axvline(x=Vb, color='k')
+# plt.axvline(x=V_c, color='k')
+# plt.axvline(x=V_D, color='k')
 
-plt.grid(True, which='both')
-plt.axhline(y=0, color='k')
+# # plt.ylim(1, 3)
 
-plt.show()
+
+# plt.show()
 
 # =============================================================================
 # FIN

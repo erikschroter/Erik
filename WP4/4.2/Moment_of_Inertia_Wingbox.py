@@ -9,7 +9,7 @@ WB_aft_height = 0.1091
 
 #Thickness To be determined
 b = 69.92
-t = 0.010
+t = 0.030
 E = 68.9*10**9   #To be changed
 
 
@@ -66,7 +66,7 @@ def Ixx_stringers(spanwise_location_iny):
     tS=0.010    #Thickness
     aS=10*tS    #Length
     bS=aS
-    n= 24     #number of stringers
+    n= 10     #number of stringers
 
     #values trapezoid
     Cchord=(h/3)*((2*a+b)/(a+b))
