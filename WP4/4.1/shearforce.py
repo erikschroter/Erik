@@ -13,7 +13,7 @@ span = 69.92
 accuracy = 41 
  
 #Loading factor [-]
-n=5
+n=1
 
 #Maximum takeoff weight [kg]
 MTOW = 291_509.2
@@ -126,3 +126,4 @@ plt.xlim(0, xdist)
 plt.ylim(0, xdist)
 plt.gca().set_aspect('equal', adjustable='box')
 
+print("max deflection:",deflection(xdist))
