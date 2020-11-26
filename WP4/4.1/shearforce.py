@@ -114,6 +114,7 @@ while i < len(a):
     i+=1
 
 plt.plot(a,deflection)
+plt.hlines(xdist*0.3,-5,40)
 plt.title("Deflection")
 plt.show()
 
