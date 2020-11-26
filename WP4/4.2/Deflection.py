@@ -47,4 +47,4 @@ def Deflection_graph(ystart=0, yendmaxb=69.92):
 
 
 
-print(Deflection(69.92/2))
+print(Deflection(34.96))
