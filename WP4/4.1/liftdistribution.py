@@ -30,7 +30,7 @@ def liftdistribution(file, rho, v, span, accuracy,weight,n):
     f = interp1d(x,Llst,kind="cubic", fill_value="extrapolate")
     
     #determinging the facter by wich the lift needs to be mulitplied
-    factor = (n*weight)/(sp.integrate.quad(f,0,span/2)[0])
+    factor = (n*weight*0.5)/(sp.integrate.quad(f,0,span/2)[0])
     
     out=[]
     
