@@ -9,8 +9,11 @@ WB_aft_height = 0.1091
 
 #Thickness To be determined
 b = 69.92
-t = 0.030
-E = 68.9*10**9   #To be changed
+t = 0.015       #WB thickness
+E = 68.9*10**9
+stringers = 15  #No. of stringers
+tS = 0.015      #Stringer thickness
+aS = 0.100        #Stringer depth
 
 
 def chord_length(spanwise_location): #Spanwise location is y/(b/2)
@@ -63,10 +66,9 @@ def Ixx_stringers(spanwise_location_iny):
     c = 0.0163 * chord
 
     #Dimensions stringers
-    tS=0.010    #Thickness
-    aS=10*tS    #Length
+
     bS=aS
-    n= 10     #number of stringers
+    n= stringers     #number of stringers
 
     #values trapezoid
     Cchord=(h/3)*((2*a+b)/(a+b))
@@ -126,4 +128,3 @@ def Ixxstringers(span_position_in_y=69.92/2):
     y1 = 0
     v_y, error2 = sp.integrate.quad(Ixx_stringers, y1, span_position_in_y)
     return v_y
-
