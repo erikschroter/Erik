@@ -13,7 +13,7 @@ span = 69.92
 accuracy = 41 
  
 #Loading factor [-]
-n=3.5
+n=5
 
 #Maximum takeoff weight [kg]
 MTOW = 291_509.2

@@ -72,29 +72,14 @@ def torquedistribution(file, rho, v, span, accuracy, y_thrust):
 
     # Calculate contribution of weight of propulsion group
 
-    W_propulsion_group = 20487.986 * 9.81  # [N]
-    root_chord = 11.95  # [m]
-    tip_chord = 3.59  # [m]
-    span = 69.92  # [m]
-    spanwise_position_engine = 11.5  # [m]
-    chord_length_engine = root_chord - (root_chord - tip_chord) * spanwise_position_engine / (span / 2)
-    T_Weight_pg = - flexaxis * chord_length_engine * W_propulsion_group
-
-    # Calculate contribution of weight of landing gear
-
-    W_landing_gear = 5060.9 * 9.81 # [N]
-    d_lg_flexuralaxis = 8.140397 - flexaxis * 10.511222  # [m]
-    T_Weight_lg = d_lg_flexuralaxis * W_landing_gear
+    W_propulsion_group = 20487.986 * 9.81 # N
 
     # Add contribution of thrust torque for a distance up to 11.5m from the root chord
 
     for j in range(len(xnew)):
-        if xnew[j] < 6:
+        if xnew[j] < 11.5:
             torque_aerodynamic = final_integration_result[j][0]
-            final_integration_result[j] = M_thrust + T_Weight_pg + T_Weight_lg + torque_aerodynamic
-        elif xnew[j] < 11.5:
-            torque_aerodynamic = final_integration_result[j][0]
-            final_integration_result[j] = M_thrust + T_Weight_pg + torque_aerodynamic
+            final_integration_result[j] = M_thrust + torque_aerodynamic
         else:
             final_integration_result[j] = final_integration_result[j][0]
 

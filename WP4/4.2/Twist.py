@@ -21,14 +21,23 @@ def Twist(spanwise_location_iny=34.96):
     y2 = Span / 2
     y1 = 0.5
     th_y2 = (0, 0)
+    th_y3 = (0, 0)
 
-    if spanwise_location_iny<=11.5:
+    if spanwise_location_iny<=6:
         th_y1 = sp.integrate.quad(dth_dy,y1,spanwise_location_iny, limit=100)
+        th_y = th_y1[0]
 
-    if spanwise_location_iny>11.5:
-        th_y1 = sp.integrate.quad(dth_dy, y1, 11.5, limit=100)
-        th_y2 = sp.integrate.quad(dth_dy, 11.5, spanwise_location_iny, limit=100)
-    th_y = th_y1[0] + th_y2[0]
+    elif spanwise_location_iny<=11.5:
+        th_y1 = sp.integrate.quad(dth_dy, y1, 6, limit=100)
+        th_y2 = sp.integrate.quad(dth_dy, 6, spanwise_location_iny, limit=100)
+        th_y = th_y1[0] + th_y2[0]
+
+    else:
+        th_y1 = sp.integrate.quad(dth_dy, y1, 6, limit=100)
+        th_y2 = sp.integrate.quad(dth_dy, 6, 11.5, limit=100)
+        th_y3 = sp.integrate.quad(dth_dy, 11.5, spanwise_location_iny, limit=100)
+        th_y = th_y1[0] + th_y2[0] + th_y3[0]
+
     return th_y
 
 def Twist_graph(ystart=0.5, yendmaxb=69.92):

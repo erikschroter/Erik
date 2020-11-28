@@ -19,11 +19,11 @@ def Torsional_Constant_J(spanwise_location_iny=34.96):
     a = WB_aft_height * chord
     b = WB_front_height * chord
     c = 0.0163 * chord
-    hpt = (h**2 + ((b-a)/2)**2)**0.5
+
 
 
     A = 0.5*(a+b)*h
-    s = a + b + 2 * hpt
+    s = a + b + 2 * h
     J = 4*A**2/(s/t)
 
     return J

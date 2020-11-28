@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from ISAdef import ISA
 
 altitude = 31000  # ft
-Weight_kg = 304636  # kg
+Weight_kg = 147780.3631  # kg
 
 def Manoeuvre_Envelope(altitude, Weight_kg):
     
@@ -87,10 +87,13 @@ plt.plot([V_A_flaps, V_F], [2.0, 2.0], "b")
 
 # plot formatting
 
-plt.title('Manoeuvre Envelope')
+plt.title(' ')
 
-plt.xlabel('V')
-plt.ylabel('n')
+plt.xlabel(' ')
+plt.ylabel(' ')
+
+plt.ylim(-1.5, 4)
+plt.xlim(0, 350)
 
 plt.grid(True, which='both')
 plt.axhline(y=0, color='k')
