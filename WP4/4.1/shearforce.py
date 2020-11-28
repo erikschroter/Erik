@@ -13,7 +13,7 @@ span = 69.92
 accuracy = 41 
  
 #Loading factor [-]
-n=3.5
+n=1
 
 #Maximum takeoff weight [kg]
 MTOW = 291_509.2
@@ -65,6 +65,10 @@ plt.plot(a,inertialForce,'g')
 plt.plot(a,totalsheer,'b')
 plt.hlines(-5,0,40)
 plt.title("Shear forces")
+plt.grid(b=None,which='Major',axis='both')
+plt.title("Lift distribution")
+plt.ylabel("Shear force [N]")
+plt.xlabel("spanwise location [m]")
 red_patch = mpatches.Patch(color='r', label='Aerodynamic forces')
 green_patch = mpatches.Patch(color='g', label='Inertial forces')
 blue_patch = mpatches.Patch(color='b', label='Total Shear force')
