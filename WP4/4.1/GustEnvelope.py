@@ -154,7 +154,7 @@ Fgz = 1 - Zmo / 76200
 M_c = 0.77 # Mach
 h_cruise = 31000 * 0.3048 # m
 
-W = MTOW # Flight condition being evaluated
+W = OEW # Flight condition being evaluated
 
 dbug = False
 
