@@ -1,5 +1,6 @@
 import scipy as sp
 from scipy import integrate
+from scipy import interpolate
 import matplotlib.pyplot as plt
 
 # Wing Box outer geometry (in chord length)
@@ -9,11 +10,15 @@ WB_aft_height = 0.1091
 
 #Thickness To be determined
 b = 69.92
-t = 0.015       #WB thickness
 E = 68.9*10**9
+
+t = 0.015       #WB thickness
 stringers = 15  #No. of stringers
 tS = 0.015      #Stringer thickness
 aS = 0.100        #Stringer depth
+Spanwise = [0, 6.992, 13.984, 20.976, 27.968]
+Stringersno = [20, 18, 16, 14, 10]
+
 
 
 def chord_length(spanwise_location): #Spanwise location is y/(b/2)
@@ -68,7 +73,8 @@ def Ixx_stringers(spanwise_location_iny):
     #Dimensions stringers
 
     bS=aS
-    n= stringers     #number of stringers
+    n1= sp.interpolate.interp1d(Spanwise,Stringersno,kind="previous",fill_value="extrapolate")     #number of stringers
+    n = n1(spanwise_location_iny)
 
     #values trapezoid
     Cchord=(h/3)*((2*a+b)/(a+b))
@@ -128,3 +134,7 @@ def Ixxstringers(span_position_in_y=69.92/2):
     y1 = 0
     v_y, error2 = sp.integrate.quad(Ixx_stringers, y1, span_position_in_y)
     return v_y
+
+
+
+Ixx_graph()
