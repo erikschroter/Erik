@@ -154,7 +154,7 @@ Fgz = 1 - Zmo / 76200
 M_c = 0.77 # Mach
 h_cruise = 31000 * 0.3048 # m
 
-W = OEW # Flight condition being evaluated
+W = MTOW # Flight condition being evaluated
 
 dbug = False
 
@@ -165,8 +165,8 @@ dbug = False
 Nmaxlst = []
 
 # Flight condition for all altitudes till cruise altitude
-for i in range(0, int(h_cruise) + 1, 250):
-# for i in range(0, 0 + 1, 250):
+# for i in range(0, int(h_cruise) + 1, 250): 1219,9449
+for i in range(0, 0 + 1, 250):
     altitude = i
     
     # Initialising datalists
