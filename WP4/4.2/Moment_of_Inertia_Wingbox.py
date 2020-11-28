@@ -13,7 +13,6 @@ b = 69.92
 E = 68.9*10**9
 
 t = 0.015       #WB thickness
-stringers = 15  #No. of stringers
 tS = 0.015      #Stringer thickness
 aS = 0.100        #Stringer depth
 Spanwise = [0, 6.992, 13.984, 20.976, 27.968]
