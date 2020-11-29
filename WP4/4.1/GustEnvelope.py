@@ -9,7 +9,6 @@ Created on Thu Nov 19 15:19:16 2020
 from CS25Loads import DesignGustVelocity, GustVelocity
 from ISAdef import ISA
 import numpy as np
-from scipy.interpolate import interp1d
 import matplotlib.pyplot as plt
 
 # =============================================================================
@@ -148,15 +147,18 @@ MZFW = 161394.7263 # kg
 
 OEW = 147780.3631 # kg
 
+
 Zmo = 40000 * 0.3048 # ft (-> m)
 Fgz = 1 - Zmo / 76200
 
 M_c = 0.77 # Mach
 h_cruise = 31000 * 0.3048 # m
 
-W = MTOW # Flight condition being evaluated
+W = OEW # Flight condition being evaluated
 
 dbug = False
+
+h = 0 * 0.3048 # Flight condition being evauluated
 
 # =============================================================================
 # Iterations for to find most critical condition
@@ -166,7 +168,7 @@ Nmaxlst = []
 
 # Flight condition for all altitudes till cruise altitude
 # for i in range(0, int(h_cruise) + 1, 250): 1219,9449
-for i in range(0, 0 + 1, 250):
+for i in range(int(h), int(h) + 1, 250):
     altitude = i
     
     # Initialising datalists
@@ -240,8 +242,22 @@ for i in range(0, 0 + 1, 250):
         U = GustVelocity(U_ds, s, H)
         debug("U", U, dbug)
         
+        ######################################################################
+        # Plot formatting
+        title = str('s - U Diagram for ') + str(round(i, 1)) + str(' [m/s]')
+        plt.title(title)
+    
+        plt.xlabel('Gust Penetration Distance, s [m]')
+        plt.ylabel('Gust Velocity, U [m/s]')
+        
+        plt.grid(True, which='both')
+        plt.axhline(y=0, color='k')
+        Uplt = plt.plot(s, U, "-", color='r')
+        plt.show(Uplt)
+        ######################################################################    
+    
         # Calculate load factor change deltaN
-        omega = omegadef(V, H)
+        omega = omegadef(V, H) # in TAS?
         debug("omega", omega, dbug)
         
         t = np.arange(0, 2*np.pi/omega + 1, 0.01)
@@ -252,6 +268,20 @@ for i in range(0, 0 + 1, 250):
         
         deltaN = deltaNdef(V_TASdef(rho, rho_0, U_ds), 9.80655, omega, t, timeconstant)
         debug("deltaN", deltaN, dbug)
+        
+        ######################################################################
+        # Plot formatting
+        title = str('t - delta n Diagram for ') + str(round(i, 1)) + str(' [m/s]')
+        plt.title(title)
+    
+        plt.xlabel('Time [s]')
+        plt.ylabel('Change in Load factor, n [-]')
+        
+        plt.grid(True, which='both')
+        plt.axhline(y=0, color='k')
+        timeplt = plt.plot(t, deltaN, "-", color='r')
+        plt.show(timeplt)
+        ######################################################################
         
         deltaNlst2.append((max(deltaN), altitude, Vb, V, V_D, V_s1))
         debug("iterate", (altitude, V, max(deltaN)), dbug)
@@ -294,10 +324,6 @@ MaxVs = max(Nmaxlst)[10]
 # =============================================================================
 
 # Plotting the datapoints and interpolation because it looks nice
-# plt.plot(Vlst1, Nlst1p, color='r')
-# plt.plot(Vlst1, Nlst1n, color='r')
-# plt.plot(Vlst2, Nlst2p, "o", color='r')
-# plt.plot(Vlst2, Nlst2n, "o", color='r')
 
 plt.plot(MaxV1, MaxN1p, label = 'V - n Diagram', color='r')
 plt.plot(MaxV1, MaxN1n, color='r')

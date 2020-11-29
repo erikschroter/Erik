@@ -2,11 +2,22 @@ import math as m
 import matplotlib.pyplot as plt
 from ISAdef import ISA
 
+<<<<<<< HEAD
+MTOW = 304636.2789 # kg
+
+MZFW = 161394.7263 # kg
+
+OEW = 147780.3631 # kg
+
+altitude = 4000  # ft
+Weight_kg = MTOW  # kg
+=======
 """Function to plot the manoeuvre envelope.
 If questions ask Christoph Pabsch"""
 
 altitude = 31000  # ft
 Weight_kg = 147780.3631  # kg
+>>>>>>> 80c34c86b0dd6e41f38cace4afef0c9b39a1a7c2
 
 def Manoeuvre_Envelope(altitude, Weight_kg):
 
