@@ -51,25 +51,19 @@ def liftdistribution(file, rho, v, span, accuracy,weight,n):
     
 
     return x, Llst, xnew, o, span/2
+'''
+x, Llst, xnew, f,xdist = liftdistribution('MainWing_a0.00_v10.00ms.csv', 1.225, 70, 69.92, 100,(2915092),1) 
+xlist = []
+ylist = []
+presision = 1000
 
-# x, Llst, xnew, f = liftdistribution('MainWing_a0.00_v10.00ms.csv', 1.225, 70, 69.92, 100) 
-
-# def plotting(x, y, xnew, f(xnew)):
+for i in range(presision):
+    xlist.append(((i*xdist)/presision))
+    ylist.append(f(((i*xdist)/presision)))
     
-# f, xdist = liftdistribution('MainWing_a0.00_v10.00ms.csv', 1.225, 70, 69.92, 100)
-# print(f(9.23))
-
-#     #plotting the datapoints and interpolation because it looks nice
-#     plt.plot(x,y,"o", xnew, f(xnew), "-")
-    
-#     # plot formatting
-    
-#     plt.title('Lift distribution')
-    
-#     plt.xlabel('span location')
-#     plt.ylabel('Distribution magnitude')
-    
-#     plt.grid(True, which='both')
-#     plt.axhline(y=0, color='k')
-    
-#     plt.show()
+plt.plot(xlist,ylist)
+plt.grid(b=None,which='Major',axis='both')
+plt.title("Lift distribution")
+plt.ylabel("Aerodynamic force [N]")
+plt.xlabel("spanwise location [m]")
+'''
