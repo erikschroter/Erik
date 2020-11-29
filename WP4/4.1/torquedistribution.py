@@ -68,7 +68,7 @@ def torquedistribution(file, rho, v, span, accuracy, y_thrust, thrust_setting, n
     
     # interpolating the data in a cubic manner
     g = interp1d(x,Mlst,kind="cubic", fill_value="extrapolate")
-    #estimateg, errorg = sp.integrate.quad(g, 0, len(x))
+    # estimateg, errorg = sp.integrate.quad(g, 0, len(x))
     # h = interp1d(x_T,Tlst,kind="linear", fill_value="extrapolate")
 
     # determining the factor by which the lift needs to be multiplied
