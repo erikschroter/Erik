@@ -1,7 +1,12 @@
-MaxFuelWeight = 0
-MTOW = 0
-EngineWeight = 0
-W_uc_MLG = 0
+MaxFuelWeight = 143_241.5525 #[kg]
+MTOW = 304_636.2789 #[kg]
+EngineWeight = 20_487.986 #[kg]
+W_uc_MLG =  7_569.349414 #[kg]
 D_fuselageOuter = 6.68 #[m]
 taperRatio = 0.3 #[]
-rootChord = 11.95 [m]
+rootChord = 11.95 #[m]
+wingSpan = 69.92 #[m]
+wingWeight = 33_640.77171 #[kg]
+maxFuelMass = 143_241.5525 #[kg]
+mainLandingGearMass = 7_569.349414 #[kg]
+g = 9.80665 #m/s^2
