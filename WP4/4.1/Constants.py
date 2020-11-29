@@ -10,4 +10,3 @@ wingWeight = 33_640.77171 #[kg]
 maxFuelMass = 143_241.5525 #[kg]
 mainLandingGearMass = 7_569.349414 #[kg]
 g = 9.80665 #m/s^2
-avgThicknessToChord = .15 #ADJUST
