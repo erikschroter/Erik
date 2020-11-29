@@ -58,18 +58,9 @@ def torquedistribution(file, rho, v, span, accuracy, y_thrust, thrust_setting, n
     for i in range(len(Cl)):
         cmlst.append(CmAirfquarterchord[i] - Cl[i]*(flexaxis-0.25))
         Mlst.append(cmlst[i]*q*(Chord[i]**2)*bprime)
-
-    # # find the closest y span value for the thrust (higher or lower)
-    # closest = min(x, key=lambda x:abs(x-y_thrust))
-    # closestindex = x.index(closest)
-    
-    # for i in range(0, closestindex + 1):
-    #     Mlst[i] = Mlst[i] + M_thrust
     
     # interpolating the data in a cubic manner
     g = interp1d(x,Mlst,kind="cubic", fill_value="extrapolate")
-    # estimateg, errorg = sp.integrate.quad(g, 0, len(x))
-    # h = interp1d(x_T,Tlst,kind="linear", fill_value="extrapolate")
 
     # determining the factor by which the lift needs to be multiplied
 
@@ -131,17 +122,7 @@ def torquedistribution(file, rho, v, span, accuracy, y_thrust, thrust_setting, n
 # setting outside function
 xnew, final_integration_result, torque_function = torquedistribution('MainWing_a0.00_v10.00ms.csv', rho, 70, 69.92, 100, 11.5, Thrust_Setting, n_Setting, Weight_Setting)
 
-# print(torque_function)
-
-# plotting the datapoints and interpolation because it looks nice
-
-# plt.plot(x,Mlst,"o", xnew, g(xnew), "-")
-# plt.plot(x_T,Tlst,"o", xnew, h(xnew), "-")
-
 plt.plot(xnew, torque_function(xnew), "-")
-
-# plt.plot(xnew, final_integration_result, "r")
-
 
 # plot formatting
 
