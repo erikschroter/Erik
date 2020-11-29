@@ -27,7 +27,7 @@ Area2 = (2*h2 +a2 +b2) * t  #Top Area
 V = 1/3*h3 *(Area1 +Area2 + (Area1 * Area2)**0.5)
 MassWB = 2 * V * Alrho
 
-AreaSt = WB.tS * (2 * WB.aS - WB.tS)
+AreaSt = WB.tS * (2 * WB.aS - WB.tS)    #Cross sectional area for singe stringer
 
 MassSt = 2 * AreaSt * Alrho * sum(Stringerslength) * 34.96/5
 
