@@ -102,7 +102,7 @@ def Twist_graph(ystart=0.5, yendmaxb=69.92):
     plt.hlines(-10, -5, 40)
     plt.title('Twist Distribution')
     plt.xlabel('Span [m]')
-    plt.ylabel('Twist [rad]')
+    plt.ylabel('Twist [deg]')
     plt.show()
 
 
