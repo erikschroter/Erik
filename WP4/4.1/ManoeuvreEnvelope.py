@@ -2,11 +2,15 @@ import math as m
 import matplotlib.pyplot as plt
 from ISAdef import ISA
 
+"""Function to plot the manoeuvre envelope.
+If questions ask Christoph Pabsch"""
+
 altitude = 31000  # ft
 Weight_kg = 147780.3631  # kg
 
 def Manoeuvre_Envelope(altitude, Weight_kg):
-    
+
+    # Determine density and temperature at altitude
     alt = altitude * 0.3048
     rho, T = ISA(alt)
     a = 20.05 * m.sqrt(T)
@@ -71,8 +75,11 @@ def Manoeuvre_Envelope(altitude, Weight_kg):
 
     return T, M_d, V_D, n_max, n_stall_speed_clean, n_min_stall_speed_clean, V_A, V_A_min, V_C, n_stall_speed_flaps, V_A_flaps, V_F
 
+# Obtain results
 T, M_d, V_D, n_max, n_stall_speed_clean, n_min_stall_speed_clean, V_A, V_A_min, V_C, n_stall_speed_flaps, V_A_flaps, V_F = Manoeuvre_Envelope(altitude, Weight_kg)
 
+
+# Plot manoeuvre envelope
 plt.plot(n_stall_speed_clean, "b")
 plt.plot(n_min_stall_speed_clean, "b")
 plt.plot([m.floor(V_A), V_A], [n_stall_speed_clean[-1], 2.5], "b")
