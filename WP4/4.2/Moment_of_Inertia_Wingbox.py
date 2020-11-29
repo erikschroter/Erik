@@ -12,11 +12,11 @@ WB_aft_height = 0.1091
 b = 69.92
 E = 68.9*10**9
 
-t = 0.015       #WB thickness
-tS = 0.015      #Stringer thickness
+t = 0.010       #WB thickness
+tS = 0.010      #Stringer thickness
 aS = 0.100        #Stringer depth
 Spanwise = [0, 6.992, 13.984, 20.976, 27.968]
-Stringersno = [20, 18, 16, 14, 10]
+Stringersno = [18, 16, 12, 8, 6]
 
 
 
@@ -79,7 +79,7 @@ def Ixx_stringers(spanwise_location_iny):
     Cchord=(h/3)*((2*a+b)/(a+b))
 
     #Values Stringer
-    Astringer=tS*(aS*2-t)
+    Astringer=tS*(aS*2-tS)
     Cy=(aS**2+aS*tS-tS**2)/(2*(2*aS-tS))
     Cx=(aS**2+aS*tS-tS**2)/(2*(2*aS-tS))
 
