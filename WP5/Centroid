@@ -52,18 +52,29 @@ def Centroid(spanwise_location_iny):       #Centroid entire wingbox
 
     #Parrallel axis stringers
     Ctop=[]
-    halfn=int(n/2)
-    n=int(n)
-    for i in range(0, halfn):
-        ParAxisOne=(h/(n-1)*i+Cy)*Astringer
+    halfn1=int(ntop/2)
+    n1=int(ntop)
+    halfn2=int(nlower/2)
+    n2=int(nlower)
+    for i in range(0, halfn1):
+        ParAxisOne=(h/(ntop-1)*i+Cy)*Astringer
         Ctop.append(ParAxisOne)
         
-    for i in range(halfn, n):
-        ParAxisOne=(h/(n-1)*i-Cy)*Astringer
-        Ctop.append(ParAxisOne)
+    for i in range(halfn1, n1):
+        ParAxisTwo=(h/(ntop-1)*i-Cy)*Astringer
+        Ctop.append(ParAxisTwo)
+        
+    for i in range(0, halfn2):
+        ParAxisThree=(h/(nlower-1)*i+Cy)*Astringer
+        Ctop.append(ParAxisThree)
+        
+    for i in range(halfn2, n2):
+        ParAxisFour=(h/(nlower-1)*i-Cy)*Astringer
+        Ctop.append(ParAxisFour)
+        
         
     Ctoptotal=sum(Ctop)+Cchord*A
-    Atot=n*Astringer+A
+    Atot=(ntop+nlower)*Astringer+A
     C=Ctoptotal/Atot
     
     return C
