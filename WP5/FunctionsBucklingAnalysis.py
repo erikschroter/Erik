@@ -49,7 +49,8 @@ def TorsionalSheardef(T, A_i):
 
 def F_cr(E, poisson, t, b):
     k_c = input("What is the k_c value?")
-    F_cr = (( pi**2 * k_c * E )/( 12 * 1-v**2 ))*(t/b)**2
+    F_cr = (( pi**2 * k_c * E )/( 12 * 1-poisson**2 ))*(t/b)**2
+    return F_cr
 
 # Column Buckling of stringers
 # 𝐾𝐾 is a factor taking into account the way the end conditions of the column; 𝐾𝐾=1 if both ends are pinned, 𝐾𝐾=4 if both ends are clamped; 𝐾𝐾=1/4 if one end is fixed and one end is free; 1/√𝐾𝐾=0.7 if one end is pinned and one end is free.
