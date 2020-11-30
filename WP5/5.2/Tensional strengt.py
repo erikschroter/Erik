@@ -14,7 +14,7 @@ span = 69.92
 accuracy = 41 
  
 #Loading factor [-]
-n=-1.5
+n=4.65
 
 #Maximum takeoff weight [kg]
 MTOW = 291_509.2
@@ -35,6 +35,8 @@ W_uc_MLG = 7_569.349
 
 #Wingbox thickness versus cord lengt
 wtvcl = 0.1347
+#tensile yield stress [MPA]
+sigma_y = 276
 
 #Wing weight including mounts and spoilers [kg]
 WingWeight = 3210.55
@@ -55,7 +57,7 @@ from liftdistribution import liftdistribution
 from Moment_of_Inertia_Wingbox import Ixx_in_y
 from Moment_of_Inertia_Wingbox import chord_length
 
-x, Llst, xnew, f, xdist = liftdistribution(filename, rho, v, span, accuracy,MTOW*9.81,n)
+x, Llst, xnew, f, xdist = liftdistribution(filename, rho, v, span, accuracy,MZFW*9.81,n)
 a = [0]
 Aerosheer = [-sp.integrate.quad(f,0,0)[0]+sp.integrate.quad(f,0,xdist)[0]]
 while a[-1] <= xdist:
@@ -90,15 +92,33 @@ plt.hlines(-5,0,40)
 plt.show()'''
 BendingStress=[]
 def y(x):
-    return (wtvcl * chord_length(x))/2
+    return (wtvcl * chord_length(x/34.96)/2)
 i=0
 while i < len(a):
   
-    BendingStress.append((Moment[i]*y(a[i]))/(Ixx_in_y(a[i])))
+    BendingStress.append(abs((Moment[i]*y(a[i]))/(10**6*Ixx_in_y(a[i]))))
     i +=1
 print(len(BendingStress),len(a))
 g = sp.interpolate.interp1d(a,BendingStress,kind="linear", fill_value="extrapolate")
-
-plt.plot(a,BendingStress)
+i=0
+safty_margine = []
+while i < len(a):
+    if BendingStress[i] >= 0.001:
+        safty_margine.append((sigma_y/BendingStress[i]))
+    else:
+        safty_margine.append(safty_margine[-1])
+    i += 1
+plt.plot(a,(BendingStress))
+plt.title("Bending Stress diagram")
+plt.grid(b=None,which='Major',axis='both')
+plt.ylabel("Bending Stress [MPa]")
+plt.xlabel("spanwise location [m]")
+plt.show()
+plt.plot(a,safty_margine)
+plt.title("Tension safty margin diagram")
+plt.grid(b=None,which='Major',axis='both')
+plt.ylabel("Safty margin [-]")
+plt.xlabel("spanwise location [m]")
+plt.ylim(0,15)
 plt.show()
 
