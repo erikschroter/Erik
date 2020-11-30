@@ -39,7 +39,8 @@ def Centroid(spanwise_location_iny):       #Centroid entire wingbox
 
     bS=aS
     n1= sp.interpolate.interp1d(Spanwise,Stringersno,kind="previous",fill_value="extrapolate")     #number of stringers
-    n = n1(spanwise_location_iny)
+    ntop = 
+    nlower = 
 
     #values trapezoid
     Cchord=(h/3)*((2*a+b)/(a+b))
