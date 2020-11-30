@@ -43,12 +43,13 @@ def Centroid(spanwise_location_iny):       #Centroid entire wingbox
 
     #values trapezoid
     Cchord=(h/3)*((2*a+b)/(a+b))
+    Cperpendicular=(2ac+a**2+c*b+a*b+b**2)/(3*(a+b))
     A = (a+b+math.sqrt(h**2+c**2)+math.sqrt(h**2+(b-a-c)**2))
 
     #Values Stringer
     Astringer=tS*(aS*2-tS)
-    Cy=(aS**2+aS*tS-tS**2)/(2*(2*aS-tS))
-    Cx=(aS**2+aS*tS-tS**2)/(2*(2*aS-tS))
+    CyS=(aS**2+aS*tS-tS**2)/(2*(2*aS-tS))
+    CxS=(aS**2+aS*tS-tS**2)/(2*(2*aS-tS))
 
     #Parrallel axis stringers
     Ctop=[]
@@ -57,25 +58,81 @@ def Centroid(spanwise_location_iny):       #Centroid entire wingbox
     halfn2=int(nlower/2)
     n2=int(nlower)
     for i in range(0, halfn1):
-        ParAxisOne=(h/(ntop-1)*i+Cy)*Astringer
+        ParAxisOne=(h/(ntop-1)*i+CyS)*Astringer
         Ctop.append(ParAxisOne)
         
     for i in range(halfn1, n1):
-        ParAxisTwo=(h/(ntop-1)*i-Cy)*Astringer
+        ParAxisTwo=(h/(ntop-1)*i-CyS)*Astringer
         Ctop.append(ParAxisTwo)
         
     for i in range(0, halfn2):
-        ParAxisThree=(h/(nlower-1)*i+Cy)*Astringer
+        ParAxisThree=(h/(nlower-1)*i+CyS)*Astringer
         Ctop.append(ParAxisThree)
         
     for i in range(halfn2, n2):
-        ParAxisFour=(h/(nlower-1)*i-Cy)*Astringer
+        ParAxisFour=(h/(nlower-1)*i-CyS)*Astringer
         Ctop.append(ParAxisFour)
         
         
     Ctoptotal=sum(Ctop)+Cchord*A
     Atot=(ntop+nlower)*Astringer+A
-    C=Ctoptotal/Atot
+    Cx=Ctoptotal/Atot
     
-    return C
+    return Cx
+    
+def Centroid(spanwise_location_iny):       #Centroid entire wingbox
+    b = 69.92 #Span
+    spanwise_location = spanwise_location_iny / (b / 2)
+    chord = chord_length(spanwise_location)
+
+    # Geometrical parameters
+    h = WB_chord * chord
+    a = WB_aft_height * chord
+    b = WB_front_height * chord
+    c = 0.0163 * chord
+
+    #Dimensions stringers
+
+    bS=aS
+    n1= sp.interpolate.interp1d(Spanwise,Stringersno,kind="previous",fill_value="extrapolate")     #number of stringers
+    n = n1(spanwise_location_iny)
+
+    #values trapezoid
+    Cchord=(h/3)*((2*a+b)/(a+b))
+    Cperpendicular=(2ac+a**2+c*b+a*b+b**2)/(3*(a+b))
+    A = (a+b+math.sqrt(h**2+c**2)+math.sqrt(h**2+(b-a-c)**2))
+
+    #Values Stringer
+    Astringer=tS*(aS*2-tS)
+    CyS=(aS**2+aS*tS-tS**2)/(2*(2*aS-tS))
+    CxS=(aS**2+aS*tS-tS**2)/(2*(2*aS-tS))
+
+    #Parrallel axis stringers
+    Ctop=[]
+    halfn1=int(ntop/2)
+    n1=int(ntop)
+    halfn2=int(nlower/2)
+    n2=int(nlower)
+    for i in range(0, halfn1):
+        ParAxisOne=((c/h)*(h/(ntop-1)*i)+CxS)*Astringer
+        Ctop.append(ParAxisOne)
+        
+    for i in range(halfn1, n1):
+        ParAxisTwo=((c/h)*(h/(ntop-1)*i)-CxS)*Astringer
+        Ctop.append(ParAxisTwo)
+        
+    for i in range(0, halfn2):
+        ParAxisThree=(h/(nlower-1)*i-CxS)*Astringer
+        Ctop.append(ParAxisThree)
+        
+    for i in range(halfn2, n2):
+        ParAxisFour=(h/(nlower-1)*i-CxS)*Astringer
+        Ctop.append(ParAxisFour)
+        
+        
+    Ctoptotal=sum(Ctop)+Cperpendicular*A
+    Atot=(ntop+nlower)*Astringer+A
+    Cx=Ctoptotal/Atot
+    
+    return Cy
     
