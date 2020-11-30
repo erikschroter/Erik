@@ -24,7 +24,7 @@ def chord_length(spanwise_location): #Spanwise location is in y/(b/2)
 
     return c
 
-def Centroid(spanwise_location_iny):       #Centroid entire wingbox
+def CentroidX(spanwise_location_iny):       #Centroid entire wingbox
     b = 69.92 #Span
     spanwise_location = spanwise_location_iny / (b / 2)
     chord = chord_length(spanwise_location)
@@ -81,7 +81,7 @@ def Centroid(spanwise_location_iny):       #Centroid entire wingbox
     
     return Cx
     
-def Centroid(spanwise_location_iny):       #Centroid entire wingbox
+def CentroidY(spanwise_location_iny):       #Centroid entire wingbox
     b = 69.92 #Span
     spanwise_location = spanwise_location_iny / (b / 2)
     chord = chord_length(spanwise_location)
