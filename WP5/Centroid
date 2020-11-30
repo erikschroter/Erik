@@ -52,31 +52,31 @@ def Centroid(spanwise_location_iny):       #Centroid entire wingbox
     CxS=(aS**2+aS*tS-tS**2)/(2*(2*aS-tS))
 
     #Parrallel axis stringers
-    Ctop=[]
+    Ctopchord=[]
     halfn1=int(ntop/2)
     n1=int(ntop)
     halfn2=int(nlower/2)
     n2=int(nlower)
     for i in range(0, halfn1):
         ParAxisOne=(h/(ntop-1)*i+CyS)*Astringer
-        Ctop.append(ParAxisOne)
+        Ctopchord.append(ParAxisOne)
         
     for i in range(halfn1, n1):
         ParAxisTwo=(h/(ntop-1)*i-CyS)*Astringer
-        Ctop.append(ParAxisTwo)
+        Ctopchord.append(ParAxisTwo)
         
     for i in range(0, halfn2):
         ParAxisThree=(h/(nlower-1)*i+CyS)*Astringer
-        Ctop.append(ParAxisThree)
+        Ctopchord.append(ParAxisThree)
         
     for i in range(halfn2, n2):
         ParAxisFour=(h/(nlower-1)*i-CyS)*Astringer
-        Ctop.append(ParAxisFour)
+        Ctopchord.append(ParAxisFour)
         
         
-    Ctoptotal=sum(Ctop)+Cchord*A
-    Atot=(ntop+nlower)*Astringer+A
-    Cx=Ctoptotal/Atot
+    Ctopchordtotal=sum(Ctopchord)+Cchord*A
+    Atotchord=(ntop+nlower)*Astringer+A
+    Cx=Ctopchordtotal/Atotchord
     
     return Cx
     
@@ -108,31 +108,31 @@ def Centroid(spanwise_location_iny):       #Centroid entire wingbox
     CxS=(aS**2+aS*tS-tS**2)/(2*(2*aS-tS))
 
     #Parrallel axis stringers
-    Ctop=[]
+    Ctopperp=[]
     halfn1=int(ntop/2)
     n1=int(ntop)
     halfn2=int(nlower/2)
     n2=int(nlower)
     for i in range(0, halfn1):
         ParAxisOne=((c/h)*(h/(ntop-1)*i)+CxS)*Astringer
-        Ctop.append(ParAxisOne)
+        Ctopperp.append(ParAxisOne)
         
     for i in range(halfn1, n1):
         ParAxisTwo=((c/h)*(h/(ntop-1)*i)-CxS)*Astringer
-        Ctop.append(ParAxisTwo)
+        Ctopperp.append(ParAxisTwo)
         
     for i in range(0, halfn2):
-        ParAxisThree=(h/(nlower-1)*i-CxS)*Astringer
-        Ctop.append(ParAxisThree)
+        ParAxisThree=(b-(c/h)*(h/(nlower-1)*i)-CxS)*Astringer
+        Ctopperp.append(ParAxisThree)
         
     for i in range(halfn2, n2):
-        ParAxisFour=(h/(nlower-1)*i-CxS)*Astringer
-        Ctop.append(ParAxisFour)
+        ParAxisFour=(b-(c/h)*(h/(nlower-1)*i)+CxS)*Astringer
+        Ctopperp.append(ParAxisFour)
         
         
-    Ctoptotal=sum(Ctop)+Cperpendicular*A
-    Atot=(ntop+nlower)*Astringer+A
-    Cx=Ctoptotal/Atot
+    Ctopperptotal=sum(Ctopperp)+Cperpendicular*A
+    Atotperp=(ntop+nlower)*Astringer+A
+    Cy=Ctopperptotal/Atotperp
     
     return Cy
     
