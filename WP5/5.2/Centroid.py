@@ -1,8 +1,18 @@
+import os
+import sys
+directory = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))+"\\WP4\\4.1"
+sys.path.insert(-1,directory)
+directory = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))+"\\WP4\\4.2"
+sys.path.insert(-1,directory)
+
+
 import scipy as sp
 import math
 from scipy import integrate
 from scipy import interpolate
 import matplotlib.pyplot as plt
+from ReadingXFLRresults import ReadingXFLR
+from liftdistribution import liftdistribution
 
 # Wing Box outer geometry (in chord length)
 WB_chord = 0.45
@@ -24,7 +34,7 @@ def chord_length(spanwise_location): #Spanwise location is in y/(b/2)
 
     return c
 
-def CentroidX(spanwise_location_iny):       #Centroid entire wingbox
+def CentroidX(spanwise_location_iny, ntop, nlower):       #Centroid entire wingbox
     b = 69.92 #Span
     spanwise_location = spanwise_location_iny / (b / 2)
     chord = chord_length(spanwise_location)
@@ -39,12 +49,10 @@ def CentroidX(spanwise_location_iny):       #Centroid entire wingbox
 
     bS=aS
     n1= sp.interpolate.interp1d(Spanwise,Stringersno,kind="previous",fill_value="extrapolate")     #number of stringers
-    ntop = 
-    nlower = 
 
     #values trapezoid
     Cchord=(h/3)*((2*a+b)/(a+b))
-    Cperpendicular=(2ac+a**2+c*b+a*b+b**2)/(3*(a+b))
+    Cperpendicular=(2*a*c+a**2+c*b+a*b+b**2)/(3*(a+b))
     A = (a+b+math.sqrt(h**2+c**2)+math.sqrt(h**2+(b-a-c)**2))
 
     #Values Stringer
@@ -81,7 +89,7 @@ def CentroidX(spanwise_location_iny):       #Centroid entire wingbox
     
     return Cx
     
-def CentroidY(spanwise_location_iny):       #Centroid entire wingbox
+def CentroidY(spanwise_location_iny, ntop, nlower):       #Centroid entire wingbox
     b = 69.92 #Span
     spanwise_location = spanwise_location_iny / (b / 2)
     chord = chord_length(spanwise_location)
@@ -100,7 +108,7 @@ def CentroidY(spanwise_location_iny):       #Centroid entire wingbox
 
     #values trapezoid
     Cchord=(h/3)*((2*a+b)/(a+b))
-    Cperpendicular=(2ac+a**2+c*b+a*b+b**2)/(3*(a+b))
+    Cperpendicular=(2*a*c+a**2+c*b+a*b+b**2)/(3*(a+b))
     A = (a+b+math.sqrt(h**2+c**2)+math.sqrt(h**2+(b-a-c)**2))
 
     #Values Stringer
@@ -136,4 +144,50 @@ def CentroidY(spanwise_location_iny):       #Centroid entire wingbox
     Cy=Ctopperptotal/Atotperp
     
     return Cy
+
+stringer_distribution = [(14,14),(12,12),(10,10),(8,8),(6,6)]  # from root to tip, (top, bottom)
+
+def SpanwiseCentroidY(stringer_distribution):
+    spanwise_position = []
+    y = []
+    n = 0
+    d = 6.99
+    for i in range(5):
+        while n < d:
+            y.append(CentroidY(n, stringer_distribution[i][0], stringer_distribution[i][1]))
+            spanwise_position.append(n)
+            n = n + 0.25
+        d += 6.99
+    y_spanwise = sp.interpolate.interp1d(spanwise_position, y, kind="linear", fill_value="extrapolate")
+    return y_spanwise
+
+
+"""
+y_spanwise = SpanwiseCentroidY(stringer_distribution)
+print(SpanwiseCentroidY(stringer_distribution))
+
+
+spanwise_position = []
+n = 0
+d = 6.99
+for i in range(5):
+    while n < d:
+        spanwise_position.append(n)
+        n = n + 0.25
+    d += 6.99
+
+plt.plot(spanwise_position, y_spanwise(spanwise_position), "-")
+
+# plot formatting
+
+plt.title('Spanwise C_y')
+
+plt.xlabel('Spanwise location [m]')
+plt.ylabel('C_y [Nm]')
+
+plt.grid(True, which='both')
+plt.axhline(y=0, color='k')
+
+plt.show()
     
+"""
