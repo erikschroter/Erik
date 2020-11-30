@@ -17,7 +17,7 @@ def TorqueFromThrust(chordwise_location_centroid, height_from_chordline_centroid
 
     distance_engine_center_chordline = 2.569  # [m]
     spanwise_position_engine = 11.5  # [m]
-    chord_length_engine = root_chord + (root_chord - tip_chord) - spanwise_position_engine / (span / 2)
+    chord_length_engine = root_chord - (root_chord - tip_chord) * spanwise_position_engine / (span / 2)
     z_dist = height_from_chordline_centroid * chord_length_engine + distance_engine_center_chordline
 
     sweep_flexural_axis = m.atan(m.tan(sweep_LE * m.pi / 180) - chordwise_location_centroid * 2 * root_chord / span * (1 - taper_ratio))
@@ -27,12 +27,11 @@ def TorqueFromThrust(chordwise_location_centroid, height_from_chordline_centroid
 
     return [torque_contribution_engine, bending_moment_contribution_engine]
 
-
 """
-USE THE FOLLOWING LINES TO TEST THE FUNTION
+# USE THE FOLLOWING LINES TO TEST THE FUNTION
 
 chordwise_location_centroid = 0.367  # *c
-height_from_chordline_centroid = 0.1  # *c
+height_from_chordline_centroid = 0.01254  # *c
 
 result, result2 = TorqueFromThrust(chordwise_location_centroid, height_from_chordline_centroid)
 print(result, result2)

@@ -13,15 +13,13 @@ span = 69.92
 accuracy = 41 
  
 #Loading factor [-]
-n=-1.5
-
+maxn=3.5
+minn=-1
 #Maximum takeoff weight [kg]
 MTOW = 291_509.2
 
 #Operating empty weight [kg]
 OEW = 141_412.4
-#Maximum zero fuel weight [kg]
-MZFW = 161394.73
 
 #Maximum fuel weight [kg]
 MaxFuelWeight = MTOW - OEW
@@ -47,9 +45,14 @@ sys.path.insert(-1,directory)
 from liftdistribution import liftdistribution
 from Moment_of_Inertia_Wingbox import Ixx_in_y
 
-x, Llst, xnew, f, xdist = liftdistribution(filename, rho, v, span, accuracy,MTOW*9.81,n)
+Aerosheer = []
+j = 0
+weight = [MTOW*9.81,MTOW*9.81,OEW*9.81,OEW*9.81]
+n = [maxn,minn,maxn,minn]
+while j < 4:
+x, Llst, xnew, f, xdist = liftdistribution(filename, rho, v, span, accuracy,weight[j],n[j])
 a = [0]
-Aerosheer = [-sp.integrate.quad(f,0,0)[0]+sp.integrate.quad(f,0,xdist)[0]]
+Aerosheer[j] = [-sp.integrate.quad(f,0,0)[0]+sp.integrate.quad(f,0,xdist)[0]]
 while a[-1] <= xdist:
     a.append(a[-1]+dt)
     Aerosheer.append(-sp.integrate.quad(f,0,a[-1])[0]+sp.integrate.quad(f,0,xdist)[0])
@@ -61,7 +64,7 @@ while i < len(Aerosheer):
     i += 1
     
 f = sp.interpolate.interp1d(a,totalsheer,kind="linear", fill_value="extrapolate")
-
+'''
 plt.plot(a,Aerosheer,'r')
 plt.plot(a,inertialForce,'g')
 plt.plot(a,totalsheer,'b')
@@ -76,7 +79,7 @@ blue_patch = mpatches.Patch(color='b', label='Total Shear force')
 plt.legend(handles=[red_patch,green_patch,blue_patch])
 
 plt.show()
-
+'''
 i = 0
 Moment = []
 while i < len(a):

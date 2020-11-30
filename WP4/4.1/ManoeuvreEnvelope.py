@@ -2,11 +2,26 @@ import math as m
 import matplotlib.pyplot as plt
 from ISAdef import ISA
 
+<<<<<<< HEAD
+MTOW = 304636.2789 # kg
+
+MZFW = 161394.7263 # kg
+
+OEW = 147780.3631 # kg
+
+altitude = 4000  # ft
+Weight_kg = MTOW  # kg
+=======
+"""Function to plot the manoeuvre envelope.
+If questions ask Christoph Pabsch"""
+
 altitude = 31000  # ft
-Weight_kg = 304636  # kg
+Weight_kg = 147780.3631  # kg
+>>>>>>> 80c34c86b0dd6e41f38cace4afef0c9b39a1a7c2
 
 def Manoeuvre_Envelope(altitude, Weight_kg):
-    
+
+    # Determine density and temperature at altitude
     alt = altitude * 0.3048
     rho, T = ISA(alt)
     a = 20.05 * m.sqrt(T)
@@ -71,8 +86,11 @@ def Manoeuvre_Envelope(altitude, Weight_kg):
 
     return T, M_d, V_D, n_max, n_stall_speed_clean, n_min_stall_speed_clean, V_A, V_A_min, V_C, n_stall_speed_flaps, V_A_flaps, V_F
 
+# Obtain results
 T, M_d, V_D, n_max, n_stall_speed_clean, n_min_stall_speed_clean, V_A, V_A_min, V_C, n_stall_speed_flaps, V_A_flaps, V_F = Manoeuvre_Envelope(altitude, Weight_kg)
 
+
+# Plot manoeuvre envelope
 plt.plot(n_stall_speed_clean, "b")
 plt.plot(n_min_stall_speed_clean, "b")
 plt.plot([m.floor(V_A), V_A], [n_stall_speed_clean[-1], 2.5], "b")
@@ -87,10 +105,13 @@ plt.plot([V_A_flaps, V_F], [2.0, 2.0], "b")
 
 # plot formatting
 
-plt.title('Manoeuvre Envelope')
+plt.title(' ')
 
-plt.xlabel('V')
-plt.ylabel('n')
+plt.xlabel(' ')
+plt.ylabel(' ')
+
+plt.ylim(-1.5, 4)
+plt.xlim(0, 350)
 
 plt.grid(True, which='both')
 plt.axhline(y=0, color='k')
