@@ -90,7 +90,7 @@ plt.hlines(-5,0,40)
 plt.show()'''
 BendingStress=[]
 def y(x):
-    return (wtvcl * chord_length(x))/2
+    return (wtvcl * chord_length(x/34.96)/2)
 i=0
 while i < len(a):
   
