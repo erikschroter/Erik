@@ -4,7 +4,7 @@ import numpy as np, scipy as sp
 import Constants, matplotlib
 import matplotlib.pyplot as plt
 
-
+#Defining Constants
 MaxFuelWeight = Constants.MaxFuelWeight
 MTOW = Constants.MTOW
 EngineWeight = Constants.EngineWeight
@@ -27,29 +27,12 @@ enginePosition = 0.33 * wingSpan / 2 #m
 engineMass = 7549 #kg
 propulsionGroupMass = 20487.986 #kg
 
-
+#Superposition of all loading cases
 def calculateInertialLoading (spanValue):
     inertialLoading = -1 * wingStructuralWeight(spanValue) + -1 * engineWeight(spanValue) + -1 * fuelLoading(spanValue) + -1 * landingGearWeight(spanValue)
     return inertialLoading
 
-def calculateInertialLoadingonGround (spanValue):
-    inertialLoadingonGround =calculateInertialLoading(spanValue) + landingGearForceonGround(spanValue)
-    return inertialLoadingonGround
-
-def landingGearForceonGround(spanValue):
-    distanceToFuselageInner2x4 = 1.8  # [m]
-    distanceToFuselageInner1x4 = 0  # [m]
-    distanceToFuselageOuter2x4 = 7.8  # [m]
-    distanceToFuselageOuter2x4Num2 = 6  # [m]
-    mainLandingGearMassPerWheel = mainLandingGearMass / (2 * (8 + 8 + 4 + 8))
-    massInner2x4 = 8 * mainLandingGearMassPerWheel
-    massInner1x4 = 4 * mainLandingGearMassPerWheel
-    massOuter2x4 = 8 * mainLandingGearMassPerWheel
-    massOuter2x4Num2 = 8 * mainLandingGearMassPerWheel
-
-    return
-
-
+#Describes piecewise distribution of landing gear weights
 def landingGearWeight(spanValue):
     distanceToFuselageInner2x4 = 1.8 #[m]
     distanceToFuselageInner1x4 = 0  # [m]
@@ -79,7 +62,7 @@ def landingGearWeight(spanValue):
     return landingGearWeight
 
 
-
+#Describes piecewise distribution of engine weight
 def engineWeight(spanValue):
     localEngineWeight = 0
     if spanValue <= enginePosition:
@@ -89,12 +72,14 @@ def engineWeight(spanValue):
 
     return localEngineWeight
 
+#Describes continuous distribution of wing weight
 def wingStructuralWeight (spanValue):
     #structural weight in [N]
     specificWingWeight = wingWeight / 2 / wingArea(0) * g
     localWingWeight = wingWeight / 2 * g - (wingArea(wingSpan/2 - spanValue) * specificWingWeight)
     return localWingWeight
 
+#Describes continuous distribution of fuel weight based on fuel tank volume
 def fuelLoading (spanValue):
     #structural weight in [N]
     fuelVolumeInWing = halfWingRequiredFuelVolume
@@ -103,7 +88,7 @@ def fuelLoading (spanValue):
 
     specificFuelWeight = maxFuelMass / 2 / fuelVolumeInWing * g
 
-#edit next line
+
     localFuelWeight = maxFuelMass / 2 * g  - ((containedFuelVolume(spanValue)) *fuelPackingFactorinWingbox * specificFuelWeight)
 
     if localFuelWeight < 0:
@@ -111,17 +96,19 @@ def fuelLoading (spanValue):
 
     return localFuelWeight
 
+#gives value of chord at specific span
 def localChord(spanValue):
     localChord = rootChord - (rootChord - taperRatio * rootChord) / (wingSpan / 2) * spanValue
     return localChord
 
+#gives total fuel volume
 def containedFuelVolume(spanValue):
     newresolution = 50
     volume = 0
     for i in range (0, round(spanValue * newresolution)):
         volume += localWingboxArea(i/ newresolution) * 1 /(newresolution)
     return volume
-
+#gives volume contained in wing box
 def containedWingboxVolume(spanValue):
     resolution = 50
     volume = 0
@@ -129,6 +116,7 @@ def containedWingboxVolume(spanValue):
         volume += wingArea(i/resolution) * 1 / (resolution)
     return volume
 
+#gives area of of wing box as a function of span
 def wingArea(spanValue):
     #approximate trapezoidal structural volume in half wing
     # area of trapezoid
@@ -136,6 +124,7 @@ def wingArea(spanValue):
     areaBetweenSpars = areaBetweenSparsOverChordSquared * localChord(spanValue) ** 2
     return areaBetweenSpars
 
+#implements packing factor and utilized percent of span to calculate true avialable fuel volume
 def fuelVolume (spanValue, fuelMass):
     # fuel in half wing
     wingFuelWeight = 0.5 * fuelMass
@@ -148,7 +137,7 @@ def fuelVolume (spanValue, fuelMass):
 
     return totalAvailableFuelVolume, requiredFuelVolume
 
-
+#describes cross sectional geometry of fuel tank as a function of span
 def localWingboxArea (spanValue):
     localChord = 0
     if spanValue <= D_fuselageOuter:
@@ -175,12 +164,13 @@ xList = []
 yList = []
 
 
-"""
 for i in range(0, round(wingSpan / 2) * listResolution):
     xList.append(i/listResolution)
     yList.append(calculateInertialLoading(i / listResolution))
 
-plt.title('Inertial Loading vs Span [N], [m] ')
+plt.title('Inertial Loading')
+plt.ylabel('Weight [N]')
+plt.xlabel('Span [m]')
 plt.plot(xList, yList)
 plt.show()
 
@@ -189,16 +179,16 @@ dy = np.diff(yList)/ dx
 xList2 = xList
 del xList2[-1]
 
-plt.title('Inertial Loading vs Span [N], [m] ')
+plt.title('Inertial Loading')
+plt.ylabel('Inertial Loading [N]')
+plt.xlabel('Span [m]')
 plt.plot(xList2, dy)
 plt.show()
 
 
-"""
 inertialForce = []
 for i in range(-1, round(wingSpan/2) * 10):
     inertialForce.append(calculateInertialLoading(i /10))
-"""
 
 
 fuelList = []
@@ -242,4 +232,6 @@ for i in range(1, round(wingSpan / 2) * listResolution):
 plt.title('fuel vol  vs Span [N], [m] ')
 plt.plot(xList, fuelVolumeList)
 plt.show()
-"""
+
+print(halfWingRequiredFuelVolume)
+print(halfWingAvailableFuelVolume)
