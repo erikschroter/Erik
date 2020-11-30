@@ -15,6 +15,7 @@ accuracy = 41
 #Loading factor [-]
 n=-1.5
 
+
 #Maximum takeoff weight [kg]
 MTOW = 291_509.2
 
@@ -92,7 +93,7 @@ plt.xlabel("spanwise location [m]")
 plt.hlines(-5,0,40)
 
 plt.show()
-
+print(Moment[-1])
 i=1
 Deflectioncalculation=[0]
 print(Moment)
