@@ -174,7 +174,7 @@ def CentroidX(stringer_distribution, spanwise_location):
 
     return Cx
 
-stringer_distribution = [(14,14),(12,12),(10,10),(8,8),(6,6)]  # from root to tip, (top, bottom)
+stringer_distribution = [(14,14,6.99),(12,12,13.98),(10,10,20.98),(8,8,27.97),(6,6,34.96)]  # from root to tip, (top, bottom)
 
 def SpanwiseCentroidY(stringer_distribution):
     spanwise_position = []
