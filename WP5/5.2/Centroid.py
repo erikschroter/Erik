@@ -14,6 +14,8 @@ import matplotlib.pyplot as plt
 from ReadingXFLRresults import ReadingXFLR
 from liftdistribution import liftdistribution
 
+import Definition_stringer_positions from Definition_stringer_positions.py
+
 # Wing Box outer geometry (in chord length)
 WB_chord = 0.45
 WB_front_height = 0.1347
@@ -142,8 +144,18 @@ def CentroidY(spanwise_location_iny, ntop, nlower):       #Centroid entire wingb
     return Cy
 """
 
-def CentroidY(spanwise_location_iny, ntop, nlower):
+def CentroidY(stringer_distribution, spanwise_location):
 
+    top = 0
+    bottom = 0
+
+    stringer_positions = Definition_stringer_positions(stringer_distribution, spanwise_location)
+    for i in range(len(stringer_positions)):
+        if stringer_positions[i][3]:
+            top = top + stringer_positions[i][2] * stringer_positions[i][1]
+            bottom = bottom + stringer_positions[i][2]
+
+    Cy = top/bottom
 
     return Cy
 
