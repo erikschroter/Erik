@@ -1,6 +1,11 @@
 import math as m
 
+"""Function to calculate the position of the stringers for a given stringer distribution from the bottom left corner of 
+the wing box
+If questions, ask Christoph Pabsch"""
+
 stringer_distribution = [(14,14),(12,12),(10,10),(8,8),(6,6)]  # from root to tip, (top, bottom)
+
 
 def Definition_stringer_position(stringer_distribution, spanwise_position):
 
@@ -82,5 +87,6 @@ def Definition_stringer_position(stringer_distribution, spanwise_position):
         n = n + 1
 
     return stringer_positions
+
 
 print(Definition_stringer_position(stringer_distribution, 0))
