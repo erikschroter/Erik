@@ -22,7 +22,7 @@ WB_aft_height = 0.1091
 #Variables to change
 t = 0.010       #WB thickness
 tS = 0.010      #Stringer thickness
-aS = 0.100        #Stringer depth
+HS = 0.100        #Stringer depth
 Spanwise = [0, 6.992, 13.984, 20.976, 27.968]
 Stringersno = [18, 16, 12, 8, 6]
 
@@ -46,8 +46,6 @@ def CentroidX(spanwise_location_iny, ntop, nlower):       #Centroid entire wingb
     c = 0.0163 * chord
 
     #Dimensions stringers
-
-    bS=aS
     n1= sp.interpolate.interp1d(Spanwise,Stringersno,kind="previous",fill_value="extrapolate")     #number of stringers
 
     #values trapezoid
@@ -56,9 +54,9 @@ def CentroidX(spanwise_location_iny, ntop, nlower):       #Centroid entire wingb
     A = (a+b+math.sqrt(h**2+c**2)+math.sqrt(h**2+(b-a-c)**2))
 
     #Values Stringer
-    Astringer=tS*(aS*2-tS)
-    CyS=(aS**2+aS*tS-tS**2)/(2*(2*aS-tS))
-    CxS=(aS**2+aS*tS-tS**2)/(2*(2*aS-tS))
+    Astringer=tS*(HS*3-2*t)
+    CyS=0.5*HS
+    CxS=0.5*HS
 
     #Parrallel axis stringers
     Ctopchord=[]
@@ -101,8 +99,6 @@ def CentroidY(spanwise_location_iny, ntop, nlower):       #Centroid entire wingb
     c = 0.0163 * chord
 
     #Dimensions stringers
-
-    bS=aS
     n1= sp.interpolate.interp1d(Spanwise,Stringersno,kind="previous",fill_value="extrapolate")     #number of stringers
     n = n1(spanwise_location_iny)
 
@@ -110,11 +106,11 @@ def CentroidY(spanwise_location_iny, ntop, nlower):       #Centroid entire wingb
     Cchord=(h/3)*((2*a+b)/(a+b))
     Cperpendicular=(2*a*c+a**2+c*b+a*b+b**2)/(3*(a+b))
     A = (a+b+math.sqrt(h**2+c**2)+math.sqrt(h**2+(b-a-c)**2))
-
+    
     #Values Stringer
-    Astringer=tS*(aS*2-tS)
-    CyS=(aS**2+aS*tS-tS**2)/(2*(2*aS-tS))
-    CxS=(aS**2+aS*tS-tS**2)/(2*(2*aS-tS))
+    Astringer=tS*(HS*3-2*t)
+    CyS=0.5*HS
+    CxS=0.5*HS
 
     #Parrallel axis stringers
     Ctopperp=[]

@@ -13,8 +13,6 @@ v = 232
 span = 69.92
 accuracy = 41 
  
-#Loading factor [-]
-n=4.65
 
 #Maximum takeoff weight [kg]
 MTOW = 291_509.2
@@ -27,6 +25,13 @@ MZFW = 161394.73
 #Maximum fuel weight [kg]
 MaxFuelWeight = MTOW - OEW
 
+#Loading factor [-]
+n=4.65
+#n=-1.65
+
+#critical weight
+WC = MTOW
+#WC = MZFW
 #Engine weight for 2 engines [kg]
 EngineWeight = 20_87.986
 
@@ -40,6 +45,8 @@ sigma_y = 276
 
 #Wing weight including mounts and spoilers [kg]
 WingWeight = 3210.55
+#stringer distribution
+stringer_distribution = [(14,14),(12,12),(10,10),(8,8),(6,6)]
 import numpy as np
 from scipy import integrate
 import sys
@@ -56,8 +63,10 @@ from InertialLoading import inertialForce
 from liftdistribution import liftdistribution
 from Moment_of_Inertia_Wingbox import Ixx_in_y
 from Moment_of_Inertia_Wingbox import chord_length
+from Centroid import SpanwiseCentroidY
 
-x, Llst, xnew, f, xdist = liftdistribution(filename, rho, v, span, accuracy,MZFW*9.81,n)
+
+x, Llst, xnew, f, xdist = liftdistribution(filename, rho, v, span, accuracy,WC*9.81,n)
 a = [0]
 Aerosheer = [-sp.integrate.quad(f,0,0)[0]+sp.integrate.quad(f,0,xdist)[0]]
 while a[-1] <= xdist:
@@ -91,14 +100,19 @@ plt.hlines(-5,0,40)
 
 plt.show()'''
 BendingStress=[]
+fy = SpanwiseCentroidY(stringer_distribution)
+
 def y(x):
-    return (wtvcl * chord_length(x/34.96)/2)
+    if n >= 0:
+        return (wtvcl * chord_length(x/34.96))-fy(x)
+    else:
+        return fy(x)
 i=0
 while i < len(a):
   
     BendingStress.append(abs((Moment[i]*y(a[i]))/(10**6*Ixx_in_y(a[i]))))
     i +=1
-print(len(BendingStress),len(a))
+
 g = sp.interpolate.interp1d(a,BendingStress,kind="linear", fill_value="extrapolate")
 i=0
 safty_margine = []
@@ -114,6 +128,7 @@ plt.grid(b=None,which='Major',axis='both')
 plt.ylabel("Bending Stress [MPa]")
 plt.xlabel("spanwise location [m]")
 plt.show()
+print("bendingstress:",BendingStress[0])
 plt.plot(a,safty_margine)
 plt.title("Tension safty margin diagram")
 plt.grid(b=None,which='Major',axis='both')
