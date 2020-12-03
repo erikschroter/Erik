@@ -86,7 +86,7 @@ def CentroidX(spanwise_location_iny, ntop, nlower):       #Centroid entire wingb
     Cx=Ctopchordtotal/Atotchord
     
     return Cx
-    
+"""    
 def CentroidY(spanwise_location_iny, ntop, nlower):       #Centroid entire wingbox
     b = 69.92 #Span
     spanwise_location = spanwise_location_iny / (b / 2)
@@ -139,6 +139,12 @@ def CentroidY(spanwise_location_iny, ntop, nlower):       #Centroid entire wingb
     Atotperp=(ntop+nlower)*Astringer+A
     Cy=Ctopperptotal/Atotperp
     
+    return Cy
+"""
+
+def CentroidY(spanwise_location_iny, ntop, nlower):
+
+
     return Cy
 
 stringer_distribution = [(14,14),(12,12),(10,10),(8,8),(6,6)]  # from root to tip, (top, bottom)

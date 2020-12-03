@@ -69,8 +69,8 @@ def Definition_stringer_position(stringer_distribution, spanwise_position):
     stringer_positions.append((x, y, A_bottom_skin, present))
 
     # Positions top stringers
-    n = 0
-    for i in range(stringer_distribution[0][0]+2):
+    n = 1
+    for i in range(stringer_distribution[0][0]):
         distance_between_stringers = (wing_box_length - a_stringer - 2*t_wing_box_skin) / (stringer_distribution[0][0]+2)
         x = a_stringer/2 + n * distance_between_stringers
         y = height_front_spar - t_wing_box_skin - h_stringer/2 - top_difference_rear_spar * x / wing_box_length
@@ -78,8 +78,8 @@ def Definition_stringer_position(stringer_distribution, spanwise_position):
         n = n + 1
 
     # Positions bottom stringers
-    n = 0
-    for i in range(stringer_distribution[0][1] + 2):
+    n = 1
+    for i in range(stringer_distribution[0][1]):
         distance_between_stringers = (wing_box_length - a_stringer - 2*t_wing_box_skin) / (stringer_distribution[0][1]+2)
         x = a_stringer / 2 + n * distance_between_stringers
         y = t_wing_box_skin + h_stringer / 2 + bottom_difference_rear_spar * x / wing_box_length
