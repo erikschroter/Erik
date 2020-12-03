@@ -34,14 +34,18 @@ def Definition_stringer_position(stringer_distribution, spanwise_position):
     # Position front spar
     A_front_spar = t_wing_box_spar_cap * (height_front_spar - 2 * t_wing_box_skin - 2 * t_wing_box_spar_cap + 2 *
                                           a_wing_box_spar_cap)
-    x = t_wing_box_spar_cap/2
+    x = (t_wing_box_spar_cap/2 * t_wing_box_spar_cap * (height_front_spar - 2 * t_wing_box_skin - 2 *
+                                                        t_wing_box_spar_cap) + a_wing_box_spar_cap/2 *
+         a_wing_box_spar_cap * t_wing_box_spar_cap) / A_front_spar
     y = height_front_spar/2
     stringer_positions.append((x, y, A_front_spar, present))
 
     # Position rear spar
     A_rear_spar = t_wing_box_spar_cap * (height_rear_spar - 2 * t_wing_box_skin - 2 * t_wing_box_spar_cap + 2 *
                                          a_wing_box_spar_cap)
-    x = wing_box_length - t_wing_box_spar_cap / 2
+    x = wing_box_length - (t_wing_box_spar_cap/2 * t_wing_box_spar_cap * (height_rear_spar - 2 * t_wing_box_skin - 2 *
+                                                                          t_wing_box_spar_cap) + a_wing_box_spar_cap/2 *
+                           a_wing_box_spar_cap * t_wing_box_spar_cap) / A_rear_spar
     y = bottom_difference_rear_spar + height_rear_spar / 2
     stringer_positions.append((x, y, A_rear_spar, present))
 
