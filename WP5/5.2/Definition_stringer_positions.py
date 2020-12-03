@@ -45,4 +45,4 @@ def Definition_stringer_position(stringer_distribution, spanwise_position):
 
     return stringer_positions
 
-print(Definition_stringer_position(stringer_distribution, 0))
+# print(Definition_stringer_position(stringer_distribution, 0))
