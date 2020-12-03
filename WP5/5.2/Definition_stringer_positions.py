@@ -1,3 +1,5 @@
+import math as m
+
 stringer_distribution = [(14,14),(12,12),(10,10),(8,8),(6,6)]  # from root to tip, (top, bottom)
 
 def Definition_stringer_position(stringer_distribution, spanwise_position):
@@ -15,6 +17,10 @@ def Definition_stringer_position(stringer_distribution, spanwise_position):
     top_difference_rear_spar = 16.3/1000 * chord_length
     bottom_difference_rear_spar = 9.3/1000 * chord_length
 
+    # Spar caps dimensions
+    t_wing_box_spar_cap = 10
+    a_wing_box_spar_cap = 110
+
     # stringer dimensions
     a_stringer = 110
     h_stringer = 110
@@ -24,6 +30,34 @@ def Definition_stringer_position(stringer_distribution, spanwise_position):
 
     stringer_positions = []
     present = True
+
+    # Position front spar
+    A_front_spar = t_wing_box_spar_cap * (height_front_spar - 2 * t_wing_box_skin - 2 * t_wing_box_spar_cap + 2 *
+                                          a_wing_box_spar_cap)
+    x = t_wing_box_spar_cap/2
+    y = height_front_spar/2
+    stringer_positions.append((x, y, A_front_spar, present))
+
+    # Position rear spar
+    A_rear_spar = t_wing_box_spar_cap * (height_rear_spar - 2 * t_wing_box_skin - 2 * t_wing_box_spar_cap + 2 *
+                                         a_wing_box_spar_cap)
+    x = wing_box_length - t_wing_box_spar_cap / 2
+    y = bottom_difference_rear_spar + height_rear_spar / 2
+    stringer_positions.append((x, y, A_rear_spar, present))
+
+    # Position top skin
+    length_top_skin = m.sqrt(wing_box_length**2 + top_difference_rear_spar**2)
+    A_top_skin = length_top_skin * t_wing_box_skin
+    x = wing_box_length/2
+    y = height_front_spar - top_difference_rear_spar/2 - t_wing_box_skin/2
+    stringer_positions.append((x, y, A_top_skin, present))
+
+    # Position bottom skin
+    length_bottom_skin = m.sqrt(wing_box_length ** 2 + bottom_difference_rear_spar ** 2)
+    A_bottom_skin = length_bottom_skin * t_wing_box_skin
+    x = wing_box_length / 2
+    y = bottom_difference_rear_spar / 2 + t_wing_box_skin / 2
+    stringer_positions.append((x, y, A_bottom_skin, present))
 
     # Positions top stringers
     n = 0
