@@ -4,6 +4,8 @@ Created on Thu Dec  3 15:03:40 2020
 
 @author: Erik Schroter
 """
+from Definition_stringer_positions import stringer_positions
+
 segment_1 = 6.99 # m
 segment_2 = 13.98 # m
 segment_3 = 20.98 # m
@@ -11,10 +13,12 @@ segment_4 = 27.97 # m
 segment_5 = 34.96 # m
 
 def GlobalCentroid_def(y_span):
-    if y_span <= segement_1:
+    if y_span <= segment_1:
 # =============================================================================
 # Initialise
 # =============================================================================
+        initial = stringer_positions        
+
         x_num = 0
         y_num = 0
         x_denom = 0
@@ -46,9 +50,9 @@ def GlobalCentroid_def(y_span):
 # =============================================================================
 # X - Y Centroids
 # =============================================================================
-        1_ centroid_x = x_num / x_denom
+        centroid_x1 = x_num / x_denom
         
-        1_centroid_y = y_num / y_denom
+        centroid_y1 = y_num / y_denom
         
     if y_span > segment_1 and y_span <= segment_2:
 # =============================================================================
@@ -85,9 +89,9 @@ def GlobalCentroid_def(y_span):
 # =============================================================================
 # X - Y Centroids
 # =============================================================================
-        2_ centroid_x = x_num / x_denom
+        centroid_x2 = x_num / x_denom
         
-        2_centroid_y = y_num / y_denom
+        centroid_y2 = y_num / y_denom
         
     if y_span > segment_2 and y_span <= segment_3:
 # =============================================================================
@@ -124,9 +128,9 @@ def GlobalCentroid_def(y_span):
 # =============================================================================
 # X - Y Centroids
 # =============================================================================
-        3_ centroid_x = x_num / x_denom
+        centroid_x3 = x_num / x_denom
         
-        3_centroid_y = y_num / y_denom
+        centroid_y3 = y_num / y_denom
         
     if y_span > segment_3 and y_span <= segment_4:
 # =============================================================================
@@ -163,9 +167,9 @@ def GlobalCentroid_def(y_span):
 # =============================================================================
 # X - Y Centroids
 # =============================================================================
-        4_ centroid_x = x_num / x_denom
+        centroid_x4 = x_num / x_denom
         
-        4_centroid_y = y_num / y_denom
+        centroid_y4 = y_num / y_denom
         
     if y_span > segment_4 and y_span <= segment_5:
 # =============================================================================
@@ -202,9 +206,9 @@ def GlobalCentroid_def(y_span):
 # =============================================================================
 # X - Y Centroids
 # =============================================================================
-        5_ centroid_x = x_num / x_denom
+        centroid_x5 = x_num / x_denom
         
-        5_centroid_y = y_num / y_denom
+        centroid_y5 = y_num / y_denom
         
-            
+        return [centroid_x1, centroid_x2, centroid_x3, centroid_x4, centroid_x5], [centroid_y1, centroid_y2, centroid_y3, centroid_y4, centroid_y5]
     
