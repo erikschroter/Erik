@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 from ReadingXFLRresults import ReadingXFLR
 from liftdistribution import liftdistribution
 
-import Definition_stringer_positions from Definition_stringer_positions.py
+from Definition_stringer_positions import Definition_stringer_position
 
 # Wing Box outer geometry (in chord length)
 WB_chord = 0.45
@@ -35,7 +35,7 @@ def chord_length(spanwise_location): #Spanwise location is in y/(b/2)
     c = Cr - Cr*(1-Taper)*(spanwise_location)
 
     return c
-
+""" 
 def CentroidX(spanwise_location_iny, ntop, nlower):       #Centroid entire wingbox
     b = 69.92 #Span
     spanwise_location = spanwise_location_iny / (b / 2)
@@ -88,7 +88,7 @@ def CentroidX(spanwise_location_iny, ntop, nlower):       #Centroid entire wingb
     Cx=Ctopchordtotal/Atotchord
     
     return Cx
-"""    
+   
 def CentroidY(spanwise_location_iny, ntop, nlower):       #Centroid entire wingbox
     b = 69.92 #Span
     spanwise_location = spanwise_location_iny / (b / 2)
@@ -149,7 +149,7 @@ def CentroidY(stringer_distribution, spanwise_location):
     top = 0
     bottom = 0
 
-    stringer_positions = Definition_stringer_positions(stringer_distribution, spanwise_location)
+    stringer_positions = Definition_stringer_position(stringer_distribution, spanwise_location)
     for i in range(len(stringer_positions)):
         if stringer_positions[i][3]:
             top = top + stringer_positions[i][2] * stringer_positions[i][1]
@@ -158,6 +158,21 @@ def CentroidY(stringer_distribution, spanwise_location):
     Cy = top/bottom
 
     return Cy
+
+def CentroidX(stringer_distribution, spanwise_location):
+
+    top = 0
+    bottom = 0
+
+    stringer_positions = Definition_stringer_position(stringer_distribution, spanwise_location)
+    for i in range(len(stringer_positions)):
+        if stringer_positions[i][3]:
+            top = top + stringer_positions[i][2] * stringer_positions[i][0]
+            bottom = bottom + stringer_positions[i][2]
+
+    Cx = top/bottom
+
+    return Cx
 
 stringer_distribution = [(14,14),(12,12),(10,10),(8,8),(6,6)]  # from root to tip, (top, bottom)
 
@@ -168,13 +183,14 @@ def SpanwiseCentroidY(stringer_distribution):
     d = 6.99
     for i in range(5):
         while n < d:
-            y.append(CentroidY(n, stringer_distribution[i][0], stringer_distribution[i][1]))
+            y.append(CentroidY(stringer_distribution, n))
             spanwise_position.append(n)
             n = n + 0.25
         d += 6.99
     y_spanwise = sp.interpolate.interp1d(spanwise_position, y, kind="linear", fill_value="extrapolate")
     return y_spanwise
 
+print(CentroidY(stringer_distribution, 0))
 
 """
 y_spanwise = SpanwiseCentroidY(stringer_distribution)
@@ -203,5 +219,5 @@ plt.grid(True, which='both')
 plt.axhline(y=0, color='k')
 
 plt.show()
-    
 """
+
