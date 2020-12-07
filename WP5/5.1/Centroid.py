@@ -11,8 +11,8 @@ import math
 from scipy import integrate
 from scipy import interpolate
 import matplotlib.pyplot as plt
-from ReadingXFLRresults import ReadingXFLR
-from liftdistribution import liftdistribution
+#from ReadingXFLRresults import ReadingXFLR
+#from liftdistribution import liftdistribution
 
 from Definition_stringer_positions import Definition_stringer_position
 
@@ -190,7 +190,7 @@ def SpanwiseCentroidY(stringer_distribution):
     y_spanwise = sp.interpolate.interp1d(spanwise_position, y, kind="linear", fill_value="extrapolate")
     return y_spanwise
 
-print(CentroidY(stringer_distribution, 0))
+#print(CentroidY(stringer_distribution, 0))
 
 """
 y_spanwise = SpanwiseCentroidY(stringer_distribution)
