@@ -213,7 +213,7 @@ plt.plot(spanwise_position, y_spanwise(spanwise_position), "-")
 plt.title('Spanwise C_y')
 
 plt.xlabel('Spanwise location [m]')
-plt.ylabel('C_y [Nm]')
+plt.ylabel('C_y [mm]')
 
 plt.grid(True, which='both')
 plt.axhline(y=0, color='k')
