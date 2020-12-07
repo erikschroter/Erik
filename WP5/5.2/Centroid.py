@@ -11,8 +11,8 @@ import math
 from scipy import integrate
 from scipy import interpolate
 import matplotlib.pyplot as plt
-from ReadingXFLRresults import ReadingXFLR
-from liftdistribution import liftdistribution
+#from ReadingXFLRresults import ReadingXFLR
+#from liftdistribution import liftdistribution
 
 from Definition_stringer_positions import Definition_stringer_position
 
