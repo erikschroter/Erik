@@ -4,14 +4,18 @@ Created on Thu Dec  3 15:03:40 2020
 
 @author: Erik Schroter
 """
+from Definition_stringer_positions import Definition_stringer_position, stringer_distribution
+
 segment_1 = 6.99 # m
 segment_2 = 13.98 # m
 segment_3 = 20.98 # m
 segment_4 = 27.97 # m
 segment_5 = 34.96 # m
 
+initial = Definition_stringer_position(stringer_distribution,0)
+
 def GlobalCentroid_def(y_span):
-    if y_span <= segement_1:
+    if y_span > 0 and y_span <= segment_1:
 # =============================================================================
 # Initialise
 # =============================================================================
@@ -22,34 +26,36 @@ def GlobalCentroid_def(y_span):
 # =============================================================================
 # Iteration over Elements
 # =============================================================================
-        for num_el in range(0, len(initial) + 1):
+        for num_el in range(0, len(initial)):
 # =============================================================================
 # For elements still existing
 # =============================================================================
-            if initial[3]==True:
+            if initial[num_el][3]==True:
 # =============================================================================
 # X - Numerator and Denominator
 # =============================================================================                
-                x_num_i = initial[0]
+                x_num_i = initial[num_el][0]
                 x_num = x_num + x_num_i
                 
-                x_denom_i = initial[0] * initial[2]
+                x_denom_i = initial[num_el][0] * initial[num_el][2]
                 x_denom = x_denom + x_denom_i
 # =============================================================================
 # Y - Numerator and Denominator
 # =============================================================================
-                y_num_i = initial[1]
+                y_num_i = initial[num_el][1]
                 y_num = y_num + y_num_i
 
-                y_denom_i = initial[1] * initial[2]
+                y_denom_i = initial[num_el][1] * initial[num_el][2]
                 y_denom = y_denom + y_denom_i
 # =============================================================================
 # X - Y Centroids
 # =============================================================================
-        1_ centroid_x = x_num / x_denom
+        centroid_x1 = x_num / x_denom
         
-        1_centroid_y = y_num / y_denom
-        
+        centroid_y1 = y_num / y_denom
+
+    return centroid_x1, centroid_y1
+
     if y_span > segment_1 and y_span <= segment_2:
 # =============================================================================
 # Initialise
@@ -61,33 +67,35 @@ def GlobalCentroid_def(y_span):
 # =============================================================================
 # Iteration over Elements
 # =============================================================================
-        for num_el in range(0, len(initial) + 1):
+        for num_el in range(0, len(initial)):
 # =============================================================================
 # For elements still existing
 # =============================================================================
-            if initial[3]==True:
+            if initial[num_el][3]==True:
 # =============================================================================
 # X - Numerator and Denominator
 # =============================================================================                
-                x_num_i = initial[0]
+                x_num_i = initial[num_el][0]
                 x_num = x_num + x_num_i
                 
-                x_denom_i = initial[0] * initial[2]
+                x_denom_i = initial[num_el][0] * initial[num_el][2]
                 x_denom = x_denom + x_denom_i
 # =============================================================================
 # Y - Numerator and Denominator
 # =============================================================================
-                y_num_i = initial[1]
+                y_num_i = initial[num_el][1]
                 y_num = y_num + y_num_i
 
-                y_denom_i = initial[1] * initial[2]
+                y_denom_i = initial[num_el][1] * initial[num_el][2]
                 y_denom = y_denom + y_denom_i
 # =============================================================================
 # X - Y Centroids
 # =============================================================================
-        2_ centroid_x = x_num / x_denom
+        centroid_x2 = x_num / x_denom
         
-        2_centroid_y = y_num / y_denom
+        centroid_y2 = y_num / y_denom
+
+    return centroid_x2, centroid_y2
         
     if y_span > segment_2 and y_span <= segment_3:
 # =============================================================================
@@ -100,33 +108,35 @@ def GlobalCentroid_def(y_span):
 # =============================================================================
 # Iteration over Elements
 # =============================================================================
-        for num_el in range(0, len(initial) + 1):
+        for num_el in range(0, len(initial)):
 # =============================================================================
 # For elements still existing
 # =============================================================================
-            if initial[3]==True:
+            if initial[num_el][3]==True:
 # =============================================================================
 # X - Numerator and Denominator
 # =============================================================================                
-                x_num_i = initial[0]
+                x_num_i = initial[num_el][0]
                 x_num = x_num + x_num_i
                 
-                x_denom_i = initial[0] * initial[2]
+                x_denom_i = initial[num_el][0] * initial[num_el][2]
                 x_denom = x_denom + x_denom_i
 # =============================================================================
 # Y - Numerator and Denominator
 # =============================================================================
-                y_num_i = initial[1]
+                y_num_i = initial[num_el][1]
                 y_num = y_num + y_num_i
 
-                y_denom_i = initial[1] * initial[2]
+                y_denom_i = initial[num_el][1] * initial[num_el][2]
                 y_denom = y_denom + y_denom_i
 # =============================================================================
 # X - Y Centroids
 # =============================================================================
-        3_ centroid_x = x_num / x_denom
+        centroid_x3 = x_num / x_denom
         
-        3_centroid_y = y_num / y_denom
+        centroid_y3 = y_num / y_denom
+
+    return centroid_x3, centroid_y3
         
     if y_span > segment_3 and y_span <= segment_4:
 # =============================================================================
@@ -139,34 +149,36 @@ def GlobalCentroid_def(y_span):
 # =============================================================================
 # Iteration over Elements
 # =============================================================================
-        for num_el in range(0, len(initial) + 1):
+        for num_el in range(0, len(initial)):
 # =============================================================================
 # For elements still existing
 # =============================================================================
-            if initial[3]==True:
+            if initial[num_el][3]==True:
 # =============================================================================
 # X - Numerator and Denominator
 # =============================================================================                
-                x_num_i = initial[0]
+                x_num_i = initial[num_el][0]
                 x_num = x_num + x_num_i
                 
-                x_denom_i = initial[0] * initial[2]
+                x_denom_i = initial[num_el][0] * initial[num_el][2]
                 x_denom = x_denom + x_denom_i
 # =============================================================================
 # Y - Numerator and Denominator
 # =============================================================================
-                y_num_i = initial[1]
+                y_num_i = initial[num_el][1]
                 y_num = y_num + y_num_i
 
-                y_denom_i = initial[1] * initial[2]
+                y_denom_i = initial[num_el][1] * initial[num_el][2]
                 y_denom = y_denom + y_denom_i
 # =============================================================================
 # X - Y Centroids
 # =============================================================================
-        4_ centroid_x = x_num / x_denom
+        centroid_x4 = x_num / x_denom
         
-        4_centroid_y = y_num / y_denom
-        
+        centroid_y4 = y_num / y_denom
+
+    return centroid_x4, centroid_y4
+
     if y_span > segment_4 and y_span <= segment_5:
 # =============================================================================
 # Initialise
@@ -178,33 +190,32 @@ def GlobalCentroid_def(y_span):
 # =============================================================================
 # Iteration over Elements
 # =============================================================================
-        for num_el in range(0, len(initial) + 1):
+        for num_el in range(0, len(initial)):
 # =============================================================================
 # For elements still existing
 # =============================================================================
-            if initial[3]==True:
+            if initial[num_el][3]==True:
 # =============================================================================
 # X - Numerator and Denominator
 # =============================================================================                
-                x_num_i = initial[0]
+                x_num_i = initial[num_el][0]
                 x_num = x_num + x_num_i
                 
-                x_denom_i = initial[0] * initial[2]
+                x_denom_i = initial[num_el][0] * initial[num_el][2]
                 x_denom = x_denom + x_denom_i
 # =============================================================================
 # Y - Numerator and Denominator
 # =============================================================================
-                y_num_i = initial[1]
+                y_num_i = initial[num_el][1]
                 y_num = y_num + y_num_i
 
-                y_denom_i = initial[1] * initial[2]
+                y_denom_i = initial[num_el][1] * initial[num_el][2]
                 y_denom = y_denom + y_denom_i
 # =============================================================================
 # X - Y Centroids
 # =============================================================================
-        5_ centroid_x = x_num / x_denom
+        centroid_x5 = x_num / x_denom
         
-        5_centroid_y = y_num / y_denom
+        centroid_y5 = y_num / y_denom
         
-            
-    
+    return centroid_x5, centroid_y5
