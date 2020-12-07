@@ -33,8 +33,8 @@ def chord_length(spanwise_location): #Spanwise location is in y/(b/2)
     Ct = 3.59
     Taper = 0.3
     c = Cr - Cr*(1-Taper)*(spanwise_location)
-
     return c
+
 """ 
 def CentroidX(spanwise_location_iny, ntop, nlower):       #Centroid entire wingbox
     b = 69.92 #Span
