@@ -23,6 +23,15 @@ for i in range(len(hinged_edges)):
     y_hinged.append(hinged_edges[i][1])
 hinged_edges_function = sp.interpolate.interp1d(x_hinged, y_hinged, kind="quadratic", fill_value="extrapolate")
 
+figure_19_a_clamped = [(1, 15), (1.1, 13.8), (1.2, 13), (1.25, 12.5), (1.5, 11.5), (1.66, 11.3), (1.75, 10.7), (2, 10.3),
+                 (2.25, 10.1), (2.5, 9.9), (2.75, 9.8), (3, 9.8), (3.5, 9.7), (4, 9.6), (5, 9.6)]
+x_clamped = []
+y_clamped = []
+for i in range(len(clamped_edges)):
+    x_clamped.append(clamped_edges[i][0])
+    y_clamped.append(clamped_edges[i][1])
+clamped_edges_function = sp.interpolate.interp1d(x_clamped, y_clamped, kind="quadratic", fill_value="extrapolate")
+
 
 def clamped_edges_callable_function(x):
     return clamped_edges_function(x)
