@@ -192,7 +192,7 @@ def SpanwiseCentroidY(stringer_distribution):
 
 print(CentroidY(stringer_distribution, 0))
 
-""""""
+"""
 y_spanwise = SpanwiseCentroidY(stringer_distribution)
 print(SpanwiseCentroidY(stringer_distribution))
 
@@ -220,4 +220,4 @@ plt.axhline(y=0, color='k')
 
 plt.show()
 
-
+"""
