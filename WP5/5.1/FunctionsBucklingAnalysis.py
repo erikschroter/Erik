@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
+
+
+import math as m
+from GlobalMomentofInertia import Ixx
 """
 Created on Mon Nov 30 14:53:19 2020
 
@@ -54,3 +58,10 @@ def ColBucklingdef(K, E, I, L):
     return stress_critical_buckling
 
 # Compressive strength failure each component
+
+sweepAngleWing = 28.77 * m.pi / 180 #rads
+LStringer = 6.99
+
+Ixx = Ixx(0)
+
+bucklingStress = ColBucklingdef(1, 68.9 * 10**9,
