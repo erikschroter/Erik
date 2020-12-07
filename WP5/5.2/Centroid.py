@@ -190,7 +190,7 @@ def SpanwiseCentroidY(stringer_distribution):
     y_spanwise = sp.interpolate.interp1d(spanwise_position, y, kind="linear", fill_value="extrapolate")
     return y_spanwise
 
-print(CentroidY(stringer_distribution, 0))
+#print(CentroidY(stringer_distribution, 0))
 
 """
 y_spanwise = SpanwiseCentroidY(stringer_distribution)
