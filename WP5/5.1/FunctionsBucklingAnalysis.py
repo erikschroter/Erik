@@ -5,6 +5,7 @@ Created on Mon Nov 30 14:53:19 2020
 @author: Erik Schroter
 """
 import numpy as np
+from Buckling_Coefficient_Figures import clamped_edges_callable_function
 
 # Margin of Safety Function
 def MoSdef(failure_stress, applied_stress):
