@@ -26,7 +26,7 @@ MZFW = 161394.73
 MaxFuelWeight = MTOW - OEW
 
 #Loading factor [-]
-n=4.65
+n=3.5
 #n=-1.65
 
 #critical weight

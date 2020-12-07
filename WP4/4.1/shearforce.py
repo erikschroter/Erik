@@ -13,7 +13,7 @@ span = 69.92
 accuracy = 41 
  
 #Loading factor [-]
-n=-1.5
+n=3.75
 
 
 #Maximum takeoff weight [kg]
@@ -48,7 +48,7 @@ sys.path.insert(-1,directory)
 from liftdistribution import liftdistribution
 from Moment_of_Inertia_Wingbox import Ixx_in_y
 
-x, Llst, xnew, f, xdist = liftdistribution(filename, rho, v, span, accuracy,MTOW*9.81,n)
+x, Llst, xnew, f, xdist = liftdistribution(filename, rho, v, span, accuracy,MZFW*9.81,n)
 a = [0]
 Aerosheer = [-sp.integrate.quad(f,0,0)[0]+sp.integrate.quad(f,0,xdist)[0]]
 while a[-1] <= xdist:
