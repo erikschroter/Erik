@@ -3,6 +3,9 @@
 
 import math as m
 from GlobalMomentofInertia import Ixx
+from Definition_stringer_positions import t_wing_box_spar_cap
+from Buckling_Coefficient_Figures import hinged_edges_function
+
 """
 Created on Mon Nov 30 14:53:19 2020
 
@@ -80,14 +83,37 @@ def ColBucklingdef(K, E, I, L):
 # =============================================================================
 # Web buckling
 # =============================================================================
-E = 68.8 * 10^9 # Pa
-v = 0.33
+E = 68.8 * 10**9 # Pa
+v = 0.33 # -
 
-f
-    localChord(y_span)
+t_f = t_wing_box_spar_cap # mm
+t_r = t_wing_box_spar_cap # mm
+
+sections = [0, 2, 6, 8, 11.5, 24] # INPUT SECTIONS!
+
+tau_cr_flst = []
+tau_cr_rlst = []
+
+for i in range(1, len(sections)):
+    y_section = sections[i] - sections[i-1] # m
+    y_midspan = (y_section / 2) + sections[i-1] # m
     
+    h_f = FrontRearSpar(y_midspan)[0]*1000 # mm
+    h_r = FrontRearSpar(y_midspan)[1]*1000 # mm
+    
+    x_f = y_section / h_f
+    x_r = y_section / h_r
+    
+    k_sf = hinged_edges_function(x_f)
+    k_sr = hinged_edges_function(x_r)
+    
+    tau_cr_f = WebBucklingdef(t_f, y_section, k_sf, E, v) # Pa
+    tau_cr_r = WebBucklingdef(t_r, y_section, k_sr, E, v) # Pa
 
+    tau_cr_flst.append(tau_cr_f)
+    tau_cr_rlst.append(tau_cr_r)
 
+print("Web buckling: \n Sections: ", sections, "\n Front Spar: ", tau_cr_flst, "\n Rear Spar: ", tau_cr_rlst)
 
 # =============================================================================
 # Column buckling
@@ -98,4 +124,4 @@ LStringer = 6.99
 
 Ixx = Ixx(0)
 
-bucklingStress = ColBucklingdef(1, 68.9 * 10**9,
+# bucklingStress = ColBucklingdef(1, 68.9 * 10**9,
