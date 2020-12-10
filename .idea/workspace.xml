@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1f6a794a-16fb-442c-953c-91eb901c2e32" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Erik.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Erik.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WP5/5.3/AileronReversal.py" beforeDir="false" afterPath="$PROJECT_DIR$/WP5/5.3/AileronReversal.py" afterDir="false" />
-    </list>
+    <list default="true" id="1f6a794a-16fb-442c-953c-91eb901c2e32" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -284,7 +279,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607605449230</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="fixing AileronReversal.py">
+      <created>1607613726779</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1607613726779</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -293,13 +295,14 @@
     <MESSAGE value="Skin Buckling Analysis" />
     <MESSAGE value="Skin Buckling Analysis added to eriks file" />
     <MESSAGE value="Reynolds number calculator and ISAdef" />
-    <option name="LAST_COMMIT_MESSAGE" value="Reynolds number calculator and ISAdef" />
+    <MESSAGE value="fixing AileronReversal.py" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixing AileronReversal.py" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="395" y="0" key="CommitChangelistDialog2" timestamp="1607605448480">
+    <state x="173" y="0" key="CommitChangelistDialog2" timestamp="1607613725553">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="395" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1607605448480" />
+    <state x="173" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1607613725553" />
     <state x="147" y="65" width="1228" height="688" key="DiffContextDialog" timestamp="1607607439676">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -308,22 +311,22 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="153" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1606676321536" />
-    <state width="745" height="232" key="GridCell.Tab.0.bottom" timestamp="1607613579733">
+    <state width="745" height="232" key="GridCell.Tab.0.bottom" timestamp="1607613682887">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="745" height="232" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1607613579733" />
-    <state width="745" height="232" key="GridCell.Tab.0.center" timestamp="1607613579731">
+    <state width="745" height="232" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1607613682887" />
+    <state width="745" height="232" key="GridCell.Tab.0.center" timestamp="1607613682886">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="745" height="232" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1607613579731" />
-    <state width="745" height="232" key="GridCell.Tab.0.left" timestamp="1607613579730">
+    <state width="745" height="232" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1607613682886" />
+    <state width="745" height="232" key="GridCell.Tab.0.left" timestamp="1607613682886">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="745" height="232" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1607613579730" />
-    <state width="745" height="232" key="GridCell.Tab.0.right" timestamp="1607613579732">
+    <state width="745" height="232" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1607613682886" />
+    <state width="745" height="232" key="GridCell.Tab.0.right" timestamp="1607613682886">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="745" height="232" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1607613579732" />
+    <state width="745" height="232" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1607613682886" />
     <state width="1515" height="174" key="GridCell.Tab.1.bottom" timestamp="1606399078452">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -356,10 +359,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="618" y="326" key="VCS.ChangelistChooser/0.0.1536.824@0.0.1536.824" timestamp="1606746649256" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1607606711942">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1607613803600">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1607606711942" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1607613803600" />
     <state x="579" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606746957254">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
