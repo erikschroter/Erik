@@ -8,12 +8,22 @@ Created on Mon Nov 30 14:53:19 2020
 
 @author: Erik Schroter
 """
+
+# Front and rear spar height function
+
 import numpy as np
 from Buckling_Coefficient_Figures import clamped_edges_callable_function
 
 taperRatio = 0.3 #[]
 rootChord = 11.95 #[m]
 wingSpan = 69.92 #[m]
+
+
+def FrontRearSpar(spanValue):
+    localChord = rootChord - (rootChord - taperRatio * rootChord) / (wingSpan / 2) * spanValue
+    FrontSpar = 0.1347 * localChord
+    RearSpar = 0.1091 * localChord
+    return FrontSpar, RearSpar
 
 def localChord(spanValue):
     localChord = rootChord - (rootChord - taperRatio * rootChord) / (wingSpan / 2) * spanValue
