@@ -4,7 +4,8 @@
 import math as m
 from GlobalMomentofInertia import Ixx
 from Definition_stringer_positions import t_wing_box_spar_cap
-from Buckling_Coefficient_Figures import hinged_edges_function
+from Buckling_Coefficient_Figures import hinged_edges_function, figure_19_c_simply_supported_function
+import numpy as np
 
 """
 Created on Mon Nov 30 14:53:19 2020
@@ -13,14 +14,9 @@ Created on Mon Nov 30 14:53:19 2020
 """
 
 # Front and rear spar height function
-
-import numpy as np
-from Buckling_Coefficient_Figures import clamped_edges_callable_function
-
 taperRatio = 0.3 #[]
 rootChord = 11.95 #[m]
 wingSpan = 69.92 #[m]
-
 
 def FrontRearSpar(spanValue):
     localChord = rootChord - (rootChord - taperRatio * rootChord) / (wingSpan / 2) * spanValue
@@ -28,6 +24,7 @@ def FrontRearSpar(spanValue):
     RearSpar = 0.1091 * localChord
     return FrontSpar, RearSpar
 
+# Local Chord function
 def localChord(spanValue):
     localChord = rootChord - (rootChord - taperRatio * rootChord) / (wingSpan / 2) * spanValue
     return localChord
@@ -70,6 +67,10 @@ def TorsionalSheardef(T, A_i):
 
 
 # Skin Buckling wing skin
+def SkinBucklingdef(k_c, E, poisson, t, b):
+    F_cr = np.pi * k_c * E / (12 * (1 - poisson**2)) * (t/b)**2
+    return F_cr
+# where 𝑘𝑘𝑐𝑐 may be deduced from Figure 19, and all other symbols have their previously defined meanings.
 
 
 # Column Buckling of stringers
@@ -83,20 +84,24 @@ def ColBucklingdef(K, E, I, L):
 # =============================================================================
 # Web buckling
 # =============================================================================
+WebPrint=False
+
+# Material Properties
 E = 68.8 * 10**9 # Pa
 v = 0.33 # -
 
 t_f = t_wing_box_spar_cap # mm
 t_r = t_wing_box_spar_cap # mm
 
-sections = [0, 2, 4, 6.99, 11.5, 13.98, 20.98, 27.97, 34.96] # INPUT SECTIONS!
+sections = [0, 4, 7.00, 11.5, 14, 17.5, 21, 24.5, 26, 28, 29, 31.5, 33, 34.96] # INPUT SECTIONS!
 
 tau_cr_flst = []
 tau_cr_rlst = []
 
 for i in range(1, len(sections)):
     y_section = sections[i] - sections[i-1] # m
-    print("iteration ", i, y_section)
+    if WebPrint==True:
+        print("iteration ", i, "section width ", round(y_section, 1))
     y_midspan = (y_section / 2) + sections[i-1] # m
     
     h_f = FrontRearSpar(y_midspan)[0]*1000 # mm
@@ -104,8 +109,9 @@ for i in range(1, len(sections)):
     
     x_f = y_section*1000 / h_f
     x_r = y_section*1000 / h_r
-    print("\n", i, "Front", x_f)
-    print("Rear", x_r)
+    if WebPrint==True:
+        print("Front Aspect ", x_f)
+        print("Rear Aspect ", x_r, "\n")
     
     if x_f < 1 or x_f > 5:
         print("\n !!! UNDEFINED ASPECT RATIO !!! \n Front Aspect Ratio: ",  x_f)
@@ -119,10 +125,17 @@ for i in range(1, len(sections)):
     tau_cr_f = WebBucklingdef(t_f, h_f, k_sf, E, v)/10**6 # MPa
     tau_cr_r = WebBucklingdef(t_r, h_r, k_sr, E, v)/10**6 # MPa
 
-    tau_cr_flst.append(tau_cr_f)
-    tau_cr_rlst.append(tau_cr_r)
+    tau_cr_flst.append(round(tau_cr_f,2))
+    tau_cr_rlst.append(round(tau_cr_r,2))
 
-print("Web buckling: \n Sections: ", sections, "\n Front Spar: ", tau_cr_flst, "\n Rear Spar: ", tau_cr_rlst)
+if WebPrint==True:
+    print("Web buckling: \n Sections: ", sections, "\n Front Spar: ", tau_cr_flst, "\n Rear Spar: ", tau_cr_rlst)
+
+# =============================================================================
+# Skin buckling
+# =============================================================================
+
+
 
 # =============================================================================
 # Column buckling
