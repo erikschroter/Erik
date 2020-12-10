@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="1f6a794a-16fb-442c-953c-91eb901c2e32" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/WP5/Re_Calculator.py" beforeDir="false" afterPath="$PROJECT_DIR$/WP5/Re_Calculator.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1khFoghBSftRejY04tpSoFVGyJy" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/WP5" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\phili\PycharmProjects\WP4new\WP5" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\phili\PycharmProjects\WP4new\WP5" />
+      <recent name="C:\Users\phili\PycharmProjects\WP4new\WP5\5.2" />
+      <recent name="C:\Users\phili\Downloads" />
+      <recent name="C:\Users\phili\PycharmProjects\WP4new\WP4\4.1\Archive" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.Re_Calculator">
+    <configuration name="Moment_of_Inertia_Wingbox" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="WP4new" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/WP4/4.2" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/WP4/4.2/Moment_of_Inertia_Wingbox.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="NormalForceDueToBending" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="WP4new" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/WP5" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/WP5/NormalForceDueToBending.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Re_Calculator" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="WP4new" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/WP5" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/WP5/Re_Calculator.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="SkinBucklingAnalysis" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="WP4new" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/WP5" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/WP5/SkinBucklingAnalysis.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="Tox" factoryName="Tox">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Doctests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.Re_Calculator" />
+        <item itemvalue="Python.NormalForceDueToBending" />
+        <item itemvalue="Python.Moment_of_Inertia_Wingbox" />
+        <item itemvalue="Python.SkinBucklingAnalysis" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1f6a794a-16fb-442c-953c-91eb901c2e32" name="Default Changelist" comment="" />
+      <created>1606145092186</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1606145092186</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Debugged GustEnvelope">
+      <created>1606146316704</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1606146316704</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Skin Buckling Analysis temporary file">
+      <created>1606745674689</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1606745674689</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Skin Buckling Analysis">
+      <created>1606746940655</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1606746940655</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Skin Buckling Analysis added to eriks file">
+      <created>1606747055317</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1606747055317</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Skin Buckling Analysis added to eriks file">
+      <created>1606747109765</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1606747109765</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Skin Buckling Analysis added to eriks file">
+      <created>1607001811802</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1607001811802</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Reynolds number calculator and ISAdef">
+      <created>1607349352386</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1607349352386</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Debugged GustEnvelope" />
+    <MESSAGE value="Skin Buckling Analysis temporary file" />
+    <MESSAGE value="Skin Buckling Analysis" />
+    <MESSAGE value="Skin Buckling Analysis added to eriks file" />
+    <MESSAGE value="Reynolds number calculator and ISAdef" />
+    <option name="LAST_COMMIT_MESSAGE" value="Reynolds number calculator and ISAdef" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="395" y="0" key="CommitChangelistDialog2" timestamp="1607349351601">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="395" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1607349351601" />
+    <state x="147" y="65" width="1228" height="688" key="DiffContextDialog" timestamp="1606745058203">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="147" y="65" width="1228" height="688" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1606745058203" />
+    <state x="549" y="153" key="FileChooserDialogImpl" timestamp="1606676321536">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="549" y="153" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1606676321536" />
+    <state width="746" height="124" key="GridCell.Tab.0.bottom" timestamp="1607365191758">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="746" height="124" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1607365191758" />
+    <state width="746" height="124" key="GridCell.Tab.0.center" timestamp="1607365191756">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="746" height="124" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1607365191756" />
+    <state width="746" height="124" key="GridCell.Tab.0.left" timestamp="1607365191754">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="746" height="124" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1607365191754" />
+    <state width="746" height="124" key="GridCell.Tab.0.right" timestamp="1607365191757">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="746" height="124" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1607365191757" />
+    <state width="1515" height="174" key="GridCell.Tab.1.bottom" timestamp="1606399078452">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1515" height="174" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1606399078452" />
+    <state width="1515" height="174" key="GridCell.Tab.1.center" timestamp="1606399078452">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1515" height="174" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1606399078452" />
+    <state width="1515" height="174" key="GridCell.Tab.1.left" timestamp="1606399078452">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1515" height="174" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1606399078452" />
+    <state width="1515" height="174" key="GridCell.Tab.1.right" timestamp="1606399078452">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1515" height="174" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1606399078452" />
+    <state x="657" y="280" key="MultipleFileMergeDialog" timestamp="1606395384897">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="657" y="280" key="MultipleFileMergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1606395384897" />
+    <state x="551" y="115" key="RollbackChangesDialog" timestamp="1606746623725">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="551" y="115" key="RollbackChangesDialog/0.0.1536.824@0.0.1536.824" timestamp="1606746623725" />
+    <state x="277" y="57" key="SettingsEditor" timestamp="1606746628641">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="277" y="57" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1606746628641" />
+    <state x="618" y="326" key="VCS.ChangelistChooser" timestamp="1606746649256">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="618" y="326" key="VCS.ChangelistChooser/0.0.1536.824@0.0.1536.824" timestamp="1606746649256" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1607349363851">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1607349363851" />
+    <state x="579" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606746957254">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="579" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1606746957254" />
+    <state x="564" y="200" key="git4idea.merge.GitMergeDialog" timestamp="1606744833997">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="564" y="200" key="git4idea.merge.GitMergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1606744833997" />
+    <state x="506" y="200" key="git4idea.merge.GitPullDialog" timestamp="1607349374368">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="506" y="200" key="git4idea.merge.GitPullDialog/0.0.1536.824@0.0.1536.824" timestamp="1607349374368" />
+    <state x="570" y="318" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1606145251092">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="570" y="318" key="git4idea.remote.GitConfigureRemotesDialog/0.0.1536.824@0.0.1536.824" timestamp="1606145251092" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/WP5/5.1/Moment_of_Inertia.py</url>
+          <line>133</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
