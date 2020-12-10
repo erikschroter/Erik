@@ -42,7 +42,7 @@ def MoSdef(failure_stress, applied_stress):
 # Shear Buckling in spar webs:
 # where 𝑡 is the thickness of the spar, 𝑏 the short side of the plate, 𝑘𝑠 a coefficient that depends on the plate aspect ratio 𝑎 /𝑏 (as depicted in Figure 17), and is obtained from Figure 18, and the remaining symbols are the familiar material properties.
 def WebBucklingdef(t, b, k_s, E, poisson):
-    shear_cr = np.pi ** 2 * k_s * E / (12 * (1 - poisson ** 2)) * (t / b) ** 2
+    shear_cr = (np.pi ** 2 * k_s * E / (12 * (1 - poisson ** 2))) * (t / b) ** 2
     return shear_cr
 
 # maximum shear stress due to the shear force in the webs
@@ -89,26 +89,35 @@ v = 0.33 # -
 t_f = t_wing_box_spar_cap # mm
 t_r = t_wing_box_spar_cap # mm
 
-sections = [0, 2, 6, 8, 11.5, 24] # INPUT SECTIONS!
+sections = [0, 2, 4, 6.99, 11.5, 13.98, 20.98, 27.97, 34.96] # INPUT SECTIONS!
 
 tau_cr_flst = []
 tau_cr_rlst = []
 
 for i in range(1, len(sections)):
     y_section = sections[i] - sections[i-1] # m
+    print("iteration ", i, y_section)
     y_midspan = (y_section / 2) + sections[i-1] # m
     
     h_f = FrontRearSpar(y_midspan)[0]*1000 # mm
     h_r = FrontRearSpar(y_midspan)[1]*1000 # mm
     
-    x_f = y_section / h_f
-    x_r = y_section / h_r
+    x_f = y_section*1000 / h_f
+    x_r = y_section*1000 / h_r
+    print("\n", i, "Front", x_f)
+    print("Rear", x_r)
+    
+    if x_f < 1 or x_f > 5:
+        print("\n !!! UNDEFINED ASPECT RATIO !!! \n Front Aspect Ratio: ",  x_f)
+    if x_r < 1 or x_r > 5:
+        print("\n !!! UNDEFINED ASPECT RATIO !!! \n Rear Aspect Ratio: ",  x_r)
+
     
     k_sf = hinged_edges_function(x_f)
     k_sr = hinged_edges_function(x_r)
     
-    tau_cr_f = WebBucklingdef(t_f, y_section, k_sf, E, v) # Pa
-    tau_cr_r = WebBucklingdef(t_r, y_section, k_sr, E, v) # Pa
+    tau_cr_f = WebBucklingdef(t_f, h_f, k_sf, E, v)/10**6 # MPa
+    tau_cr_r = WebBucklingdef(t_r, h_r, k_sr, E, v)/10**6 # MPa
 
     tau_cr_flst.append(tau_cr_f)
     tau_cr_rlst.append(tau_cr_r)
@@ -125,3 +134,4 @@ LStringer = 6.99
 Ixx = Ixx(0)
 
 # bucklingStress = ColBucklingdef(1, 68.9 * 10**9,
+

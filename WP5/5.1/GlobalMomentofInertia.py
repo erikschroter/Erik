@@ -73,7 +73,7 @@ def Ixx (y_span):
 listResolution = 80
 xList = []
 yList = []
-
+"""
 for i in range(0, round(wingSpan / 2) * listResolution - 3):
     xList.append(i/listResolution)
     yList.append(Ixx(i / listResolution))
@@ -83,8 +83,9 @@ plt.ylabel('Ixx [mm^4]')
 plt.xlabel('Span [m]')
 plt.plot(xList, yList)
 plt.show()
+"""
 
-
+"""
 print("0:",Ixx(0))
 print("5:", Ixx(5))
 print("10:", Ixx(10))
@@ -92,3 +93,4 @@ print("15:", Ixx(15))
 print("end - .5:", Ixx(wingSpan /2 - .5))
 print("end -0.1 :", Ixx(wingSpan /2 - .1))
 print("end:", Ixx(wingSpan /2))
+"""
