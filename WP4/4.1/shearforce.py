@@ -35,8 +35,8 @@ W_uc_MLG = 7_569.349
 
 #Wing weight including mounts and spoilers [kg]
 WingWeight = 3210.55
-import numpy as np
-from scipy import integrate
+#import numpy as np
+#from scipy import integrate
 import sys
 import matplotlib.patches as mpatches
 import os
@@ -45,8 +45,10 @@ import matplotlib.pyplot as plt
 from InertialLoading import inertialForce
 directory = os.path.dirname(os.path.dirname(__file__))+"\\4.2"
 sys.path.insert(-1,directory)
+directory = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))+"\\WP5\\5.1"
+sys.path.insert(-1,directory)
 from liftdistribution import liftdistribution
-from Moment_of_Inertia_Wingbox import Ixx_in_y
+from GlobalMomentofInertia import Ixx
 
 x, Llst, xnew, f, xdist = liftdistribution(filename, rho, v, span, accuracy,MZFW*9.81,n)
 a = [0]
@@ -99,7 +101,7 @@ Deflectioncalculation=[0]
 print(Moment)
 while i < len(a):
   
-    Deflectioncalculation.append(-Moment[i]/(E*Ixx_in_y(a[i])))
+    Deflectioncalculation.append(-Moment[i]/(E*(Ixx(a[i])*10**-(12))))
     i +=1
 print(Deflectioncalculation)
 g = sp.interpolate.interp1d(a,Deflectioncalculation,kind="linear", fill_value="extrapolate")

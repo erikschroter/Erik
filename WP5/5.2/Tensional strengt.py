@@ -56,6 +56,8 @@ directory = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))+"\\WP4\\
 sys.path.insert(-1,directory)
 directory = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))+"\\WP4\\4.2"
 sys.path.insert(-1,directory)
+directory = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))+"\\WP5\\5.1"
+sys.path.insert(-1,directory)
 import scipy as sp
 import matplotlib.pyplot as plt
 from InertialLoading import inertialForce
