@@ -86,6 +86,7 @@ def ColBucklingdef(K, E, I, L):
 # =============================================================================
 WebPrint=False
 
+# Material Properties
 E = 68.8 * 10**9 # Pa
 v = 0.33 # -
 
