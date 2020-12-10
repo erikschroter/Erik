@@ -75,5 +75,3 @@ def Torsional_Constant_graph(ystart=0.5, yendmaxb=34.96):
     plt.xlabel('Span')
     plt.ylabel('Torsional Constant')
     plt.show()
-
-Torsional_Constant_graph()
