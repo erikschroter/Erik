@@ -4,7 +4,8 @@
 import math as m
 from GlobalMomentofInertia import Ixx
 from Definition_stringer_positions import t_wing_box_spar_cap
-from Buckling_Coefficient_Figures import hinged_edges_function
+from Buckling_Coefficient_Figures import hinged_edges_function, figure_19_c_simply_supported_function
+import numpy as np
 
 """
 Created on Mon Nov 30 14:53:19 2020
@@ -13,14 +14,9 @@ Created on Mon Nov 30 14:53:19 2020
 """
 
 # Front and rear spar height function
-
-import numpy as np
-from Buckling_Coefficient_Figures import clamped_edges_callable_function
-
 taperRatio = 0.3 #[]
 rootChord = 11.95 #[m]
 wingSpan = 69.92 #[m]
-
 
 def FrontRearSpar(spanValue):
     localChord = rootChord - (rootChord - taperRatio * rootChord) / (wingSpan / 2) * spanValue
@@ -28,6 +24,7 @@ def FrontRearSpar(spanValue):
     RearSpar = 0.1091 * localChord
     return FrontSpar, RearSpar
 
+# Local Chord function
 def localChord(spanValue):
     localChord = rootChord - (rootChord - taperRatio * rootChord) / (wingSpan / 2) * spanValue
     return localChord
@@ -70,6 +67,10 @@ def TorsionalSheardef(T, A_i):
 
 
 # Skin Buckling wing skin
+def SkinBucklingdef(k_c, E, poisson, t, b):
+    F_cr = np.pi * k_c * E / (12 * (1 - poisson**2)) * (t/b)**2
+    return F_cr
+# where 𝑘𝑘𝑐𝑐 may be deduced from Figure 19, and all other symbols have their previously defined meanings.
 
 
 # Column Buckling of stringers
@@ -128,6 +129,12 @@ for i in range(1, len(sections)):
 
 if WebPrint==True:
     print("Web buckling: \n Sections: ", sections, "\n Front Spar: ", tau_cr_flst, "\n Rear Spar: ", tau_cr_rlst)
+
+# =============================================================================
+# Skin buckling
+# =============================================================================
+
+
 
 # =============================================================================
 # Column buckling
