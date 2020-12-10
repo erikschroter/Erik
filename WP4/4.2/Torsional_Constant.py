@@ -2,7 +2,7 @@ import Moment_of_Inertia_Wingbox as WB
 from matplotlib import pyplot as plt
 
 
-t = WB.t
+t = WB.t_wing_box_skin
 G = 24*10**9
 
 def Torsional_Constant_J(spanwise_location_iny=34.96):
