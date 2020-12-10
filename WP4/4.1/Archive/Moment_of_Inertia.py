@@ -165,3 +165,4 @@ def Ixxstringers(span_position_in_y=69.92/2):
     v_y, error2 = sp.integrate.quad(Ixx_stringers, y1, span_position_in_y)
     return v_y
 
+print(Ixx_in_y(30))

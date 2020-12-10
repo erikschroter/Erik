@@ -3,8 +3,8 @@ import sys
 directory = os.path.dirname(__file__)+"\\5.1"
 sys.path.insert(-1,directory)
 
-from Moment_of_Inertia import Ixx_in_y
-
+from GlobalMomentofInertia import Ixx
+print(Ixx_in_y)
 #Max moment occurs at MZFW and n = 4.65 (the wing wants to bend upwards so the resulting moment in the root is negative but counterclockwise positive)
 
 M_max = -45430675 #Nm CCW+ if seen from the back of the airplane
