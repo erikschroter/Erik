@@ -3,13 +3,16 @@ import math as m
 """Function to calculate the position of the stringers for a given stringer distribution from the bottom left corner of 
 the wing box
 If questions, ask Christoph Pabsch"""
-
+root_chord = 11.95  # [m]
+tip_chord = 3.59  # [m]
+span = 69.92  # [m]
+t_wing_box_skin = 10
+t_wing_box_spar_cap = 10
+a_wing_box_spar_cap = 110 #width
 
 
 def Definition_stringer_position(stringer_distribution, spanwise_position):
-    root_chord = 11.95  # [m]
-    tip_chord = 3.59  # [m]
-    span = 69.92  # [m]
+
     chord_length = 1000 * (root_chord - (root_chord - tip_chord) * spanwise_position / (span / 2))
 
     # wing box dimensions
@@ -21,8 +24,7 @@ def Definition_stringer_position(stringer_distribution, spanwise_position):
     bottom_difference_rear_spar = 9.3 / 1000 * chord_length
 
     # Spar caps dimensions
-    t_wing_box_spar_cap = 10
-    a_wing_box_spar_cap = 110
+
 
     # stringer dimensions
     a_stringer = 110
@@ -104,7 +106,7 @@ def Definition_stringer_position(stringer_distribution, spanwise_position):
     step = 2
     step_power = 1
     while n_top_remove > 0.1:
-        print(n)
+        #print(n)
         stringer_positions[4+n] = (stringer_positions[4+n][0], stringer_positions[4+n][1], stringer_positions[4+n][2], False)
         n = n + step
         if n + 1 > stringer_distribution[0][0]:
@@ -144,4 +146,4 @@ def Removing_Stringers(stringer_positions, stringer_distribution, spanwise_posit
 stringer_distribution = [(14, 14, 6.99), (12, 12, 13.98), (10, 10, 20.98), (8, 8, 27.97),
                          (6, 6, 34.96)]  # from root to tip, (top, bottom)
 
-print(Definition_stringer_position(stringer_distribution, 14))
+#print(Definition_stringer_position(stringer_distribution, 14))

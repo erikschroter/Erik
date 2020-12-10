@@ -1,10 +1,23 @@
 # -*- coding: utf-8 -*-
+
+
+import math as m
+from GlobalMomentofInertia import Ixx
 """
 Created on Mon Nov 30 14:53:19 2020
 
 @author: Erik Schroter
 """
 import numpy as np
+from Buckling_Coefficient_Figures import clamped_edges_callable_function
+
+taperRatio = 0.3 #[]
+rootChord = 11.95 #[m]
+wingSpan = 69.92 #[m]
+
+def localChord(spanValue):
+    localChord = rootChord - (rootChord - taperRatio * rootChord) / (wingSpan / 2) * spanValue
+    return localChord
 
 # Margin of Safety Function
 def MoSdef(failure_stress, applied_stress):
@@ -53,3 +66,26 @@ def ColBucklingdef(K, E, I, L):
     return stress_critical_buckling
 
 # Compressive strength failure each component
+
+# =============================================================================
+# Web buckling
+# =============================================================================
+E = 68.8 * 10^9 # Pa
+v = 0.33
+
+f
+    localChord(y_span)
+    
+
+
+
+# =============================================================================
+# Column buckling
+# =============================================================================
+
+sweepAngleWing = 28.77 * m.pi / 180 #rads
+LStringer = 6.99
+
+Ixx = Ixx(0)
+
+bucklingStress = ColBucklingdef(1, 68.9 * 10**9,
