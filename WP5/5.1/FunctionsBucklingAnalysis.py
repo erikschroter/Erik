@@ -125,3 +125,4 @@ LStringer = 6.99
 Ixx = Ixx(0)
 
 # bucklingStress = ColBucklingdef(1, 68.9 * 10**9,
+
