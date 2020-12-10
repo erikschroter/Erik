@@ -1,8 +1,13 @@
-import Moment_of_Inertia_Wingbox as WB
+import sys
+import os
+directory = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))+"\\WP5\\5.1"
+sys.path.insert(-1,directory)
+
+import GlobalMomentofInertia as WB
 from matplotlib import pyplot as plt
 
 
-t = WB.t
+t = WB.t_wing_box_skin
 G = 24*10**9
 
 def Torsional_Constant_J(spanwise_location_iny=34.96):
@@ -14,7 +19,7 @@ def Torsional_Constant_J(spanwise_location_iny=34.96):
 
 
     spanwise_location = spanwise_location_iny / (b / 2)
-    chord = WB.chord_length(spanwise_location)
+    chord = WB.localChord(spanwise_location)
     h = WB_chord * chord
     a = WB_aft_height * chord
     b = WB_front_height * chord
