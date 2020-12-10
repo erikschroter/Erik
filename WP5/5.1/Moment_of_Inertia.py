@@ -4,6 +4,7 @@ from scipy import interpolate
 import matplotlib.pyplot as plt
 import math
 
+
 # Wing Box outer geometry (in chord length)
 WB_chord = 0.45
 WB_front_height = 0.1347
@@ -16,8 +17,7 @@ E = 68.9*10**9
 #Variables to change
 t = 0.010       #WB thickness
 tS = 0.005      #Stringer thickness
-aS = 0.015        #Stringer depth
-bS = 0.080
+aS = 0.110        #Stringer depth
 hS = 0.110
 Spanwise = [0, 6.992, 13.984, 20.976, 27.968]
 Stringersnolow = [18, 16, 12, 8, 6]             #Stringers number lower WB
@@ -71,9 +71,6 @@ def Ixx_stringers_lower(spanwise_location_iny):       #Stringers Ixx lower WB
     b = WB_front_height * chord
     c = 0.0163 * chord
 
-    #Dimensions stringers
-
-
     n1= sp.interpolate.interp1d(Spanwise,Stringersnolow,kind="previous",fill_value="extrapolate")     #number of stringers
     n = n1(spanwise_location_iny)
 
@@ -81,17 +78,19 @@ def Ixx_stringers_lower(spanwise_location_iny):       #Stringers Ixx lower WB
     Cchord=(h/3)*((2*a+b)/(a+b))
 
     #Values Stringer
-    Astringer=tS*(2*aS + 2*hS +bS)      #Area
-    Cy=(2*aS*tS*tS/2 + 2*hS*tS*hS/2 + bS*tS*hS)/(2*aS*tS*tS + 2*hS*tS + bS*tS*hS)
-    Cx=(aS**2+aS*tS-tS**2)/(2*(2*aS-tS))
+    Astringer=tS*(2*aS + hS)      #Area
+    CentroidxS = 0.5*aS
+    CentroidyS = 0.5*hS
+
+    StringerIxx = 1 / 12 * tS * hS ** 3 + (2 * (a * tS) *(hS/2-tS/2)**2)
 
     #Parrallel axis stringers
     I=[]
     n=int(n)
     for i in range(1, n+1):
-        ParAxisOne=Astringer*(Cchord - Cy - i/(n+1) * math.tan(math.radians(1.18)))**2
+        ParAxisOne=Astringer*(Cchord - CentroidyS - i/(n+1) * math.tan(math.radians(1.18)))**2
         I.append(ParAxisOne)
-    SumI=sum(I)
+    SumI=sum(I) + StringerIxx*n
 
     return SumI
 
@@ -114,17 +113,19 @@ def Ixx_stringers_upper(spanwise_location_iny):       #Stringers Ixx upper WB
     Cchord=(h/3)*((2*a+b)/(a+b))
 
     #Values Stringer
-    Astringer=tS*(2*aS + 2*hS +bS)      #Area
-    Cy=(2*aS*tS*tS/2 + 2*hS*tS*hS/2 + bS*tS*hS)/(2*aS*tS*tS + 2*hS*tS + bS*tS*hS)
+    Astringer = tS * (2 * aS + hS)  # Area
+    CentroidxS = 0.5 * aS
+    CentroidyS = 0.5 * hS
 
+    StringerIxx2 = 1 / 12 * tS * hS ** 3 + (2 * (a * tS) * (hS / 2 - tS / 2) ** 2)
 
     #Parrallel axis stringers
     I2=[]
     n=int(n)
     for i in range(1, n+1):
-        ParAxisTwo=Astringer*(Cchord - Cy - i/(n+1) * math.tan(math.radians(2.08)))**2
+        ParAxisTwo=Astringer*(Cchord - CentroidyS - i/(n+1) * math.tan(math.radians(2.08)))**2
         I2.append(ParAxisTwo)
-    SumI2=sum(I2)
+    SumI2=sum(I2) + StringerIxx2 * n
 
     return SumI2
 
