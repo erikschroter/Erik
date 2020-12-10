@@ -30,9 +30,9 @@ b4 = 14
 
 G = 24 * 10**9
 
-dCLdal = 0.11
-dCLdE = 0.1313
-dCmdE = -0.0041
+dCLdal = 6.304
+dCLdE = 7.5224
+dCmdE = -0.2331
 S = 543.25
 
 def Vr(Span_in_y, altitude): #Only 31000 or 0
@@ -41,26 +41,12 @@ def Vr(Span_in_y, altitude): #Only 31000 or 0
     if altitude == 0:
         rho = 1.225
     J = TCJ(Span_in_y)
+    print(J)
     K = G * J
     c = chord_length(Span_in_y)
 
     VR = ((-K * dCLdE) / (0.5* rho* S* c* dCmdE* dCLdal))**0.5
-
     return VR
-
-def Vrhighgraph():      #High speed ailerons
-    Aileronspanlst = []
-    Vrlst = []
-    for a in range(b3*10, b4*10):
-        a = a//10
-        Aileronspanlst.append(a)
-        Vrlst.append(Vr(a))
-
-    plt.plot(Aileronspanlst, Vrlst)
-    plt.title('Vr diagram')
-    plt.xlabel('Span [m]')
-    plt.ylabel('Vr [m/s]')
-    plt.show()
 
 stringer_distribution = [(14,14,6.99),(12,12,13.98),(10,10,20.98),(8,8,27.97),(6,6,34.96)]  # from root to tip, (top, bottom)
 
@@ -73,12 +59,15 @@ def Aileron_effectiveness(Vfreestream, altitude, Span_in_y = 32): #Altitude Only
     J = TCJ(Span_in_y)
     K = G * J
     V = Vfreestream * math.cos(math.radians(28.77))
-    Cx = CentroidX(stringer_distribution, Span_in_y)
-    Cy = CentroidY(stringer_distribution, Span_in_y)
+    Cx = (CentroidX(stringer_distribution, Span_in_y))/1000
+    Cy = (CentroidY(stringer_distribution, Span_in_y))/1000
+    print(Cx)
 
     e = Cx/ chord_length(Span_in_y)+ 0.15- 0.25      # Cx position relative to chord + front spar distance - quarter chord
-
     c = chord_length(Span_in_y)
+    print(e)
+
+    print(K)
     ae = (0.5* rho* V**2* S* c* dCmdE* dCLdal+ K* dCLdE)/((K- 0.5* rho* V**2* S* c* e* dCLdal)*dCLdE)        #Change 1 by actual dCm/dE & dCL/dE from Xfoil
 
     return ae
