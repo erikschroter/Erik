@@ -33,6 +33,15 @@ for i in range(len(figure_19_a_clamped)):
     y_a_clamped.append(figure_19_a_clamped[i][1])
 figure_19_a_clamped_function = sp.interpolate.interp1d(x_a_clamped, y_a_clamped, kind="quadratic", fill_value="extrapolate")
 
+figure_19_c_simply_supported = [(0.4, 8.6), (0.45, 8), (0.9, 10.4), (1, 10.3), (1.1, 10.4), (1.3, 9), (1.5, 8.5), (1.65, 8.3),
+                 (1.8, 8.4), (1.9, 8.15), (2, 8), (2.2, 7.8), (2.4, 7.8), (2.6, 7.65), (3, 7.55), (3.4, 7.45), (3.7, 7.4),
+                        (4, 7.3), (4.3, 7.4), (4.6, 7.3),(5, 7.2)]
+x_c_simply_supported = []
+y_c_simply_supported = []
+for i in range(len(figure_19_c_simply_supported)):
+    x_c_simply_supported.append(figure_19_c_simply_supported[i][0])
+    y_c_simply_supported.append(figure_19_c_simply_supported[i][1])
+figure_19_c_simply_supported_function = sp.interpolate.interp1d(x_c_simply_supported, y_c_simply_supported, kind="quadratic", fill_value="extrapolate")
 
 def clamped_edges_callable_function(x):
     return clamped_edges_function(x)
@@ -44,6 +53,10 @@ def hinged_edges_callable_function(x):
 
 def figure_19_a_clamped_callable_function(x):
     return figure_19_a_clamped_function(x)
+
+
+def figure_19_c_simply_supported_function(x):
+    return figure_19_c_simply_supported_function(x)
 
 
 """
