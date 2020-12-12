@@ -6,6 +6,10 @@ from GlobalMomentofInertia import Ixx
 from Definition_stringer_positions import t_wing_box_skin, stringer_distribution
 from Buckling_Coefficient_Figures import figure_19_c_simply_supported_function
 from Distance_stringers import Distance_Stringers
+import sys
+
+sys.setrecursionlimit(10**7)
+
 
 """
 Created on Thursday Dec 10 16:56:32 2020
@@ -82,7 +86,7 @@ def ColBucklingdef(K, E, I, L):
 # Compressive strength failure each component
 
 # =============================================================================
-# Top and Bottom panel buckling
+# Top and Bottom panel buckling (Reference from reader page 680)
 # =============================================================================
 E = 68.8 * 10**9 # Pa
 v = 0.33 # -
@@ -108,22 +112,26 @@ for i in range(1, len(sections)):
 
     for n in range(len(distance_top_stringers)):
         b = distance_top_stringers[n][0]
-        a = y_section
+        a = 1000*y_section
+        print(a/b)
         k_c = figure_19_c_simply_supported_function(a/b)
-        top_stresses.append(3.14159265**2 * k_c * E / (12 * (1 - v**2)) * (t/b)**2)
-    critical_top_stress = max(top_stresses)
+        print(k_c)
+        top_stresses.append((3.14159265**2 * k_c * E / (12 * (1 - v**2)) * (t/b)**2))
+    critical_top_stress = min(top_stresses)
 
     for n in range(len(distance_bottom_stringers)):
         b = distance_bottom_stringers[n][0]
-        a = y_section
+        a = 1000*y_section
         k_c = figure_19_c_simply_supported_function(a/b)
-        bottom_stresses.append(3.14159265**2 * k_c * E / (12 * (1 - v**2)) * (t/b)**2)
-    critical_bottom_stress = max(bottom_stresses)
+        bottom_stresses.append((3.14159265**2 * k_c * E / (12 * (1 - v**2)) * (t/b)**2))
+    critical_bottom_stress = min(bottom_stresses)
 
     critical_bottom_stresses.append(critical_bottom_stress)
     critical_top_stresses.append(critical_top_stress)
 
 print(critical_bottom_stresses)
 print(critical_top_stresses)
+print(min(critical_bottom_stresses))
+print(min(critical_top_stresses))
 
 
