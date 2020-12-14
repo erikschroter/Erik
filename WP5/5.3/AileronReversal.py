@@ -38,6 +38,7 @@ S = 543.25
 def Vr(Span_in_y, altitude): #Only 31000 or 0
     if altitude == 31000:
         rho = 0.441653
+
     if altitude == 0:
         rho = 1.225
 
