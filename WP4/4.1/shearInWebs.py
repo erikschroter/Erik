@@ -94,26 +94,23 @@ for i in range (0, len(totalsheer)):
 print(avgShear)
 print(maxShear)
 
-scipyAvgShear = sp.interpolate.interp1d(spanValue,avgShear,kind="quadratic", fill_value="extrapolate")
-scipyMaxShear =
+scipyMaxShear = sp.interpolate.interp1d(spanValue,maxShear,kind="quadratic", fill_value="extrapolate")
 
 
-"""
-plt.plot(a, Aerosheer, 'r')
-plt.plot(a, inertialForce, 'g')
-plt.plot(a, totalsheer, 'b')
+
+plt.plot(spanValue, avgShear, 'r')
+plt.plot(spanValue, maxShear, 'g')
 plt.hlines(-5, 0, 40)
-plt.title("Shear forces")
+plt.title("Max Shear in Web")
 plt.grid(b=None, which='Major', axis='both')
 plt.ylabel("Shear force [N]")
 plt.xlabel("spanwise location [m]")
-red_patch = mpatches.Patch(color='r', label='Aerodynamic forces')
-green_patch = mpatches.Patch(color='g', label='Inertial forces')
-blue_patch = mpatches.Patch(color='b', label='Total Shear force')
-plt.legend(handles=[red_patch, green_patch, blue_patch])
+red_patch = mpatches.Patch(color='r', label='Average Shear')
+green_patch = mpatches.Patch(color='g', label='Max Shear')
+plt.legend(handles=[red_patch, green_patch])
 
 plt.show()
-
+"""
 i = 0
 Moment = []
 while i < len(a):
