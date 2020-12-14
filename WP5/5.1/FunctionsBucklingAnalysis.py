@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+Runtime_forever=False
 
 import matplotlib.pyplot as plt
 import math as m
@@ -6,8 +7,11 @@ from GlobalMomentofInertia import Ixx
 from Definition_stringer_positions import t_wing_box_spar_cap, stringer_distribution
 from Buckling_Coefficient_Figures import hinged_edges_function, figure_19_c_simply_supported_function
 from Top_Bottom_Skin_Buckling import Top_Bottom_Skin_Buckling
-from maximum_compressive_stress import maximum_compressive_stress_bottom
-from maximum_compressive_stress_top import maximum_compressive_stress_top
+
+if Runtime_forever==True:
+    from maximum_compressive_stress import maximum_compressive_stress_bottom
+    from maximum_compressive_stress_top import maximum_compressive_stress_top
+    
 import numpy as np
 
 """
@@ -87,19 +91,20 @@ def ColBucklingdef(K, E, I, L):
 # =============================================================================
 # Web buckling
 # =============================================================================
-WebPrint=False
+WebPrint=True
 
 # Material Properties
 E = 68.8 * 10**9 # Pa
 v = 0.33 # -
 
-rib_spacing = 0.61
-sections = np.arange(0, 34.96, 0.61)
+# rib_spacing = 0.61
+# sections = np.arange(0, 34.96, 0.61)
 
-req_rib_location = np.array([4, 6, 11, 11.5, 12, 14, 14.5, 22.1, 24, 24.2, 32, 34.96])
+# req_rib_location = np.array([4, 6, 11, 11.5, 12, 14, 14.5, 22.1, 24, 24.2, 32, 34.96])
 
-sections = np.append(sections, req_rib_location)
-sections = np.unique(sections)
+# sections = np.append(sections, req_rib_location)
+# sections = np.unique(sections)
+sections = [4.0, 4.5, 5.0, 5.5, 6.0, 6.714285714285714, 7.428571428571429, 8.142857142857142, 8.857142857142858, 9.571428571428571, 10.285714285714285, 11.0, 11.5, 12.0, 12.666666666666666, 13.333333333333334, 14.0, 14.5, 15.585714285714285, 16.67142857142857, 17.757142857142856, 18.84285714285714, 19.92857142857143, 21.014285714285716, 22.1, 22.733333333333334, 23.366666666666667, 24.0, 24.2, 25.5, 26.8, 28.1, 29.4, 30.7, 32.0, 32.986666666666665, 33.973333333333336, 34.96]
 
 t_f = t_wing_box_spar_cap # mm
 t_r = t_wing_box_spar_cap # mm
@@ -170,34 +175,34 @@ plt.show()
 # =============================================================================
 # Skin buckling
 # =============================================================================
-
-critical_bottom_stresses_function, critical_top_stresses_function = Top_Bottom_Skin_Buckling(sections,
-                                                                                             stringer_distribution)
-
-
-
-# Creating plot list
-
-y = [0]
-for i in range(round(wingSpan / 2 * 100)):
-    new_value = y[i] + 0.01
-    y.append(new_value)
-
-plt.plot(y, critical_bottom_stresses_function(y)/(1000*maximum_compressive_stress_bottom(y)), "b")
-plt.plot(y, critical_top_stresses_function(y)/(1000*maximum_compressive_stress_top(y)), "r")
-
-# plot formatting
-
-plt.title('Critical skin buckling stresses (blue bottom, red top)')
-
-plt.xlabel('Spanwise location [m]')
-plt.ylabel('Stress [Pa]')
-
-plt.grid(True, which='both')
-plt.axhline(y=0, color='k')
-plt.ylim(-1,5)
-
-plt.show()
+if Runtime_forever==True:
+    critical_bottom_stresses_function, critical_top_stresses_function = Top_Bottom_Skin_Buckling(sections,
+                                                                                                  stringer_distribution)
+    
+    
+    
+    # Creating plot list
+    
+    y = [0]
+    for i in range(round(wingSpan / 2 * 100)):
+        new_value = y[i] + 0.01
+        y.append(new_value)
+    
+    plt.plot(y, critical_bottom_stresses_function(y)/(1000*maximum_compressive_stress_bottom(y)), "b")
+    plt.plot(y, critical_top_stresses_function(y)/(1000*maximum_compressive_stress_top(y)), "r")
+    
+    # plot formatting
+    
+    plt.title('Critical skin buckling stresses (blue bottom, red top)')
+    
+    plt.xlabel('Spanwise location [m]')
+    plt.ylabel('Stress [Pa]')
+    
+    plt.grid(True, which='both')
+    plt.axhline(y=0, color='k')
+    plt.ylim(-1,5)
+    
+    plt.show()
 
 # =============================================================================
 # Column buckling
