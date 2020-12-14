@@ -5,10 +5,18 @@ sys.path.insert(-1,directory)
 
 import GlobalMomentofInertia as WB
 from matplotlib import pyplot as plt
+import scipy as sp
 
-
-t = WB.t_wing_box_skin
+t = WB.t_wing_box_skin/1000
 G = 24*10**9
+
+def chord_length(spanwise_location): #Spanwise location is in y/(b/2)
+    Cr = 11.95
+    Ct = 3.59
+    Taper = 0.3
+    c = Cr - Cr*(1-Taper)*(spanwise_location)
+
+    return c
 
 def Torsional_Constant_J(spanwise_location_iny=34.96):
     b = 69.92
@@ -19,7 +27,7 @@ def Torsional_Constant_J(spanwise_location_iny=34.96):
 
 
     spanwise_location = spanwise_location_iny / (b / 2)
-    chord = WB.localChord(spanwise_location)
+    chord = chord_length(spanwise_location)
     h = WB_chord * chord
     a = WB_aft_height * chord
     b = WB_front_height * chord

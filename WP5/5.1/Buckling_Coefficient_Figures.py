@@ -33,9 +33,9 @@ for i in range(len(figure_19_a_clamped)):
     y_a_clamped.append(figure_19_a_clamped[i][1])
 figure_19_a_clamped_function = sp.interpolate.interp1d(x_a_clamped, y_a_clamped, kind="quadratic", fill_value="extrapolate")
 
-figure_19_c_simply_supported = [(0.4, 8.6), (0.45, 8), (0.55, 6), (0.7, 4.5), (0.75, 4.25), (0.8, 4.15), (0.9, 4.08), (1.0, 4.0),
+figure_19_c_simply_supported = [(0.4, 8.6), (0.55, 6), (0.7, 4.5), (0.8, 4.15), (0.9, 4.08), (1.0, 4.0),
                  (1.2, 4.1), (1.45, 4.6), (1.6, 4.15), (1.75, 4.1), (2.0, 4.0), (2.2, 4.0), (2.3, 4.08), (2.45, 4.15), (3.0, 4.0),
-                        (3.45, 4.08), (4.0, 4.0), (4.5, 4.05),(5.0, 4.0)]
+                        (3.45, 4.08), (4.0, 4.0), (4.5, 4.05), (5.0, 4.0), (6.0, 4.0), (7.0, 4.0), (10.0, 4.0), (35.0, 4.0),]
 x_c_simply_supported = []
 y_c_simply_supported = []
 for i in range(len(figure_19_c_simply_supported)):
@@ -55,7 +55,7 @@ def figure_19_a_clamped_callable_function(x):
     return figure_19_a_clamped_function(x)
 
 
-def figure_19_c_simply_supported_function(x):
+def figure_19_c_simply_supported_callable_function(x):
     return figure_19_c_simply_supported_function(x)
 
 
