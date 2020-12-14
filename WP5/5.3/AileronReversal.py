@@ -21,18 +21,18 @@ def chord_length(Span_in_y): #Spanwise location is in y/(b/2)
     return c
 
 #Low speed aileron in m
-b1 = 24
+b1 = 2413
 b2 = 32
 
 #High speed aileron in m
 b3 = 12
 b4 = 14
 
-G = 24 * 10**9
+G = 26 * 10**9
 
 dCLdal = 6.304
-dCLdE = 7.5224
-dCmdE = -0.2331
+dCLdE = 5.6526
+dCmdE = -0.90846
 S = 543.25
 
 def Vr(Span_in_y, altitude): #Only 31000 or 0
@@ -40,8 +40,8 @@ def Vr(Span_in_y, altitude): #Only 31000 or 0
         rho = 0.441653
     if altitude == 0:
         rho = 1.225
+
     J = TCJ(Span_in_y)
-    print(J)
     K = G * J
     c = chord_length(Span_in_y)
 
@@ -50,29 +50,29 @@ def Vr(Span_in_y, altitude): #Only 31000 or 0
 
 stringer_distribution = [(14,14,6.99),(12,12,13.98),(10,10,20.98),(8,8,27.97),(6,6,34.96)]  # from root to tip, (top, bottom)
 
-def Aileron_effectiveness(Vfreestream, altitude, Span_in_y = 32): #Altitude Only 31000 or 0
+def Aileron_effectiveness(Vfreestream, altitude, Span_in_y): #Altitude Only 31000 or 0
     if altitude == 31000:
         rho = 0.441653
+
     if altitude == 0:
         rho = 1.225
+
 
     J = TCJ(Span_in_y)
     K = G * J
     V = Vfreestream * math.cos(math.radians(28.77))
     Cx = (CentroidX(stringer_distribution, Span_in_y))/1000
     Cy = (CentroidY(stringer_distribution, Span_in_y))/1000
-    print(Cx)
 
-    e = Cx/ chord_length(Span_in_y)+ 0.15- 0.25      # Cx position relative to chord + front spar distance - quarter chord
+
+    e = -((Cx/ (chord_length(Span_in_y)*1000) + 0.15) -0.25)     # Cx position relative to chord + front spar distance - quarter chord
     c = chord_length(Span_in_y)
-    print(e)
 
-    print(K)
     ae = (0.5* rho* V**2* S* c* dCmdE* dCLdal+ K* dCLdE)/((K- 0.5* rho* V**2* S* c* e* dCLdal)*dCLdE)        #Change 1 by actual dCm/dE & dCL/dE from Xfoil
 
     return ae
 
-def Aileron_effectiveness_graph(Span_in_y = 32):
+def Aileron_effectiveness_graph(Span_in_y):
 
     Vlst = []
     ae_sea_lst = []
@@ -94,8 +94,13 @@ def Aileron_effectiveness_graph(Span_in_y = 32):
 
     plt.show()
 
-print(Vr(32, 31000))
-print(Vr(32, 0))
+print('low-speed aileron cruise', Vr(28, 31000, 'low'))
+print('low-speed aileron sea', Vr(28, 0, 'high'))
+print('high-speed aileron cruise', Vr(13, 31000, 'low'))
+print('high-speed aileron sea', Vr(13, 0, 'high'))
+
 Aileron_effectiveness_graph(28)     #Low speed ailerons
 Aileron_effectiveness_graph(13)     #High speed ailerons
+
+
 
