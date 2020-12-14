@@ -26,12 +26,12 @@ MZFW = 161394.73
 MaxFuelWeight = MTOW - OEW
 
 #Loading factor [-]
-n=3.5
+n=4.65
 #n=-1.65
 
 #critical weight
-WC = MTOW
-#WC = MZFW
+#WC = MTOW
+WC = MZFW
 #Engine weight for 2 engines [kg]
 EngineWeight = 20_87.986
 
