@@ -78,6 +78,7 @@ def localChord2(spanValue):
     return localChord
 
 avgShear = []
+spanValue = []
 maxShear = []
 k_v = 1.5
 for i in range (0, len(totalsheer)):
@@ -88,10 +89,13 @@ for i in range (0, len(totalsheer)):
     thicknessRearSpar = 10 *10**(-3)  #m
     avgShear.append(totalsheer[i] / (FrontSpar * thicknessFrontSpar + RearSpar*thicknessRearSpar))
     maxShear.append(k_v * avgShear[i])
+    spanValue.append(i/10)
 
 print(avgShear)
 print(maxShear)
 
+scipyAvgShear = sp.interpolate.interp1d(spanValue,avgShear,kind="quadratic", fill_value="extrapolate")
+scipyMaxShear =
 
 
 """
