@@ -85,16 +85,22 @@ def ColBucklingdef(K, E, I, L):
 # =============================================================================
 # Web buckling
 # =============================================================================
-WebPrint=False
+WebPrint=True
 
 # Material Properties
 E = 68.8 * 10**9 # Pa
 v = 0.33 # -
 
+rib_spacing = 0.61
+sections = np.arange(0, 34.96, 0.61)
+
+req_rib_location = np.array([4, 6, 11, 11.5, 12, 14, 14.5, 22.1, 24, 24.2, 32, 34.96])
+
+sections = np.append(sections, req_rib_location)
+sections = np.unique(sections)
+
 t_f = t_wing_box_spar_cap # mm
 t_r = t_wing_box_spar_cap # mm
-
-sections = [0, 4, 7.00, 11.5, 14, 17.5, 21, 24.5, 26, 28, 29, 31.5, 33, 34.96] # INPUT SECTIONS!
 
 tau_cr_flst = []
 tau_cr_rlst = []
@@ -108,8 +114,16 @@ for i in range(1, len(sections)):
     h_f = FrontRearSpar(y_midspan)[0]*1000 # mm
     h_r = FrontRearSpar(y_midspan)[1]*1000 # mm
     
-    x_f = y_section*1000 / h_f
-    x_r = y_section*1000 / h_r
+    if y_section*1000 >= h_f:
+        x_f = y_section*1000 / h_f
+    elif y_section*1000 < h_f:
+        x_f = h_f/(y_section*1000)
+
+    if y_section*1000 >= h_r:
+        x_r = y_section*1000 / h_r
+    elif y_section*1000 < h_r:
+        x_r = h_r /(y_section*1000)
+        
     if WebPrint==True:
         print("Front Aspect ", x_f)
         print("Rear Aspect ", x_r, "\n")
