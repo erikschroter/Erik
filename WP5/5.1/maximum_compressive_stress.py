@@ -67,6 +67,8 @@ from liftdistribution import liftdistribution
 from Moment_of_Inertia_Wingbox import Ixx_in_y
 from Moment_of_Inertia_Wingbox import chord_length
 from Centroid import SpanwiseCentroidY
+from Top_Bottom_Skin_Buckling import Top_Bottom_Skin_Buckling
+from Rib_Sections_Definition import sections
 
 
 x, Llst, xnew, f, xdist = liftdistribution(filename, rho, v, span, accuracy,WC*9.81,n)
@@ -103,18 +105,18 @@ plt.hlines(-5,0,40)
 
 plt.show()'''
 BendingStress=[]
-fy = SpanwiseCentroidY(stringer_distribution)
+critical_bottom_stresses_function, critical_top_stresses_function, y_critical_bottom_stresses_function, y_critical_top_stresses_function = Top_Bottom_Skin_Buckling(sections, stringer_distribution)
+
 
 def y(x):
     if n >= 0:
-        print('top in compression')
-        return (wtvcl * chord_length(x/34.96))-fy(x)
+        # print('top in compression')
+        return y_critical_top_stresses_function(x)
     else:
-        print('bottom in compression')
-        return fy(x)
+        # print('bottom in compression')
+        return y_critical_bottom_stresses_function(x)
 i=0
 while i < len(a):
-  
     BendingStress.append(abs((Moment[i]*y(a[i]))/(10**6*Ixx_in_y(a[i]))))
     i +=1
 

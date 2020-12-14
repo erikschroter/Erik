@@ -102,33 +102,32 @@ def Definition_stringer_position(stringer_distribution, spanwise_position):
     n_bottom_remove = stringer_distribution[0][1] - n_bottom
 
     # Remove top stringers
-    n = 0
+    n = stringer_distribution[0][0]
     step = 2
     step_power = 1
     while n_top_remove > 0.1:
-        #print(n)
         stringer_positions[4+n] = (stringer_positions[4+n][0], stringer_positions[4+n][1], stringer_positions[4+n][2], False)
-        n = n + step
-        if n + 1 > stringer_distribution[0][0]:
-            k = 0
+        n = n - step
+        if n - 1 < 0:
+            k = stringer_distribution[0][0]
             while stringer_positions[4+k][3] == False:
-                k = k + 1
+                k = k - 1
             n = k
             step_power = step_power + 1
             step = 2 ** step_power
         n_top_remove = n_top_remove - 1
 
     # Remove bottom stringers
-    n = 0
+    n = stringer_distribution[0][1]
     step = 2
     step_power = 1
     while n_bottom_remove > 0.1:
-        stringer_positions[4 + stringer_distribution[0][0] + n] = (stringer_positions[4 + stringer_distribution[0][0] + n][0], stringer_positions[4 + stringer_distribution[0][0] + n][1], stringer_positions[4 + stringer_distribution[0][0] + n][2], False)
-        n = n + step
-        if n + 1 > stringer_distribution[0][1]:
-            k = 0
-            while stringer_positions[4 + stringer_distribution[0][0] + k][3] == False:
-                k = k + 1
+        stringer_positions[3 + stringer_distribution[0][0] + n] = (stringer_positions[3 + stringer_distribution[0][0] + n][0], stringer_positions[3 + stringer_distribution[0][0] + n][1], stringer_positions[3 + stringer_distribution[0][0] + n][2], False)
+        n = n - step
+        if n - 1 < 0:
+            k = stringer_distribution[0][1]
+            while stringer_positions[3 + stringer_distribution[0][0] + k][3] == False:
+                k = k - 1
             n = k
             step_power = step_power + 1
             step = 2 ** step_power
@@ -146,4 +145,4 @@ def Removing_Stringers(stringer_positions, stringer_distribution, spanwise_posit
 stringer_distribution = [(14, 14, 6.99), (12, 12, 13.98), (10, 10, 20.98), (8, 8, 27.97),
                          (6, 6, 34.96)]  # from root to tip, (top, bottom)
 
-#print(Definition_stringer_position(stringer_distribution, 14))
+# print(Definition_stringer_position(stringer_distribution, 14))
