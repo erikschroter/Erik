@@ -103,7 +103,6 @@ y = [0]
 for i in range(round(wingSpan / 2 * 100)):
     new_value = y[i] + 0.01
     y.append(new_value)
-print(y)
 
 plt.plot(y, critical_bottom_stresses_function(y), "b")
 plt.plot(y, critical_top_stresses_function(y), "r")
