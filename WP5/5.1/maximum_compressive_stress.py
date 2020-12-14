@@ -64,9 +64,7 @@ import matplotlib.pyplot as plt
 from InertialLoading import inertialForce
 
 from liftdistribution import liftdistribution
-from Moment_of_Inertia import Ixx_in_y
-from Moment_of_Inertia import chord_length
-from Centroid import SpanwiseCentroidY
+from GlobalMomentofInertia import Ixx
 from Top_Bottom_Skin_Buckling import Top_Bottom_Skin_Buckling
 from Rib_Sections_Definition import sections
 
@@ -117,7 +115,7 @@ def y(x):
         return y_critical_bottom_stresses_function(x)
 i=0
 while i < len(a):
-    BendingStress.append(abs((Moment[i]*y(a[i]))/(10**6*Ixx_in_y(a[i]))))
+    BendingStress.append(abs((Moment[i]*y(a[i]))/(10**(-6)*Ixx(a[i]))))
     i +=1
 
 maximum_compressive_stress_bottom = sp.interpolate.interp1d(a,BendingStress,kind="linear", fill_value="extrapolate")
