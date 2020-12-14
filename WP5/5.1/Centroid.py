@@ -192,7 +192,7 @@ def SpanwiseCentroidY(stringer_distribution):
 
 #print(CentroidY(stringer_distribution, 0))
 
-"""
+
 y_spanwise = SpanwiseCentroidY(stringer_distribution)
 print(SpanwiseCentroidY(stringer_distribution))
 
@@ -205,7 +205,7 @@ for i in range(5):
         spanwise_position.append(n)
         n = n + 0.25
     d += 6.99
-
+"""
 plt.plot(spanwise_position, y_spanwise(spanwise_position), "-")
 
 # plot formatting

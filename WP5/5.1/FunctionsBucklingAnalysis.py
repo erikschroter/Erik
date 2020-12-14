@@ -49,7 +49,7 @@ def MaxSheardef(k_v, shear_avg):
     shear_max = k_v * shear_avg
     return shear_max
 
-# where the average shear stress in the spar fs due to the shear load is equal to
+# where the average shear stress in the spar webs due to the shear load is equal to
 # where 𝑉 is the shear force at the considered spanwise station of the wing, ℎ𝑓 is the height of the front spar, 𝑡𝑡𝑓 is the thickness of the front spar, ℎ𝑟𝑟 is the height of the rear spar, and 𝑡𝑡𝑟𝑟 is the thickness of the rear spar
 def AvgSheardef(V, h_f, t_f, h_r, t_r):
     # only for two spars!!!; requires generalised version for more than 2 spars
@@ -171,12 +171,3 @@ LStringer = 6.99
 Ixx = Ixx(0)
 
 bucklingStress = ColBucklingdef(1, 68.9 * 10**9, 3882083.333 ** (10^-12), LStringer)
-
-import sys
-import os
-directory = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))+"\\WP4\\4.1"
-sys.path.insert(-1,directory)
-
-from shearInWebs import maxShearWeb
-
-print(maxShearWeb(0), "h")
