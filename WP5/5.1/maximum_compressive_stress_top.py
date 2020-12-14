@@ -26,29 +26,29 @@ MZFW = 161394.73
 MaxFuelWeight = MTOW - OEW
 
 #Loading factor [-]
-n=4.65
-#n=-1.65
+n= 4.65
+# n_second= -1.5
 
 #critical weight
-#WC = MTOW
 WC = MZFW
+# WC_second = MTOW
 #Engine weight for 2 engines [kg]
 EngineWeight = 20_87.986
 
 #Undercarriage weight for MLG only [kg]
 W_uc_MLG = 7_569.349
 
-#Wingbox thickness versus cord lengt
+#Wingbox thickness versus cord length
 wtvcl = 0.1347
 #tensile yield stress [MPA]
 sigma_y = 276
 
 #Wing weight including mounts and spoilers [kg]
 WingWeight = 3210.55
-#stringer distribution
-stringer_distribution = [(14,14),(12,12),(10,10),(8,8),(6,6)]
+
 import numpy as np
 from scipy import integrate
+from Definition_stringer_positions import stringer_distribution
 import sys
 import matplotlib.patches as mpatches
 import os
@@ -56,7 +56,7 @@ directory = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))+"\\WP4\\
 sys.path.insert(-1,directory)
 directory = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))+"\\WP4\\4.2"
 sys.path.insert(-1,directory)
-directory = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))+"\\WP5\\5.1"
+directory = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))+"\\WP5\\5.2"
 sys.path.insert(-1,directory)
 import scipy as sp
 import matplotlib.pyplot as plt
@@ -106,24 +106,21 @@ fy = SpanwiseCentroidY(stringer_distribution)
 
 def y(x):
     if n >= 0:
-        return fy(x)
+        print('top in compression')
+        return (wtvcl * chord_length(x / 34.96)) - fy(x)
     else:
-        return (wtvcl * chord_length(x/34.96))-fy(x)
+        print('bottom in compression')
+        return fy(x)
 i=0
 while i < len(a):
   
     BendingStress.append(abs((Moment[i]*y(a[i]))/(10**6*Ixx_in_y(a[i]))))
     i +=1
 
-g = sp.interpolate.interp1d(a,BendingStress,kind="linear", fill_value="extrapolate")
-i=0
-safty_margine = []
-while i < len(a):
-    if BendingStress[i] >= 0.001:
-        safty_margine.append((sigma_y/BendingStress[i]))
-    else:
-        safty_margine.append(safty_margine[-1])
-    i += 1
+maximum_compressive_stress_top = sp.interpolate.interp1d(a,BendingStress,kind="linear", fill_value="extrapolate")
+
+
+
 plt.plot(a,(BendingStress))
 plt.title("Bending Stress diagram")
 plt.grid(b=None,which='Major',axis='both')
@@ -131,11 +128,4 @@ plt.ylabel("Bending Stress [MPa]")
 plt.xlabel("spanwise location [m]")
 plt.show()
 print("bendingstress:",BendingStress[0])
-plt.plot(a,safty_margine)
-plt.title("Tension safty margin diagram")
-plt.grid(b=None,which='Major',axis='both')
-plt.ylabel("Safty margin [-]")
-plt.xlabel("spanwise location [m]")
-plt.ylim(0,15)
-plt.show()
 
