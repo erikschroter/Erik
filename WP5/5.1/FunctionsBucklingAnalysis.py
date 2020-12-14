@@ -74,8 +74,8 @@ def TorsionalSheardef(T, A_i):
 
 # Column Buckling of stringers
 # 𝐾𝐾 is a factor taking into account the way the end conditions of the column; 𝐾𝐾=1 if both ends are pinned, 𝐾𝐾=4 if both ends are clamped; 𝐾𝐾=1/4 if one end is fixed and one end is free; 1/√𝐾𝐾=0.7 if one end is pinned and one end is free.
-def ColBucklingdef(K, E, I, L):
-    stress_critical_buckling =  K * np.pi ** 2 * E * I / L ** 2
+def ColBucklingdef(K, E, I, L, A):
+    stress_critical_buckling =  K * np.pi ** 2 * E * I / (A * L ** 2)
     return stress_critical_buckling
 
 # Compressive strength failure each component
@@ -131,7 +131,11 @@ print("Web buckling: \n Sections: ", sections, "\n Front Spar: ", tau_cr_flst, "
 sweepAngleWing = 28.77 * m.pi / 180 #rads
 LStringer = 6.99
 
-Ixx = Ixx(0)
+def webBuckling (spanValue):
+    localChord = rootChord - (rootChord - taperRatio * rootChord) / (wingSpan / 2) * spanValue
+    FrontSpar = 0.1347 * localChord
+    RearSpar = 0.1091 * localChord
 
-# bucklingStress = ColBucklingdef(1, 68.9 * 10**9,
+K, E, I, L, A
+bucklingStress = ColBucklingdef(1, 68.9 * 10**9, 3882083.333 ** (10^-12), length)
 

@@ -158,7 +158,7 @@ def localWingboxArea (spanValue):
 halfWingAvailableFuelVolume, halfWingRequiredFuelVolume = fuelVolume(0, maxFuelMass)
 fuelVolumeOutsideWing = 2 * (halfWingRequiredFuelVolume - halfWingAvailableFuelVolume)
 
-
+"""
 listResolution = 80
 xList = []
 yList = []
@@ -184,13 +184,13 @@ plt.ylabel('Inertial Loading [N]')
 plt.xlabel('Span [m]')
 plt.plot(xList2, dy)
 plt.show()
-
+"""
 
 inertialForce = []
 for i in range(-1, round(wingSpan/2) * 10):
     inertialForce.append(calculateInertialLoading(i /10))
 
-
+"""
 fuelList = []
 for i in range(1, round(wingSpan / 2) * listResolution):
     fuelList.append(fuelLoading(i / listResolution))
@@ -210,7 +210,6 @@ plt.show()
 propList = []
 for i in range(1, round(wingSpan / 2) * listResolution):
     propList.append(engineWeight(i / listResolution))
-
 plt.title('propulsion Loading vs Span [N], [m] ')
 plt.plot(xList, propList)
 plt.show()
@@ -235,3 +234,4 @@ plt.show()
 
 print(halfWingRequiredFuelVolume)
 print(halfWingAvailableFuelVolume)
+"""
