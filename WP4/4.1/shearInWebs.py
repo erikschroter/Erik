@@ -91,18 +91,13 @@ for i in range (0, len(totalsheer)):
     maxShear.append(k_v * avgShear[i])
     spanValue.append(i/10)
 
-#print(avgShear)
-#print(maxShear)
+print(avgShear)
+print(maxShear)
 
 scipyMaxShear = sp.interpolate.interp1d(spanValue,maxShear,kind="quadratic", fill_value="extrapolate")
 
-def maxShearWeb(ySpan):
-    webShear = maxShear[ySpan * 10]
-    return webShear
 
-print(maxShearWeb(34))
 
-"""
 plt.plot(spanValue, avgShear, 'r')
 plt.plot(spanValue, maxShear, 'g')
 plt.hlines(-5, 0, 40)
@@ -115,7 +110,7 @@ green_patch = mpatches.Patch(color='g', label='Max Shear')
 plt.legend(handles=[red_patch, green_patch])
 
 plt.show()
-
+"""
 i = 0
 Moment = []
 while i < len(a):

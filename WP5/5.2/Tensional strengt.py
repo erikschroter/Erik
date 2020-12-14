@@ -26,12 +26,12 @@ MZFW = 161394.73
 MaxFuelWeight = MTOW - OEW
 
 #Loading factor [-]
-n=4.65
+n=3.5
 #n=-1.65
 
 #critical weight
-#WC = MTOW
-WC = MZFW
+WC = MTOW
+#WC = MZFW
 #Engine weight for 2 engines [kg]
 EngineWeight = 20_87.986
 
@@ -106,9 +106,9 @@ fy = SpanwiseCentroidY(stringer_distribution)
 
 def y(x):
     if n >= 0:
-        return fy(x)
-    else:
         return (wtvcl * chord_length(x/34.96))-fy(x)
+    else:
+        return fy(x)
 i=0
 while i < len(a):
   

@@ -151,10 +151,10 @@ plt.plot(y, critical_top_stresses_function(y), "r")
 
 # plot formatting
 
-plt.title('Margin of safety for skin buckling (blue bottom, red top)')
+plt.title('Critical skin buckling stresses (blue bottom, red top)')
 
 plt.xlabel('Spanwise location [m]')
-plt.ylabel('Margin of safety')
+plt.ylabel('Stress [Pa]')
 
 plt.grid(True, which='both')
 plt.axhline(y=0, color='k')
