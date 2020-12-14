@@ -94,10 +94,10 @@ def Aileron_effectiveness_graph(Span_in_y):
 
     plt.show()
 
-print('low-speed aileron cruise', Vr(28, 31000, 'low'))
-print('low-speed aileron sea', Vr(28, 0, 'high'))
-print('high-speed aileron cruise', Vr(13, 31000, 'low'))
-print('high-speed aileron sea', Vr(13, 0, 'high'))
+print('low-speed aileron cruise', Vr(28, 31000))
+print('low-speed aileron sea', Vr(28, 0))
+print('high-speed aileron cruise', Vr(13, 31000))
+print('high-speed aileron sea', Vr(13, 0))
 
 Aileron_effectiveness_graph(28)     #Low speed ailerons
 Aileron_effectiveness_graph(13)     #High speed ailerons
