@@ -102,6 +102,7 @@ sections = np.unique(sections)
 t_f = t_wing_box_spar_cap # mm
 t_r = t_wing_box_spar_cap # mm
 
+y_mid_seg_lst = []
 tau_cr_flst = []
 tau_cr_rlst = []
 
@@ -110,6 +111,8 @@ for i in range(1, len(sections)):
     if WebPrint==True:
         print("iteration ", i, "section width ", round(y_section, 1))
     y_midspan = (y_section / 2) + sections[i-1] # m
+    
+    y_mid_seg_lst.append(y_midspan)
     
     h_f = FrontRearSpar(y_midspan)[0]*1000 # mm
     h_r = FrontRearSpar(y_midspan)[1]*1000 # mm
@@ -145,6 +148,22 @@ for i in range(1, len(sections)):
 
 if WebPrint==True:
     print("Web buckling: \n Sections: ", sections, "\n Front Spar: ", tau_cr_flst, "\n Rear Spar: ", tau_cr_rlst)
+
+
+plt.plot(y_mid_seg_lst, tau_cr_flst, "r")
+plt.plot(y_mid_seg_lst, tau_cr_rlst, "b")
+
+# plot formatting
+
+plt.title('Critical web buckling stresses (blue rear, red front)')
+
+plt.xlabel('Spanwise location [m]')
+plt.ylabel('Stress [MPa]')
+
+plt.grid(True, which='both')
+plt.axhline(y=0, color='k')
+
+plt.show()
 
 # =============================================================================
 # Skin buckling
