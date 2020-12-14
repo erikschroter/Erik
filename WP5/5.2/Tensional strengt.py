@@ -63,8 +63,8 @@ import matplotlib.pyplot as plt
 from InertialLoading import inertialForce
 
 from liftdistribution import liftdistribution
-from Moment_of_Inertia_Wingbox import Ixx_in_y
-from Moment_of_Inertia_Wingbox import chord_length
+from Moment_of_Inertia import Ixx_in_y
+from Moment_of_Inertia import chord_length
 from Centroid import SpanwiseCentroidY
 
 
