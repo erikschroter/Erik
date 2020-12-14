@@ -1,5 +1,6 @@
 import math as m
 
+#define constants, max and min distances can be adjusted
 requiredRibs = [4, 6, 11, 11.5, 12, 14, 14.5, 22.1, 24, 24.2, 32, 34.96]
 maxDistanceTip = 1.9 #m
 maxDistanceRoot = .61 #m
@@ -8,10 +9,12 @@ minDistanceRoot = .3 #m
 wingSpan = 34.96 #m
 resolution = 100
 
+#defines min preferred distance between ribs (may be violated near required ribs)
 def minDistance (ySpan):
     minDist = (minDistanceTip - minDistanceRoot) / wingSpan * ySpan + 0.3
     return minDist
 
+#defines min preferred distance between ribs
 def maxDistance (ySpan):
     maxDist = (maxDistanceTip - maxDistanceRoot) / wingSpan * ySpan + 0.61
     return maxDist
@@ -48,7 +51,7 @@ def maxSpacinginList():
         newDist = maxSpacing / (segments +1)
 
         for j in range(0, segments):
-            print("Rib List, j: ", j, ribList)
+            #print("Rib List, j: ", j, ribList)
             ribList.insert(maxi+j+1, ribList[maxi] + (j+1) * newDist)
 
 
@@ -56,45 +59,9 @@ def maxSpacinginList():
         #print("Rib List: ", ribList)
 
     return recalculate
-
-def minSpacinginList():
-    minSpacing = 0.9
-    mini  = 0
-    recalculate = False
-    for i in range(0, len(ribList)-1 ):
-        spacing = ribList[i+1] - ribList[i]
-
-        if spacing < maxSpacing:
-            maxSpacing = spacing
-            spanVal = (ribList[i + 1] + ribList[i]) / 2
-            minDist = minDistance(spanVal)
-            maxDist = maxDistance(spanVal)
-            #print(maxSpacing)
-            maxi = i
-    if maxSpacing > maxDist:
-        recalculate = True
-        maxNumberRibsAdded = maxSpacing / minDist
-        minNumberRibsAdded = maxSpacing / maxDist
-        segments = 0
-        if m.ceil(minNumberRibsAdded) <= maxNumberRibsAdded:
-            segments = m.ceil(minNumberRibsAdded)
-        newDist = maxSpacing / (segments +1)
-
-        for j in range(0, segments):
-            print("Rib List, j: ", j, ribList)
-            ribList.insert(maxi+j+1, ribList[maxi] + (j+1) * newDist)
-
-
-        #print(maxNumberRibsAdded, minNumberRibsAdded, "yo")
-        #print("Rib List: ", ribList)
-
-    return recalculate
-
 
 runCalculation = True
 while runCalculation:
     runCalculation = maxSpacinginList()
 
-
-#print((ribList))
 
