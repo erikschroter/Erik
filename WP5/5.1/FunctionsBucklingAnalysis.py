@@ -3,8 +3,9 @@
 
 import math as m
 from GlobalMomentofInertia import Ixx
-from Definition_stringer_positions import t_wing_box_spar_cap
+from Definition_stringer_positions import t_wing_box_spar_cap, stringer_distribution
 from Buckling_Coefficient_Figures import hinged_edges_function, figure_19_c_simply_supported_function
+from Top_Bottom_Skin_Buckling import Top_Bottom_Skin_Buckling
 import numpy as np
 
 """
@@ -135,7 +136,8 @@ if WebPrint==True:
 # Skin buckling
 # =============================================================================
 
-
+critical_bottom_stresses_function, critical_top_stresses_function = Top_Bottom_Skin_Buckling(sections,
+                                                                                             stringer_distribution)
 
 # =============================================================================
 # Column buckling
