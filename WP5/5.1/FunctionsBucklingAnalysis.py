@@ -6,6 +6,8 @@ from GlobalMomentofInertia import Ixx
 from Definition_stringer_positions import t_wing_box_spar_cap, stringer_distribution
 from Buckling_Coefficient_Figures import hinged_edges_function, figure_19_c_simply_supported_function
 from Top_Bottom_Skin_Buckling import Top_Bottom_Skin_Buckling
+from maximum_compressive_stress import maximum_compressive_stress_bottom
+from maximum_compressive_stress_top import maximum_compressive_stress_top
 import numpy as np
 
 """
@@ -153,6 +155,8 @@ if WebPrint==True:
 critical_bottom_stresses_function, critical_top_stresses_function = Top_Bottom_Skin_Buckling(sections,
                                                                                              stringer_distribution)
 
+
+
 # Creating plot list
 
 y = [0]
@@ -160,8 +164,8 @@ for i in range(round(wingSpan / 2 * 100)):
     new_value = y[i] + 0.01
     y.append(new_value)
 
-plt.plot(y, critical_bottom_stresses_function(y), "b")
-plt.plot(y, critical_top_stresses_function(y), "r")
+plt.plot(y, critical_bottom_stresses_function(y)/(1000*maximum_compressive_stress_bottom(y)), "b")
+plt.plot(y, critical_top_stresses_function(y)/(1000*maximum_compressive_stress_top(y)), "r")
 
 # plot formatting
 
@@ -172,6 +176,7 @@ plt.ylabel('Stress [Pa]')
 
 plt.grid(True, which='both')
 plt.axhline(y=0, color='k')
+plt.ylim(-1,5)
 
 plt.show()
 

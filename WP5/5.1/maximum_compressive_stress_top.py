@@ -119,7 +119,7 @@ while i < len(a):
 
 maximum_compressive_stress_top = sp.interpolate.interp1d(a,BendingStress,kind="linear", fill_value="extrapolate")
 
-
+"""
 
 plt.plot(a,(BendingStress))
 plt.title("Bending Stress diagram")
@@ -129,3 +129,4 @@ plt.xlabel("spanwise location [m]")
 plt.show()
 print("bendingstress:",BendingStress[0])
 
+"""
