@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-
+import matplotlib.pyplot as plt
 import math as m
 from GlobalMomentofInertia import Ixx
 from Definition_stringer_positions import t_wing_box_spar_cap, stringer_distribution
@@ -138,6 +138,28 @@ if WebPrint==True:
 
 critical_bottom_stresses_function, critical_top_stresses_function = Top_Bottom_Skin_Buckling(sections,
                                                                                              stringer_distribution)
+
+# Creating plot list
+
+y = [0]
+for i in range(round(wingSpan / 2 * 100)):
+    new_value = y[i] + 0.01
+    y.append(new_value)
+
+plt.plot(y, critical_bottom_stresses_function(y), "b")
+plt.plot(y, critical_top_stresses_function(y), "r")
+
+# plot formatting
+
+plt.title('Critical skin buckling stresses (blue bottom, red top)')
+
+plt.xlabel('Spanwise location [m]')
+plt.ylabel('Stress [Pa]')
+
+plt.grid(True, which='both')
+plt.axhline(y=0, color='k')
+
+plt.show()
 
 # =============================================================================
 # Column buckling

@@ -27,21 +27,21 @@ v = 0.33  # -
 t = t_wing_box_skin  # mm
 
 # sections = [0, 2, 4, 6.99, 11.5, 13.98, 20.98, 27.97, 34.96] # INPUT SECTIONS!
-sections = [0, 4, 6, 6.99, 11, 11.5, 12, 14, 14.5, 20.98, 22.1, 24, 27.97, 32, 33.2, 34.96]  # INPUT SECTIONS!
+# sections = [0, 4, 6, 6.99, 11, 11.5, 12, 14, 14.5, 20.98, 22.1, 24, 27.97, 32, 33.2, 34.96]  # INPUT SECTIONS!
 
 
 # Function to calculate Top and Bottom Skin Buckling from rib and stringer distribution
 
-def Top_Bottom_Skin_Buckling(sections, stringer_distribution):
+def Top_Bottom_Skin_Buckling(section, stringer_distribution):
     critical_bottom_stresses = []
     critical_top_stresses = []
 
     # Define the critical skin stresses for all inter-rib positions
 
-    for i in range(1, len(sections)):
+    for i in range(1, len(section)):
         # Define inter-rib sections
-        y_section = sections[i] - sections[i - 1]  # m
-        y_midspan = (y_section / 2) + sections[i - 1]  # m
+        y_section = section[i] - section[i - 1]  # m
+        y_midspan = (y_section / 2) + section[i - 1]  # m
         spanwise_location = y_midspan
 
         # Obtain inter-stringer distances
@@ -77,9 +77,9 @@ def Top_Bottom_Skin_Buckling(sections, stringer_distribution):
     bottom_stress_list = []
     top_stress_list = []
 
-    for i in range(len(sections) - 1):
-        spanwise_location_stress.append(sections[i])
-        spanwise_location_stress.append(sections[i + 1] - 0.001)
+    for i in range(len(section) - 1):
+        spanwise_location_stress.append(section[i])
+        spanwise_location_stress.append(section[i + 1] - 0.001)
         bottom_stress_list.append(critical_bottom_stresses[i])
         bottom_stress_list.append(critical_bottom_stresses[i])
         top_stress_list.append(critical_top_stresses[i])
@@ -94,9 +94,9 @@ def Top_Bottom_Skin_Buckling(sections, stringer_distribution):
     return critical_bottom_stresses_function, critical_top_stresses_function
 
 
-critical_bottom_stresses_function, critical_top_stresses_function = Top_Bottom_Skin_Buckling(sections,
-                                                                                             stringer_distribution)
-
+# critical_bottom_stresses_function, critical_top_stresses_function = Top_Bottom_Skin_Buckling(sections,
+#                                                                                             stringer_distribution)
+"""
 # Creating plot list
 
 y = [0]
@@ -118,3 +118,4 @@ plt.grid(True, which='both')
 plt.axhline(y=0, color='k')
 
 plt.show()
+"""
