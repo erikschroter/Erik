@@ -21,7 +21,7 @@ def chord_length(Span_in_y): #Spanwise location is in y/(b/2)
     return c
 
 #Low speed aileron in m
-b1 = 24
+b1 = 2413
 b2 = 32
 
 #High speed aileron in m
@@ -40,6 +40,7 @@ def Vr(Span_in_y, altitude): #Only 31000 or 0
         rho = 0.441653
     if altitude == 0:
         rho = 1.225
+
     J = TCJ(Span_in_y)
     K = G * J
     c = chord_length(Span_in_y)
@@ -49,11 +50,13 @@ def Vr(Span_in_y, altitude): #Only 31000 or 0
 
 stringer_distribution = [(14,14,6.99),(12,12,13.98),(10,10,20.98),(8,8,27.97),(6,6,34.96)]  # from root to tip, (top, bottom)
 
-def Aileron_effectiveness(Vfreestream, altitude, Span_in_y = 32): #Altitude Only 31000 or 0
+def Aileron_effectiveness(Vfreestream, altitude, Span_in_y): #Altitude Only 31000 or 0
     if altitude == 31000:
         rho = 0.441653
+
     if altitude == 0:
         rho = 1.225
+
 
     J = TCJ(Span_in_y)
     K = G * J
@@ -69,7 +72,7 @@ def Aileron_effectiveness(Vfreestream, altitude, Span_in_y = 32): #Altitude Only
 
     return ae
 
-def Aileron_effectiveness_graph(Span_in_y = 32):
+def Aileron_effectiveness_graph(Span_in_y):
 
     Vlst = []
     ae_sea_lst = []
@@ -91,10 +94,13 @@ def Aileron_effectiveness_graph(Span_in_y = 32):
 
     plt.show()
 
-print('low cruise', Vr(28, 31000))
-print('low sea', Vr(28, 0))
-print('high cruise', Vr(13, 31000))
-print('high sea', Vr(13, 0))
+print('low-speed aileron cruise', Vr(28, 31000, 'low'))
+print('low-speed aileron sea', Vr(28, 0, 'high'))
+print('high-speed aileron cruise', Vr(13, 31000, 'low'))
+print('high-speed aileron sea', Vr(13, 0, 'high'))
+
 Aileron_effectiveness_graph(28)     #Low speed ailerons
 Aileron_effectiveness_graph(13)     #High speed ailerons
+
+
 
