@@ -31,8 +31,15 @@ b4 = 14
 G = 26 * 10**9
 
 dCLdal = 6.304
-dCLdE = 5.6526
-dCmdE = -0.90846
+dCLdE_highspeed_cruise = 5.613813799
+dCmdE_highspeed_cruise = -0.892930272
+dCLdE_lowspeed_cruise = 5.652636854
+dCmdE_lowspeed_cruise =-0.908459494
+dCLdE_highspeed_sealevel =5.644872243
+dCmdE_highspeed_sealevel =-0.908459494
+dCLdE_lowspeed_sealevel =5.69922452
+dCmdE_lowspeed_sealevel =-0.916224105
+
 S = 543.25
 
 def Vr(Span_in_y, altitude): #Only 31000 or 0
