@@ -80,7 +80,7 @@ def localChord2(spanValue):
 avgShear = []
 spanValue = []
 maxShear = []
-k_v = 1.5
+k_v = 1.24815
 for i in range (0, len(totalsheer)):
     localChord = localChord2(i /10)
     FrontSpar = 0.1347 * localChord
@@ -96,7 +96,11 @@ print(maxShear)
 
 scipyMaxShear = sp.interpolate.interp1d(spanValue,maxShear,kind="quadratic", fill_value="extrapolate")
 
+def maxWebShear(spanValue):
+    shear = maxShear[spanValue *10]
+    return shear
 
+print(maxWebShear(0))
 
 plt.plot(spanValue, avgShear, 'r')
 plt.plot(spanValue, maxShear, 'g')

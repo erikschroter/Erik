@@ -132,7 +132,10 @@ def Definition_stringer_position(stringer_distribution, spanwise_position):
             step_power = step_power + 1
             step = 2 ** step_power
         n_bottom_remove = n_bottom_remove - 1
-
+    print("Front spar:", A_front_spar)
+    print("Rear spar:", A_rear_spar)
+    print("Top skin:", A_top_skin)
+    print("Bottom skin:", A_bottom_skin)
     return stringer_positions
 
 
@@ -145,4 +148,4 @@ def Removing_Stringers(stringer_positions, stringer_distribution, spanwise_posit
 stringer_distribution = [(14, 14, 6.99), (12, 12, 13.98), (10, 10, 20.98), (8, 8, 27.97),
                          (6, 6, 34.96)]  # from root to tip, (top, bottom)
 
-# print(Definition_stringer_position(stringer_distribution, 14))
+print(Definition_stringer_position(stringer_distribution, 14))
