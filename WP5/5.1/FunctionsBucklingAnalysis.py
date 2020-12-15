@@ -14,7 +14,10 @@ directory = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))+"\\WP4\\
 sys.path.insert(-1,directory)
 from shearInWebs import maxShear, scipyMaxShear
 from Shear_from_torque import shear_stress_from_torque_function
-    
+
+import scipy as sp
+from scipy import integrate
+from scipy.interpolate import interp1d
 import numpy as np
 
 """
@@ -166,6 +169,12 @@ for i in range(1, len(sections)):
 if WebPrint==True:
     print("Web buckling: \n Sections: ", sections, "\n Front Spar: ", tau_cr_flst, "\n Rear Spar: ", tau_cr_rlst)
 
+# Margin of Safety
+web_buckling_applied = scipyMaxShear + shear_stress_from_torque_function
+
+web_buckling_critical_f = interp1d(y_mid_seg_lst, tau_cr_flst, kind="linear", fill_value="extrapolate")
+
+# Plotting
 
 plt.plot(y_mid_seg_lst, tau_cr_flst, "r")
 plt.plot(y_mid_seg_lst, tau_cr_rlst, "b")
