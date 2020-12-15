@@ -8,6 +8,9 @@ tip_chord = 3.59  # [m]
 span = 69.92  # [m]
 t_wing_box_skin = 10
 
+stringer_distribution = [(14, 14, 6.99), (12, 12, 13.98), (10, 10, 20.98), (8, 8, 27.97),
+                         (6, 6, 34.96)]  # from root to tip, (top, bottom)
+
 # Spar caps dimensions
 
 t_wing_box_spar_cap = 10
@@ -142,8 +145,5 @@ def Removing_Stringers(stringer_positions, stringer_distribution, spanwise_posit
 
     return stringer_positions
 
-
-stringer_distribution = [(14, 14, 6.99), (12, 12, 13.98), (10, 10, 20.98), (8, 8, 27.97),
-                         (6, 6, 34.96)]  # from root to tip, (top, bottom)
 
 # print(Definition_stringer_position(stringer_distribution, 14))
