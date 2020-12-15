@@ -79,7 +79,7 @@ yList = []
 for i in range(0, round(wingSpan / 2) * listResolution - 3):
     xList.append(i/listResolution)
     yList.append(Ixx(i / listResolution))
-
+"""
 plt.title('Moment of Inertia')
 plt.ylabel('Ixx [mm^4]')
 plt.xlabel('Span [m]')
@@ -87,7 +87,7 @@ plt.plot(xList, yList)
 plt.show()
 """
 
-""""""
+"""
 print("0:",Ixx(0))
 print("5:", Ixx(5))
 print("10:", Ixx(10))

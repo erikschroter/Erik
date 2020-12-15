@@ -6,20 +6,20 @@ If questions, ask Christoph Pabsch"""
 root_chord = 11.95  # [m]
 tip_chord = 3.59  # [m]
 span = 69.92  # [m]
-t_wing_box_skin = 10 # INPUT
+t_wing_box_skin = 10
 
-stringer_distribution = [(14, 14, 6.99), (12, 12, 13.98), (10, 10, 20.98), (8, 8, 27.97),
-                         (6, 6, 34.96)]  # from root to tip, (top, bottom) (num stringers top, num stringer bottom, y_span end) INPUT
+stringer_distribution = [(14, 14, 17), (11, 11, 18), (10, 10, 19), (6, 6, 26.5), (3, 3, 29.5),
+                         (2, 2, 34.96)]  # from root to tip, (top, bottom)
 
 # Spar caps dimensions
 
-t_wing_box_spar_cap = 10 # INPUT
+t_wing_box_spar_cap = 10
 a_wing_box_spar_cap = 110 #width
 
 # stringer dimensions
-a_stringer = 110 # SAME AS H
-h_stringer = 110 # INPUT
-t_stringer = 5 # INPUT
+a_stringer = 160
+h_stringer = 160
+t_stringer = 10
 
 
 def Definition_stringer_position(stringer_distribution, spanwise_position):
