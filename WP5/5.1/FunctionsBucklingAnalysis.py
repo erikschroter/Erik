@@ -202,6 +202,9 @@ if Runtime_forever==True:
     plt.plot(y, critical_bottom_stresses_function(y)/(1000*maximum_compressive_stress_bottom(y)), "b")
     plt.plot(y, critical_top_stresses_function(y)/(1000*maximum_compressive_stress_top(y)), "r")
     
+    
+    MoSdef(critical_bottom_stresses_function(y),(1000*maximum_compressive_stress_bottom(y)))
+    MoSdef(critical_top_stresses_function(y), (1000*maximum_compressive_stress_top(y)))
     # plot formatting
     
     plt.title('Margin of safety for skin buckling stresses (blue bottom, red top)')
