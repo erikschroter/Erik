@@ -83,7 +83,7 @@ for i in range(int(wingSpan / 2 * 100)):
 
 shear_stress_from_torque_positive_function = interp1d(y_list, shear_stresses_positive, kind="linear", fill_value="extrapolate")
 shear_stress_from_torque_negative_function = interp1d(y_list, shear_stresses_negative, kind="linear", fill_value="extrapolate")
-print(shear_stress_from_torque_positive_function)
-print(shear_stress_from_torque_negative_function)
-print(shear_stresses_positive)
-print(shear_stresses_negative)
+# print(shear_stress_from_torque_positive_function)
+# print(shear_stress_from_torque_negative_function)
+# print(shear_stresses_positive)
+# print(shear_stresses_negative)

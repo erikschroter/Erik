@@ -13,7 +13,7 @@ from Rib_Sections_Definition import sections
 directory = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))+"\\WP4\\4.1"
 sys.path.insert(-1,directory)
 from shearInWebs import maxShear, scipyMaxShear
-from Shear_from_torque import shear_stress_from_torque_function
+from Shear_from_torque import shear_stress_from_torque_positive_function as shear_stress_torq_front, shear_stress_from_torque_negative_function as shear_stress_torq_rear
 
 import scipy as sp
 from scipy import integrate
@@ -170,9 +170,11 @@ if WebPrint==True:
     print("Web buckling: \n Sections: ", sections, "\n Front Spar: ", tau_cr_flst, "\n Rear Spar: ", tau_cr_rlst)
 
 # Margin of Safety
-web_buckling_applied = scipyMaxShear + shear_stress_from_torque_function
+web_buckling_applied_front = scipyMaxShear + shear_stress_torq_front
+web_buckling_applied_rear = scipyMaxShear + shear_stress_torq_rear
 
-web_buckling_critical_f = interp1d(y_mid_seg_lst, tau_cr_flst, kind="linear", fill_value="extrapolate")
+
+# web_buckling_critical_f = interp1d(y_mid_seg_lst, tau_cr_flst, kind="linear", fill_value="extrapolate")
 
 # Plotting
 
