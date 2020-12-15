@@ -7,8 +7,16 @@ root_chord = 11.95  # [m]
 tip_chord = 3.59  # [m]
 span = 69.92  # [m]
 t_wing_box_skin = 10
+
+# Spar caps dimensions
+
 t_wing_box_spar_cap = 10
 a_wing_box_spar_cap = 110 #width
+
+# stringer dimensions
+a_stringer = 110
+h_stringer = 110
+t_stringer = 5
 
 
 def Definition_stringer_position(stringer_distribution, spanwise_position):
@@ -22,14 +30,6 @@ def Definition_stringer_position(stringer_distribution, spanwise_position):
     height_rear_spar = 109.1 / 1000 * chord_length
     top_difference_rear_spar = 16.3 / 1000 * chord_length
     bottom_difference_rear_spar = 9.3 / 1000 * chord_length
-
-    # Spar caps dimensions
-
-
-    # stringer dimensions
-    a_stringer = 110
-    h_stringer = 110
-    t_stringer = 5
 
     A_stringer = h_stringer * t_stringer + 2 * a_stringer * t_stringer
 
@@ -72,7 +72,7 @@ def Definition_stringer_position(stringer_distribution, spanwise_position):
     n = 1
     for i in range(stringer_distribution[0][0]):
         distance_between_stringers = (wing_box_length - a_stringer - 2 * t_wing_box_skin) / (
-                    stringer_distribution[0][0] + 2)
+                    stringer_distribution[0][0] + 1)
         x = a_stringer / 2 + n * distance_between_stringers
         y = height_front_spar - t_wing_box_skin - h_stringer / 2 - top_difference_rear_spar * x / wing_box_length
         stringer_positions.append((x, y, A_stringer, present))
@@ -82,7 +82,7 @@ def Definition_stringer_position(stringer_distribution, spanwise_position):
     n = 1
     for i in range(stringer_distribution[0][1]):
         distance_between_stringers = (wing_box_length - a_stringer - 2 * t_wing_box_skin) / (
-                    stringer_distribution[0][1] + 2)
+                    stringer_distribution[0][1] + 1)
         x = a_stringer / 2 + n * distance_between_stringers
         y = t_wing_box_skin + h_stringer / 2 + bottom_difference_rear_spar * x / wing_box_length
         stringer_positions.append((x, y, A_stringer, present))
@@ -106,11 +106,12 @@ def Definition_stringer_position(stringer_distribution, spanwise_position):
     step = 2
     step_power = 1
     while n_top_remove > 0.1:
-        stringer_positions[4+n] = (stringer_positions[4+n][0], stringer_positions[4+n][1], stringer_positions[4+n][2], False)
+        # print(n)
+        stringer_positions[3+n] = (stringer_positions[3+n][0], stringer_positions[3+n][1], stringer_positions[3+n][2], False)
         n = n - step
         if n - 1 < 0:
             k = stringer_distribution[0][0]
-            while stringer_positions[4+k][3] == False:
+            while stringer_positions[3+k][3] == False:
                 k = k - 1
             n = k
             step_power = step_power + 1
