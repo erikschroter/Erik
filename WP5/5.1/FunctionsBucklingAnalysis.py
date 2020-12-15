@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-Runtime_forever=False
+Runtime_forever=True
 
 import matplotlib.pyplot as plt
 import math as m
@@ -201,7 +201,7 @@ if Runtime_forever==True:
     
     plt.grid(True, which='both')
     plt.axhline(y=0, color='k')
-    plt.ylim(-1,5)
+    plt.ylim(-1,6)
     
     plt.show()
 
