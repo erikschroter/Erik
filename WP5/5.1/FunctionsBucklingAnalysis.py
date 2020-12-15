@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-Runtime_forever=False
+Runtime_forever=True
 import os
 import sys
 import matplotlib.pyplot as plt
@@ -12,7 +12,8 @@ from Rib_Sections_Definition import sections
 
 directory = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))+"\\WP4\\4.1"
 sys.path.insert(-1,directory)
-from shearInWebs import maxShear
+from shearInWebs import maxShear, scipyMaxShear
+from Shear_from_torque import shear_stress_from_torque_function
     
 import numpy as np
 
@@ -202,9 +203,6 @@ if Runtime_forever==True:
     plt.plot(y, critical_bottom_stresses_function(y)/(1000*maximum_compressive_stress_bottom(y)), "b")
     plt.plot(y, critical_top_stresses_function(y)/(1000*maximum_compressive_stress_top(y)), "r")
     
-    
-    MoSdef(critical_bottom_stresses_function(y),(1000*maximum_compressive_stress_bottom(y)))
-    MoSdef(critical_top_stresses_function(y), (1000*maximum_compressive_stress_top(y)))
     # plot formatting
     
     plt.title('Margin of safety for skin buckling stresses (blue bottom, red top)')
@@ -223,7 +221,7 @@ if Runtime_forever==True:
 # =============================================================================
 
 sweepAngleWing = 28.77 * m.pi / 180 #rads
-LStringer = 6.99
+LStringer = 6.99 / np.cos(sweepAngleWing)
 
 Ixx = Ixx(0)
 
