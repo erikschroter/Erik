@@ -5,7 +5,7 @@ import sys
 import matplotlib.pyplot as plt
 import math as m
 from GlobalMomentofInertia import Ixx
-from Definition_stringer_positions import t_wing_box_spar_cap, stringer_distribution, t_wing_box_skin
+from Definition_stringer_positions import t_wing_box_spar_cap, stringer_distribution, t_wing_box_skin, a_stringer, h_stringer, t_stringer
 from Buckling_Coefficient_Figures import hinged_edges_function, figure_19_c_simply_supported_function
 from Top_Bottom_Skin_Buckling import Top_Bottom_Skin_Buckling
 from Rib_Sections_Definition import sections
@@ -93,7 +93,7 @@ def ColBucklingdef(K, E, I, L):
 # =============================================================================
 # Web buckling
 # =============================================================================
-WebPrint=True
+WebPrint=False
 
 # Material Properties
 E = 68.8 * 10**9 # Pa
@@ -226,4 +226,4 @@ Ixx = Ixx(0)
 
 bucklingStress = ColBucklingdef(1, 68.9 * 10**9, 3882083.333 ** (10^-12), LStringer)
 
-print("\n\nDESIGN OPTION: \n\n t_spar: ", t_wing_box_spar_cap, "||| rib sections: ", sections, "||| stringer distances: ", stringer_distribution, "||| t_skin: ", t_wing_box_skin, "||| LStringer: ", LStringer)
+print("\n\nDESIGN OPTION: \n\n t_spar: ", t_wing_box_spar_cap, "||| rib sections: ", sections, "||| stringer distances: ", stringer_distribution, "||| width stringer: ", a_stringer, "||| height stringer: ", h_stringer, "||| t_stringer: ", t_stringer, "||| t_skin: ", t_wing_box_skin, "||| LStringer: ", LStringer)

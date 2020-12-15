@@ -91,8 +91,8 @@ for i in range (0, len(totalsheer)):
     maxShear.append(k_v * avgShear[i])
     spanValue.append(i/10)
 
-print(avgShear)
-print(maxShear)
+# print(avgShear)
+# print(maxShear)
 
 scipyMaxShear = sp.interpolate.interp1d(spanValue,maxShear,kind="quadratic", fill_value="extrapolate")
 
