@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-Runtime_forever=True
+Runtime_forever=False
 
 import matplotlib.pyplot as plt
 import math as m
