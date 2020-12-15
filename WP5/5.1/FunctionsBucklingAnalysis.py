@@ -1,17 +1,21 @@
 # -*- coding: utf-8 -*-
 Runtime_forever=False
-
+import os
+import sys
 import matplotlib.pyplot as plt
 import math as m
 from GlobalMomentofInertia import Ixx
-from Definition_stringer_positions import t_wing_box_spar_cap, stringer_distribution
+from Definition_stringer_positions import t_wing_box_spar_cap, stringer_distribution, t_wing_box_skin
 from Buckling_Coefficient_Figures import hinged_edges_function, figure_19_c_simply_supported_function
 from Top_Bottom_Skin_Buckling import Top_Bottom_Skin_Buckling
 from Rib_Sections_Definition import sections
 
-
+directory = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))+"\\WP4\\4.1"
+sys.path.insert(-1,directory)
+from shearInWebs import maxShear
     
 import numpy as np
+
 
 """
 Created on Mon Nov 30 14:53:19 2020
@@ -90,7 +94,7 @@ def ColBucklingdef(K, E, I, L):
 # =============================================================================
 # Web buckling
 # =============================================================================
-WebPrint=True
+WebPrint=False
 
 # Material Properties
 E = 68.8 * 10**9 # Pa
@@ -105,8 +109,8 @@ v = 0.33 # -
 # sections = np.unique(sections)
 # sections = [4.0, 4.5, 5.0, 5.5, 6.0, 6.714285714285714, 7.428571428571429, 8.142857142857142, 8.857142857142858, 9.571428571428571, 10.285714285714285, 11.0, 11.5, 12.0, 12.666666666666666, 13.333333333333334, 14.0, 14.5, 15.585714285714285, 16.67142857142857, 17.757142857142856, 18.84285714285714, 19.92857142857143, 21.014285714285716, 22.1, 22.733333333333334, 23.366666666666667, 24.0, 24.2, 25.5, 26.8, 28.1, 29.4, 30.7, 32.0, 32.986666666666665, 33.973333333333336, 34.96]
 
-t_f = t_wing_box_spar_cap # mm
-t_r = t_wing_box_spar_cap # mm
+t_f = t_wing_box_spar_cap # mm # CHANGE IN DEFINITION STRINGER POSITION FILE
+t_r = t_wing_box_spar_cap # mm # "
 
 y_mid_seg_lst = []
 tau_cr_flst = []
@@ -146,8 +150,16 @@ for i in range(1, len(sections)):
     k_sf = hinged_edges_function(x_f)
     k_sr = hinged_edges_function(x_r)
     
-    tau_cr_f = WebBucklingdef(t_f, h_f, k_sf, E, v)/10**6 # MPa
-    tau_cr_r = WebBucklingdef(t_r, h_r, k_sr, E, v)/10**6 # MPa
+    
+    if y_section*1000 >= h_f:
+        tau_cr_f = WebBucklingdef(t_f, h_f, k_sf, E, v)/10**6 # MPa
+    elif y_section*1000 < h_f:
+        tau_cr_f = WebBucklingdef(t_f, y_section*1000, k_sf, E, v)/10**6 # MPa
+
+    if y_section*1000 >= h_r:
+        tau_cr_r = WebBucklingdef(t_r, h_r, k_sr, E, v)/10**6 # MPa
+    elif y_section*1000 < h_r:
+        tau_cr_r = WebBucklingdef(t_r, y_section*1000, k_sr, E, v)/10**6 # MPa
 
     tau_cr_flst.append(round(tau_cr_f,2))
     tau_cr_rlst.append(round(tau_cr_r,2))
@@ -215,3 +227,5 @@ LStringer = 6.99
 Ixx = Ixx(0)
 
 bucklingStress = ColBucklingdef(1, 68.9 * 10**9, 3882083.333 ** (10^-12), LStringer)
+
+print("\n\nDESIGN OPTION: \n\n t_spar: ", t_wing_box_spar_cap, "||| rib sections: ", sections, "||| stringer distances: ", stringer_distribution, "||| t_skin: ", t_wing_box_skin, "||| LStringer: ", LStringer)

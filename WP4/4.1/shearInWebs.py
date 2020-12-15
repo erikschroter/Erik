@@ -85,7 +85,7 @@ for i in range (0, len(totalsheer)):
     localChord = localChord2(i /10)
     FrontSpar = 0.1347 * localChord
     RearSpar = 0.1091 * localChord
-    thicknessFrontSpar = 10 *10**(-3) #m
+    thicknessFrontSpar = 10 *10**(-3) #m # 
     thicknessRearSpar = 10 *10**(-3)  #m
     avgShear.append(totalsheer[i] / (FrontSpar * thicknessFrontSpar + RearSpar*thicknessRearSpar))
     maxShear.append(k_v * avgShear[i])
