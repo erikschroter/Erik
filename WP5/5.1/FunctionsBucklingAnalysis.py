@@ -223,7 +223,7 @@ if Runtime_forever==True:
 # =============================================================================
 
 sweepAngleWing = 28.77 * m.pi / 180 #rads
-LStringer = 6.99
+LStringer = 6.99 / m.cos(sweepAngleWing)
 
 Ixx = Ixx(0)
 
