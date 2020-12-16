@@ -6,7 +6,7 @@ import math as m
 
 from FunctionsGlobalBucklingAnalysis import segment_1,segment_2,segment_3, segment_4, segment_5
 from Definition_stringer_positions import Definition_stringer_position, stringer_distribution
-from Centroid_OLD import CentroidY
+from Centroid import CentroidY
 import Definition_stringer_positions
 t_wing_box_spar_cap = Definition_stringer_positions.t_wing_box_spar_cap
 t_wing_box_skin = Definition_stringer_positions.t_wing_box_skin

@@ -1,24 +1,11 @@
 # -*- coding: utf-8 -*-
-Runtime_forever=True
-import os
-import sys
+
 import matplotlib.pyplot as plt
 import math as m
 from GlobalMomentofInertia import Ixx
-from Definition_stringer_positions import t_wing_box_spar_cap, stringer_distribution, t_wing_box_skin, a_stringer, h_stringer, t_stringer
+from Definition_stringer_positions import t_wing_box_spar_cap, stringer_distribution
 from Buckling_Coefficient_Figures import hinged_edges_function, figure_19_c_simply_supported_function
 from Top_Bottom_Skin_Buckling import Top_Bottom_Skin_Buckling
-from Rib_Sections_Definition import sections
-
-
-directory = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))+"\\WP4\\4.1"
-sys.path.insert(-1,directory)
-from shearInWebs import maxShear, scipyMaxShear
-from Shear_from_torque import shear_stress_from_torque_positive_function as shear_stress_torq_front, shear_stress_from_torque_negative_function as shear_stress_torq_rear
-
-import scipy as sp
-from scipy import integrate
-from scipy.interpolate import interp1d
 import numpy as np
 
 """
@@ -104,24 +91,13 @@ WebPrint=False
 E = 68.8 * 10**9 # Pa
 v = 0.33 # -
 
-# rib_spacing = 0.61
-# sections = np.arange(0, 34.96, 0.61)
-
-# req_rib_location = np.array([4, 6, 11, 11.5, 12, 14, 14.5, 22.1, 24, 24.2, 32, 34.96])
-
-# sections = np.append(sections, req_rib_location)
-# sections = np.unique(sections)
-# sections = [4.0, 4.5, 5.0, 5.5, 6.0, 6.714285714285714, 7.428571428571429, 8.142857142857142, 8.857142857142858, 9.571428571428571, 10.285714285714285, 11.0, 11.5, 12.0, 12.666666666666666, 13.333333333333334, 14.0, 14.5, 15.585714285714285, 16.67142857142857, 17.757142857142856, 18.84285714285714, 19.92857142857143, 21.014285714285716, 22.1, 22.733333333333334, 23.366666666666667, 24.0, 24.2, 25.5, 26.8, 28.1, 29.4, 30.7, 32.0, 32.986666666666665, 33.973333333333336, 34.96]
-
-t_f = t_wing_box_spar_cap # mm # CHANGE IN DEFINITION STRINGER POSITION FILE
+t_f = t_wing_box_spar_cap # mm
 t_r = t_wing_box_spar_cap # mm
 
-y_mid_seg_lst = []
+sections = [0, 4, 7.00, 11.5, 14, 17.5, 21, 24.5, 26, 28, 29, 31.5, 33, 34.96] # INPUT SECTIONS!
 
 tau_cr_flst = []
 tau_cr_rlst = []
-
-y_section_lst = []
 
 for i in range(1, len(sections)):
     y_section = sections[i] - sections[i-1] # m
@@ -129,28 +105,11 @@ for i in range(1, len(sections)):
         print("iteration ", i, "section width ", round(y_section, 1))
     y_midspan = (y_section / 2) + sections[i-1] # m
     
-    y_mid_seg_lst.append(y_midspan-(y_section/2))
-    y_mid_seg_lst.append(y_midspan+(y_section/2)-0.01)
-    
-# =============================================================================
-#     FOR COLUMN BUCKLING
-    y_section_lst.append(y_section)
-    y_section_lst.append(y_section)
-# =============================================================================
-    
     h_f = FrontRearSpar(y_midspan)[0]*1000 # mm
     h_r = FrontRearSpar(y_midspan)[1]*1000 # mm
     
-    if y_section*1000 >= h_f:
-        x_f = y_section*1000 / h_f
-    elif y_section*1000 < h_f:
-        x_f = h_f/(y_section*1000)
-
-    if y_section*1000 >= h_r:
-        x_r = y_section*1000 / h_r
-    elif y_section*1000 < h_r:
-        x_r = h_r /(y_section*1000)
-        
+    x_f = y_section*1000 / h_f
+    x_r = y_section*1000 / h_r
     if WebPrint==True:
         print("Front Aspect ", x_f)
         print("Rear Aspect ", x_r, "\n")
@@ -164,178 +123,51 @@ for i in range(1, len(sections)):
     k_sf = hinged_edges_function(x_f)
     k_sr = hinged_edges_function(x_r)
     
-    if y_section*1000 >= h_f:
-        tau_cr_f = WebBucklingdef(t_f, h_f, k_sf, E, v)/10**6 # MPa
-    elif y_section*1000 < h_f:
-        tau_cr_f = WebBucklingdef(t_f, y_section*1000, k_sf, E, v)/10**6 # MPa
+    tau_cr_f = WebBucklingdef(t_f, h_f, k_sf, E, v)/10**6 # MPa
+    tau_cr_r = WebBucklingdef(t_r, h_r, k_sr, E, v)/10**6 # MPa
 
-    if y_section*1000 >= h_r:
-        tau_cr_r = WebBucklingdef(t_r, h_r, k_sr, E, v)/10**6 # MPa
-    elif y_section*1000 < h_r:
-        tau_cr_r = WebBucklingdef(t_r, y_section*1000, k_sr, E, v)/10**6 # MPa
-
-    tau_cr_flst.append(round(tau_cr_f, 2))
-    tau_cr_flst.append(round(tau_cr_f, 2))
-    tau_cr_rlst.append(round(tau_cr_r, 2))
-    tau_cr_rlst.append(round(tau_cr_r, 2))
+    tau_cr_flst.append(round(tau_cr_f,2))
+    tau_cr_rlst.append(round(tau_cr_r,2))
 
 if WebPrint==True:
     print("Web buckling: \n Sections: ", sections, "\n Front Spar: ", tau_cr_flst, "\n Rear Spar: ", tau_cr_rlst)
 
-# Margin of Safety
-
-web_buckling_critical_f = interp1d(y_mid_seg_lst, tau_cr_flst, kind="linear", fill_value="extrapolate")
-web_buckling_critical_r = interp1d(y_mid_seg_lst, tau_cr_rlst, kind="linear", fill_value="extrapolate")
-
-y = 0
-y_list = []
-Web_Margin_of_Safety_List_Front = []
-Web_Margin_of_Safety_List_Rear = []
-for i in range(int(wingSpan/2*100)):
-    Maximum_Stress_from_shear = scipyMaxShear(y)
-    Maximum_Stress_from_torque_front = shear_stress_torq_front(y)
-    Maximum_Stress_from_torque_rear = shear_stress_torq_rear(y)
-    Critical_Web_Buckling_Front = 10**6 * web_buckling_critical_f(y)
-    Critical_Web_Buckling_Rear = 10**6 * web_buckling_critical_r(y)
-    y_list.append(y)
-    Web_Margin_of_Safety_List_Front.append(Critical_Web_Buckling_Front/(Maximum_Stress_from_shear+Maximum_Stress_from_torque_front))
-    Web_Margin_of_Safety_List_Rear.append(Critical_Web_Buckling_Rear/(Maximum_Stress_from_shear-Maximum_Stress_from_torque_rear))
-    y = y + 0.01
-
-web_buckling_margin_of_safety_f = interp1d(y_list, Web_Margin_of_Safety_List_Front, kind="linear", fill_value="extrapolate")
-web_buckling_margin_of_safety_r = interp1d(y_list, Web_Margin_of_Safety_List_Rear, kind="linear", fill_value="extrapolate")
-
-# print(web_buckling_margin_of_safety_f)
-# print(web_buckling_margin_of_safety_r)
-
-# Plotting
-
-plt.plot(y_list, Web_Margin_of_Safety_List_Rear, "b")
-plt.plot(y_list, Web_Margin_of_Safety_List_Front, "r")
-
-# plot formatting
-
-plt.title('Web Margin of Safety (blue rear, red front)')
-
-plt.xlabel('Spanwise location [m]')
-plt.ylabel('Web Margin of safety')
-
-plt.grid(True, which='both')
-plt.axhline(y=0, color='k')
-plt.ylim(-1,6)
-
-plt.show()
-"""
-# Plotting
-
-plt.plot(y_mid_seg_lst, tau_cr_flst, "r")
-plt.plot(y_mid_seg_lst, tau_cr_rlst, "b")
-
-# plot formatting
-
-plt.title('Critical web buckling stresses (blue rear, red front)')
-
-plt.xlabel('Spanwise location [m]')
-plt.ylabel('Stress [MPa]')
-
-plt.grid(True, which='both')
-plt.axhline(y=0, color='k')
-
-plt.show()
-"""
 # =============================================================================
 # Skin buckling
 # =============================================================================
-if Runtime_forever==True:
-    from maximum_compressive_stress import maximum_compressive_stress_bottom, column_maximum_compressive_stress_bottom
-    from maximum_compressive_stress_top import maximum_compressive_stress_top, column_maximum_compressive_stress_top
 
-if Runtime_forever==True:
-    critical_bottom_stresses_function, critical_top_stresses_function, y_critical_bottom_stresses_function, y_critical_top_stresses_function = Top_Bottom_Skin_Buckling(sections, stringer_distribution)
-    
+critical_bottom_stresses_function, critical_top_stresses_function = Top_Bottom_Skin_Buckling(sections,
+                                                                                             stringer_distribution)
 
-    # Creating plot list
-    
-    y = [0]
-    for i in range(round(wingSpan / 2 * 100)):
-        new_value = y[i] + 0.01
-        y.append(new_value)
-    
-    plt.plot(y, critical_bottom_stresses_function(y)/(1000*maximum_compressive_stress_bottom(y)), "b")
-    plt.plot(y, critical_top_stresses_function(y)/(1000*maximum_compressive_stress_top(y)), "r")
-    
-    # plot formatting
-    
-    plt.title('Margin of safety for skin buckling stresses (blue bottom, red top)')
-    
-    plt.xlabel('Spanwise location [m]')
-    plt.ylabel('Margin of safety')
-    
-    plt.grid(True, which='both')
-    plt.axhline(y=0, color='k')
-    plt.ylim(-1,6)
-    
-    plt.show()
+# Creating plot list
+
+y = [0]
+for i in range(round(wingSpan / 2 * 100)):
+    new_value = y[i] + 0.01
+    y.append(new_value)
+
+plt.plot(y, critical_bottom_stresses_function(y), "b")
+plt.plot(y, critical_top_stresses_function(y), "r")
+
+# plot formatting
+
+plt.title('Margin of safety for skin buckling (blue bottom, red top)')
+
+plt.xlabel('Spanwise location [m]')
+plt.ylabel('Margin of safety')
+
+plt.grid(True, which='both')
+plt.axhline(y=0, color='k')
+
+plt.show()
 
 # =============================================================================
 # Column buckling
 # =============================================================================
 
-sweepAngleWing = 28.77 * m.pi / 180  # rads
-LStringer = y_section_lst / np.cos(sweepAngleWing)
+sweepAngleWing = 28.77 * m.pi / 180 #rads
+LStringer = 6.99
 
-Ixx_stringer = h_stringer ** 3 * t_stringer / 12 + 2 * a_stringer * t_stringer** 3 / 12 + 2 * a_stringer * t_stringer * (h_stringer/2 + t_stringer/2)**2
+Ixx = Ixx(0)
 
-bucklingStress = ColBucklingdef(1, 68.9 * 10 ** 9, Ixx_stringer * (10 ** -12), LStringer)
-
-
-col_buckling_critical = interp1d(y_mid_seg_lst, bucklingStress, kind="linear", fill_value="extrapolate")
-
-y = 0
-y_list = []
-col_buckling_lst_top = []
-col_buckling_lst_bottom = []
-
-if Runtime_forever==True:
-
-    for i in range(int(wingSpan/2*100)):
-        Failure_col_buckling = col_buckling_critical(y)
-        
-        Applied_col_bottom = column_maximum_compressive_stress_bottom(y)
-        Applied_col_top = column_maximum_compressive_stress_top(y)
-        y_list.append(y)
-        col_buckling_lst_top.append(Failure_col_buckling/Applied_col_top)
-        col_buckling_lst_bottom.append(Failure_col_buckling/Applied_col_bottom)
-        y = y + 0.01
-    
-    col_buckling_margin_of_safety_top = interp1d(y_list, col_buckling_lst_top, kind="linear", fill_value="extrapolate")
-    col_buckling_margin_of_safety_bottom = interp1d(y_list, col_buckling_lst_bottom, kind="linear", fill_value="extrapolate")
-    
-    # Plotting
-    
-    plt.plot(y_list, col_buckling_lst_bottom, "b")
-    plt.plot(y_list, col_buckling_lst_top, "r")
-    
-    # plot formatting
-    
-    plt.title('Margin of safety for column buckling (blue bottom, red top)')
-    
-    plt.xlabel('Spanwise location [m]')
-    plt.ylabel('Margin of safety')
-    
-    plt.grid(True, which='both')
-    plt.axhline(y=0, color='k')
-    plt.ylim(-1, 6)
-    
-    plt.show()
-
-
-# =============================================================================
-# Design options
-# =============================================================================
-
-
-print("\n\nDESIGN OPTION: \n\n t_spar: ", t_wing_box_spar_cap, "||| rib sections: ", sections, "||| stringer distances: ", stringer_distribution, "||| width stringer: ", a_stringer, "||| height stringer: ", h_stringer, "||| t_stringer: ", t_stringer, "||| t_skin: ", t_wing_box_skin, "||| LStringer: ", LStringer)
-
-
-
+bucklingStress = ColBucklingdef(1, 68.9 * 10**9, 3882083.333 ** (10^-12), LStringer)
