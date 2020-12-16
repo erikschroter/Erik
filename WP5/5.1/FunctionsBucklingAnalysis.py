@@ -26,7 +26,6 @@ Created on Mon Nov 30 14:53:19 2020
 
 @author: Erik Schroter
 """
-
 # Front and rear spar height function
 taperRatio = 0.3 #[]
 rootChord = 11.95 #[m]
@@ -257,13 +256,24 @@ if Runtime_forever==True:
     # Creating plot list
     
     y = [0]
-    for i in range(round(wingSpan / 2 * 100)):
+
+    for i in range(0, round(wingSpan / 2) * 100):
         new_value = y[i] + 0.01
         y.append(new_value)
-    
+
+
     plt.plot(y, critical_bottom_stresses_function(y)/(1000*maximum_compressive_stress_bottom(y)), "b")
     plt.plot(y, critical_top_stresses_function(y)/(1000*maximum_compressive_stress_top(y)), "r")
-    
+
+    MoSBottomSkin = []
+    MoSTopSkin = []
+    yList1=[]
+    for j in range(0, round(wingSpan / 2) * 100):
+        yList1.append(j/100)
+        MoSBottomSkin.append(critical_bottom_stresses_function(j /100) / (1000 * maximum_compressive_stress_bottom(j/100)))
+        MoSTopSkin.append(critical_top_stresses_function(j/100) / (1000 * maximum_compressive_stress_top(j/100)))
+
+
     # plot formatting
     
     plt.title('Margin of safety for skin buckling stresses (blue bottom, red top)')
@@ -277,6 +287,8 @@ if Runtime_forever==True:
     
     plt.show()
 
+skin_buckling_margin_of_safety_t = interp1d(yList1, MoSTopSkin, kind="linear", fill_value="extrapolate")
+skin_buckling_margin_of_safety_b = interp1d(yList1, MoSBottomSkin, kind="linear", fill_value="extrapolate")
 # =============================================================================
 # Column buckling
 # =============================================================================
@@ -338,4 +350,62 @@ if Runtime_forever==True:
 print("\n\nDESIGN OPTION: \n\n t_spar: ", t_wing_box_spar_cap, "||| rib sections: ", sections, "||| stringer distances: ", stringer_distribution, "||| width stringer: ", a_stringer, "||| height stringer: ", h_stringer, "||| t_stringer: ", t_stringer, "||| t_skin: ", t_wing_box_skin, "||| LStringer: ", LStringer)
 
 
+# =============================================================================
+#AVERAGE MoS CALCULATION
+# =============================================================================
 
+consideredLengthHalfWingSpan = wingSpan /2 * 0.9
+from maximum_compressive_stress import maximum_compressive_stress_bottom, column_maximum_compressive_stress_bottom
+from maximum_compressive_stress_top import maximum_compressive_stress_top, column_maximum_compressive_stress_top
+critical_bottom_stresses_function, critical_top_stresses_function, y_critical_bottom_stresses_function, y_critical_top_stresses_function = Top_Bottom_Skin_Buckling(sections, stringer_distribution)
+
+resolution = 100
+
+
+#Average MoS for web buckling
+frontWebMoS = 0
+rearWebMoS = 0
+for i in range(0, round(consideredLengthHalfWingSpan *resolution)):
+    frontWebMoS += web_buckling_margin_of_safety_f(i/resolution)
+    rearWebMoS += web_buckling_margin_of_safety_r(i/resolution)
+
+averageFrontWebMoS = frontWebMoS / (round(consideredLengthHalfWingSpan *resolution) + 1)
+averageRearWebMoS = rearWebMoS / (round(consideredLengthHalfWingSpan *resolution) + 1)
+
+
+#Average MoS for skin buckling
+topSkinMoS = 0
+bottomSkinMoS = 0
+
+for i in range(0, round(consideredLengthHalfWingSpan *resolution)):
+    topSkinMoS += skin_buckling_margin_of_safety_t(i / resolution)
+    bottomSkinMoS += skin_buckling_margin_of_safety_b(i / resolution)
+
+averageTopSkinMoS = topSkinMoS / (round(consideredLengthHalfWingSpan *resolution) + 1)
+averageBottomSkinMoS = bottomSkinMoS / (round(consideredLengthHalfWingSpan *resolution) + 1)
+
+
+
+#Average MoS for column buckling
+topColumnMoS = 0
+bottomColumnMoS = 0
+
+for i in range(0, round(consideredLengthHalfWingSpan * resolution)):
+    topColumnMoS += col_buckling_margin_of_safety_top(i / resolution)
+    bottomColumnMoS += col_buckling_margin_of_safety_bottom(i / resolution)
+
+averageTopColumn = topColumnMoS / (round(consideredLengthHalfWingSpan * resolution) + 1)
+averageBottomColumn = bottomColumnMoS / (round(consideredLengthHalfWingSpan * resolution) + 1)
+
+
+
+
+
+print("average MoS Front Web : ", averageFrontWebMoS)
+print("average MoS Rear Web : ", averageRearWebMoS)
+
+print("average MoS Top Skin : ", averageTopSkinMoS)
+print("average MoS Bottom Skin :  ", averageBottomSkinMoS)
+
+print("average MoS Top Column : ", averageTopColumn)
+print("average MoS Bottom Column : ", averageBottomColumn)
