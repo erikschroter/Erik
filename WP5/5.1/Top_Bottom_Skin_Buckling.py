@@ -1,13 +1,19 @@
 # -*- coding: utf-8 -*-
-
 import matplotlib.pyplot as plt
+#%%
 from Definition_stringer_positions import t_wing_box_skin, stringer_distribution
+#%%
 from Buckling_Coefficient_Figures import figure_19_c_simply_supported_function
+#%%
 from Distance_stringers import Distance_Stringers
+#%%
 from scipy.interpolate import interp1d
+#%%
 import sys
+#%%
 sys.setrecursionlimit(10 ** 7)
-
+#%%
+#%%
 """
 Created on Thursday Dec 10 16:56:32 2020
 
@@ -17,7 +23,7 @@ Created on Thursday Dec 10 16:56:32 2020
 taperRatio = 0.3  # []
 rootChord = 11.95  # [m]
 wingSpan = 69.92  # [m]
-
+#%%
 # =============================================================================
 # Top and Bottom panel buckling (Reference from reader page 680)
 # =============================================================================
@@ -118,7 +124,7 @@ def Top_Bottom_Skin_Buckling(section, stringer_distribution):
                                               fill_value="extrapolate")
 
     return critical_bottom_stresses_function, critical_top_stresses_function, y_critical_bottom_stresses_function, y_critical_top_stresses_function
-
+#%%
 
 
 """
