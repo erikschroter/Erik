@@ -4,17 +4,25 @@ import os
 import sys
 import matplotlib.pyplot as plt
 import math as m
+#%%
 from GlobalMomentofInertia import Ixx
+#%%
 from Definition_stringer_positions import t_wing_box_spar_cap, stringer_distribution, t_wing_box_skin, a_stringer, h_stringer, t_stringer
+#%%
 from Buckling_Coefficient_Figures import hinged_edges_function, figure_19_c_simply_supported_function
+#%%
 from Top_Bottom_Skin_Buckling import Top_Bottom_Skin_Buckling
+#%%
 from Rib_Sections_Definition import sections
-
+#%%
 directory = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))+"\\WP4\\4.1"
+#%%
 sys.path.insert(-1,directory)
+#%%
 from shearInWebs import maxShear, scipyMaxShear
+#%%
 from Shear_from_torque import shear_stress_from_torque_positive_function as shear_stress_torq_front, shear_stress_from_torque_negative_function as shear_stress_torq_rear
-
+#%%
 import scipy as sp
 from scipy import integrate
 from scipy.interpolate import interp1d
@@ -25,7 +33,7 @@ Created on Mon Nov 30 14:53:19 2020
 
 @author: Erik Schroter
 """
-
+#%%
 # Front and rear spar height function
 taperRatio = 0.3 #[]
 rootChord = 11.95 #[m]
@@ -93,7 +101,7 @@ def ColBucklingdef(K, E, I, L):
     return stress_critical_buckling
 
 # Compressive strength failure each component
-
+#%%
 # =============================================================================
 # Web buckling
 # =============================================================================
@@ -217,22 +225,22 @@ plt.ylim(-1,6)
 plt.show()
 
 # Plotting
-
-plt.plot(y_mid_seg_lst, tau_cr_flst, "r")
-plt.plot(y_mid_seg_lst, tau_cr_rlst, "b")
-
-# plot formatting
-
-plt.title('Critical web buckling stresses (blue rear, red front)')
-
-plt.xlabel('Spanwise location [m]')
-plt.ylabel('Stress [MPa]')
-
-plt.grid(True, which='both')
-plt.axhline(y=0, color='k')
-
-plt.show()
-
+if WebPrint==True:
+    plt.plot(y_mid_seg_lst, tau_cr_flst, "r")
+    plt.plot(y_mid_seg_lst, tau_cr_rlst, "b")
+    
+    # plot formatting
+    
+    plt.title('Critical web buckling stresses (blue rear, red front)')
+    
+    plt.xlabel('Spanwise location [m]')
+    plt.ylabel('Stress [MPa]')
+    
+    plt.grid(True, which='both')
+    plt.axhline(y=0, color='k')
+    
+    plt.show()
+#%%
 # =============================================================================
 # Skin buckling
 # =============================================================================
@@ -266,7 +274,7 @@ if Runtime_forever==True:
     plt.ylim(-1,6)
     
     plt.show()
-
+#%%
 # =============================================================================
 # Column buckling
 # =============================================================================
