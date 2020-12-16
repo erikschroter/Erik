@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-Runtime_forever=True
+Runtime_forever=False
 import os
 import sys
 import matplotlib.pyplot as plt
@@ -195,8 +195,8 @@ for i in range(int(wingSpan/2*100)):
 web_buckling_margin_of_safety_f = interp1d(y_list, Web_Margin_of_Safety_List_Front, kind="linear", fill_value="extrapolate")
 web_buckling_margin_of_safety_r = interp1d(y_list, Web_Margin_of_Safety_List_Rear, kind="linear", fill_value="extrapolate")
 
-print(web_buckling_margin_of_safety_f)
-print(web_buckling_margin_of_safety_r)
+# print(web_buckling_margin_of_safety_f)
+# print(web_buckling_margin_of_safety_r)
 
 # Plotting
 
