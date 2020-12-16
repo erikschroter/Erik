@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import math as m
 
 from FunctionsGlobalBucklingAnalysis import segment_1,segment_2,segment_3, segment_4, segment_5
-from Definition_stringer_positions import Definition_stringer_position, stringer_distribution
+from Definition_stringer_positions import Definition_stringer_position, stringer_distribution, a_stringer, h_stringer, t_stringer
 from Centroid import CentroidY
 import Definition_stringer_positions
 t_wing_box_spar_cap = Definition_stringer_positions.t_wing_box_spar_cap
@@ -31,11 +31,13 @@ def Ixx (y_span):
     centroidY = CentroidY(stringer_distribution, y_span)
 
     #steinerTerms
+    number_stringers = -4
     Ixx = 0
     for i in range(0, len(stringer_positions)):
         if stringer_positions[i][3]:
             #print(stringer_positions[i][3])
             Ixx += ((stringer_positions[i][1])-centroidY)**2 * (stringer_positions[i][2])
+            number_stringers = number_stringers + 1
             #print("stringer pos: ", stringer_positions[i][1])
             #print("area: ", stringer_positions[i][2])
             #print("centroid: ", centroidY)
@@ -50,30 +52,29 @@ def Ixx (y_span):
     rearSparCentroidY = heightRearSpar / 2
 
     #spars contribution
-    Ixx += (heightFrontSpar ** 3 * t_wing_box_spar_cap / 12)
-    Ixx += (heightRearSpar **3 * t_wing_box_spar_cap / 12)
+    Ixx += (heightFrontSpar ** 3 * t_wing_box_spar_cap / 12) + 2 * (a_wing_box_spar_cap * t_wing_box_spar_cap ** 3 / 12 + a_wing_box_spar_cap * t_wing_box_spar_cap * (heightFrontSpar/2)**2)
+    Ixx += (heightRearSpar **3 * t_wing_box_spar_cap / 12) + 2 * (a_wing_box_spar_cap * t_wing_box_spar_cap ** 3 / 12 + a_wing_box_spar_cap * t_wing_box_spar_cap * (heightRearSpar/2)**2)
 
     lengthSkin = 450 / 1000 * chord
     angleTopSkin = 2.08 * m.pi / 180
     angleBottomSkin = 1.18 * m.pi  / 180
 
     #skin contribution
-    Ixx += t_wing_box_skin ** 3 * lengthSkin * m.cos(angleTopSkin) **2
-    Ixx += t_wing_box_skin ** 3 * lengthSkin * m.cos(angleBottomSkin) ** 2
+    Ixx += t_wing_box_skin * (lengthSkin/m.cos(angleTopSkin)) ** 3 * m.sin(angleTopSkin) ** 2 / 12
+    Ixx += t_wing_box_skin * (lengthSkin/m.cos(angleBottomSkin)) ** 3 * m.sin(angleBottomSkin) ** 2 / 12
 
-    #spar caps contribution
-    Ixx += 4  * a_wing_box_spar_cap ** 3 * t_wing_box_spar_cap
-
+    #stringer contribution
+    Ixx_stringer = h_stringer ** 3 * t_stringer / 12 + 2 * a_stringer * t_stringer** 3 / 12 + 2 * a_stringer * t_stringer * (h_stringer/2 + t_stringer/2)**2
+    Ixx += number_stringers * Ixx_stringer
     return Ixx
 
 
-
-
+"""
 
 listResolution = 80
 xList = []
 yList = []
-"""
+
 for i in range(0, round(wingSpan / 2) * listResolution - 3):
     xList.append(i/listResolution)
     yList.append(Ixx(i / listResolution))
