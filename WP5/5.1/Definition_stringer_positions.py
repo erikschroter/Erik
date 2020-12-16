@@ -8,17 +8,18 @@ tip_chord = 3.59  # [m]
 span = 69.92  # [m]
 t_wing_box_skin = 10
 
-stringer_distribution =  [(14, 14, 17.8), (7, 7, 20), (6, 6, 25.6), (3, 3, 29.6), (2, 2, 34.96)]   # from root to tip, (top, bottom)
+stringer_distribution = [(15, 15, 17.8), (7, 7, 20), (6, 6, 25.6), (3, 3, 29.6),
+                         (2, 2, 34.96)]  # from root to tip, (top, bottom)
 
 # Spar caps dimensions
 
-t_wing_box_spar_cap = 15.3
+t_wing_box_spar_cap = 14.8
 a_wing_box_spar_cap = 110 #width
 
 # stringer dimensions
-a_stringer = 180
-h_stringer = 180
-t_stringer = 11.5
+a_stringer = 270
+h_stringer = 210 #max 210
+t_stringer = 4.5
 
 
 def Definition_stringer_position(stringer_distribution, spanwise_position):

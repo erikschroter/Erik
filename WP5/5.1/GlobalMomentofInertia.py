@@ -64,7 +64,7 @@ def Ixx (y_span):
     Ixx += t_wing_box_skin * (lengthSkin/m.cos(angleBottomSkin)) ** 3 * m.sin(angleBottomSkin) ** 2 / 12
 
     #stringer contribution
-    Ixx_stringer = h_stringer ** 3 + t_stringer / 12 + 2 * a_stringer * t_stringer** 3 / 12 + 2 + a_stringer * t_stringer * (h_stringer/2 + t_stringer/2)**2
+    Ixx_stringer = h_stringer ** 3 * t_stringer / 12 + 2 * a_stringer * t_stringer** 3 / 12 + 2 * a_stringer * t_stringer * (h_stringer/2 + t_stringer/2)**2
     Ixx += number_stringers * Ixx_stringer
     return Ixx
 
