@@ -41,7 +41,11 @@ W_uc_MLG = 7_569.349
 #Wingbox thickness versus cord lengt
 wtvcl = 0.1347
 #tensile yield stress [MPA]
+<<<<<<< HEAD
 sigma_y = 276
+=======
+sigma_y = 310
+>>>>>>> parent of 100ee0b... WEIGHTS FIXED
 
 #Wing weight including mounts and spoilers [kg]
 WingWeight = 3210.55

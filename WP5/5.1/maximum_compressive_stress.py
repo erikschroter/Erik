@@ -5,7 +5,7 @@ Created on Mon Nov 30 14:22:34 2020
 @author: michi
 """
 
-
+E = 8.9*(10**9)
 dt=0.1
 filename = 'MainWing_a0.00_v10.00ms.csv'
 rho = 0.4416
@@ -15,10 +15,10 @@ accuracy = 41
  
 
 #Maximum takeoff weight [kg]
-MTOW = 304636
+MTOW = 291_509.2
 
 #Operating empty weight [kg]
-OEW = 147780
+OEW = 141_412.4
 #Maximum zero fuel weight [kg]
 MZFW = 161394.73
 
@@ -33,6 +33,19 @@ n=-1.5
 WC = MTOW
 # WC_second = MZFW
 
+#Engine weight for 2 engines [kg]
+EngineWeight = 20_87.986
+
+#Undercarriage weight for MLG only [kg]
+W_uc_MLG = 7_569.349
+
+#Wingbox thickness versus cord length
+wtvcl = 0.1347
+#tensile yield stress [MPA]
+sigma_y = 276
+
+#Wing weight including mounts and spoilers [kg]
+WingWeight = 3210.55
 
 import numpy as np
 from scipy import integrate
