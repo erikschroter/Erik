@@ -127,11 +127,11 @@ def Top_Bottom_Skin_Buckling(section, stringer_distribution):
 #%%
 
 
-"""
+
 sections = [0, 4, 6, 6.99, 11, 11.5, 12, 14, 14.5, 20.98, 22.1, 24, 27.97, 32, 33.2, 34.96]  # INPUT SECTIONS!
 critical_bottom_stresses_function, critical_top_stresses_function, y_critical_bottom_stresses_function, y_critical_top_stresses_function = Top_Bottom_Skin_Buckling(sections, stringer_distribution)
 # Creating plot list
-
+"""
 y = [0]
 for i in range(round(wingSpan / 2 * 100)):
     new_value = y[i] + 0.01
