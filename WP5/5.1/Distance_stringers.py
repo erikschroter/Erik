@@ -54,4 +54,4 @@ def Distance_Stringers(stringer_distribution, spanwise_location):
 
     return distance_top_stringers, distance_bottom_stringers
 
-print(Distance_Stringers(stringer_distribution, spanwise_location))
+# print(Distance_Stringers(stringer_distribution, spanwise_location))

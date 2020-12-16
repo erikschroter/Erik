@@ -121,7 +121,7 @@ def torquedistribution(file, rho, v, span, accuracy, y_thrust, thrust_setting, n
 
 # setting outside function
 xnew, final_integration_result, torque_function = torquedistribution('MainWing_a0.00_v10.00ms.csv', rho, 70, 69.92, 100, 11.5, Thrust_Setting, n_Setting, Weight_Setting)
-
+"""
 plt.plot(xnew, torque_function(xnew), "-")
 
 # plot formatting
@@ -135,3 +135,4 @@ plt.grid(True, which='both')
 plt.axhline(y=0, color='k')
 
 plt.show()
+"""

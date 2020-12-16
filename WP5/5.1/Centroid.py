@@ -194,7 +194,7 @@ def SpanwiseCentroidY(stringer_distribution):
 
 
 y_spanwise = SpanwiseCentroidY(stringer_distribution)
-print(SpanwiseCentroidY(stringer_distribution))
+# print(SpanwiseCentroidY(stringer_distribution))
 
 
 spanwise_position = []

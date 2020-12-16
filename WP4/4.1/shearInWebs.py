@@ -97,7 +97,7 @@ for i in range (0, len(totalsheer)):
 scipyMaxShear = sp.interpolate.interp1d(spanValue,maxShear,kind="quadratic", fill_value="extrapolate")
 
 
-
+"""
 plt.plot(spanValue, avgShear, 'r')
 plt.plot(spanValue, maxShear, 'g')
 plt.hlines(-5, 0, 40)
@@ -110,7 +110,7 @@ green_patch = mpatches.Patch(color='g', label='Max Shear')
 plt.legend(handles=[red_patch, green_patch])
 
 plt.show()
-"""
+""""""
 i = 0
 Moment = []
 while i < len(a):

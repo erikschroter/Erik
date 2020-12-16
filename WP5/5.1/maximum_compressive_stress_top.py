@@ -64,7 +64,7 @@ from InertialLoading import inertialForce
 
 from liftdistribution import liftdistribution
 from GlobalMomentofInertia import Ixx
-from Centroid import SpanwiseCentroidY
+from Centroid import y_spanwise, SpanwiseCentroidY
 from Top_Bottom_Skin_Buckling import Top_Bottom_Skin_Buckling
 from Rib_Sections_Definition import sections
 
@@ -103,6 +103,7 @@ plt.hlines(-5,0,40)
 
 plt.show()'''
 BendingStress=[]
+Column_BendingStress=[]
 fy = SpanwiseCentroidY(stringer_distribution)
 critical_bottom_stresses_function, critical_top_stresses_function, y_critical_bottom_stresses_function, y_critical_top_stresses_function = Top_Bottom_Skin_Buckling(sections, stringer_distribution)
 
@@ -120,7 +121,31 @@ while i < len(a):
     BendingStress.append(abs((Moment[i]*y(a[i]))/(10**(-6)*Ixx(a[i]))))
     i +=1
 
+taperRatio = 0.3 #[]
+rootChord = 11.95 #[m]
+wingSpan = 69.92 #[m]
+
+def localChord(spanValue):
+    localChord = rootChord - (rootChord - taperRatio * rootChord) / (wingSpan / 2) * spanValue
+    return localChord
+
+def y_column(x):
+    if n >= 0:
+        # print('top in compression')
+        return 134.7 * localChord(x) - y_spanwise(x)
+    else:
+        # print('bottom in compression')
+        return y_spanwise(x)
+i=0
+while i < len(a):
+    Column_BendingStress.append(abs((Moment[i]*y_column(a[i]))/(10**(-6)*Ixx(a[i]))))
+    i +=1
+
 maximum_compressive_stress_top = sp.interpolate.interp1d(a,BendingStress,kind="linear", fill_value="extrapolate")
+column_maximum_compressive_stress_top = sp.interpolate.interp1d(a,Column_BendingStress,kind="linear", fill_value="extrapolate")
+
+print(maximum_compressive_stress_top)
+print(column_maximum_compressive_stress_top)
 
 """
 
