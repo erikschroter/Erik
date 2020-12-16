@@ -276,7 +276,7 @@ sweepAngleWing = 28.77 * m.pi / 180  # rads
 LStringer = 6.99 / np.cos(sweepAngleWing)
 
 Ixx = Ixx(0)
-Ixx_stringer = h_stringer ** 3 + t_stringer / 12 + 2 * a_stringer * t_stringer** 3 / 12 + 2 + a_stringer * t_stringer * (h_stringer/2 + t_stringer/2)**2
+Ixx_stringer = h_stringer ** 3 * t_stringer / 12 + 2 * a_stringer * t_stringer** 3 / 12 + 2 * a_stringer * t_stringer * (h_stringer/2 + t_stringer/2)**2
 
 bucklingStress = ColBucklingdef(1, 68.9 * 10 ** 9, Ixx_stringer * (10 ** -12), LStringer)
 print("\n\nDESIGN OPTION: \n\n t_spar: ", t_wing_box_spar_cap, "||| rib sections: ", sections, "||| stringer distances: ", stringer_distribution, "||| width stringer: ", a_stringer, "||| height stringer: ", h_stringer, "||| t_stringer: ", t_stringer, "||| t_skin: ", t_wing_box_skin, "||| LStringer: ", LStringer)
