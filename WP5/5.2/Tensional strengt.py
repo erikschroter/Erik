@@ -63,8 +63,8 @@ import matplotlib.pyplot as plt
 from InertialLoading import inertialForce
 
 from liftdistribution import liftdistribution
-from GlobalMomentofInertia import Ixx
-from Moment_of_Inertia import chord_length
+from Moment_of_Inertia_Wingbox import Ixx_in_y
+from Moment_of_Inertia_Wingbox import chord_length
 from Centroid import SpanwiseCentroidY
 
 
@@ -112,7 +112,7 @@ def y(x):
 i=0
 while i < len(a):
   
-    BendingStress.append(abs((Moment[i]*y(a[i]))/(10**(-6)*Ixx(a[i]))))
+    BendingStress.append(abs((Moment[i]*y(a[i]))/(10**6*Ixx_in_y(a[i]))))
     i +=1
 
 g = sp.interpolate.interp1d(a,BendingStress,kind="linear", fill_value="extrapolate")
