@@ -80,27 +80,22 @@ def localChord2(spanValue):
 avgShear = []
 spanValue = []
 maxShear = []
-k_v = 1.5
+k_v = 1.2448
 for i in range (0, len(totalsheer)):
     localChord = localChord2(i /10)
     FrontSpar = 0.1347 * localChord
     RearSpar = 0.1091 * localChord
-    thicknessFrontSpar = 10 *10**(-3) #m
+    thicknessFrontSpar = 10 *10**(-3) #m # 
     thicknessRearSpar = 10 *10**(-3)  #m
     avgShear.append(totalsheer[i] / (FrontSpar * thicknessFrontSpar + RearSpar*thicknessRearSpar))
     maxShear.append(k_v * avgShear[i])
     spanValue.append(i/10)
 
-#print(avgShear)
-#print(maxShear)
+# print(avgShear)
+# print(maxShear)
 
 scipyMaxShear = sp.interpolate.interp1d(spanValue,maxShear,kind="quadratic", fill_value="extrapolate")
 
-def maxShearWeb(ySpan):
-    webShear = maxShear[ySpan * 10]
-    return webShear
-
-print(maxShearWeb(34))
 
 """
 plt.plot(spanValue, avgShear, 'r')
@@ -115,7 +110,7 @@ green_patch = mpatches.Patch(color='g', label='Max Shear')
 plt.legend(handles=[red_patch, green_patch])
 
 plt.show()
-
+""""""
 i = 0
 Moment = []
 while i < len(a):
