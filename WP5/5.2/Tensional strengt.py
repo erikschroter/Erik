@@ -41,7 +41,7 @@ W_uc_MLG = 7_569.349
 #Wingbox thickness versus cord lengt
 wtvcl = 0.1347
 #tensile yield stress [MPA]
-sigma_y = 276
+sigma_y = 310
 
 #Wing weight including mounts and spoilers [kg]
 WingWeight = 3210.55
@@ -52,20 +52,20 @@ from scipy import integrate
 import sys
 import matplotlib.patches as mpatches
 import os
+directory = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))+"\\WP5\\5.1"
+sys.path.insert(-1,directory)
 directory = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))+"\\WP4\\4.1"
 sys.path.insert(-1,directory)
 directory = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))+"\\WP4\\4.2"
-sys.path.insert(-1,directory)
-directory = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))+"\\WP5\\5.1"
 sys.path.insert(-1,directory)
 import scipy as sp
 import matplotlib.pyplot as plt
 from InertialLoading import inertialForce
 
 from liftdistribution import liftdistribution
-from Moment_of_Inertia_Wingbox import Ixx_in_y
-from Moment_of_Inertia_Wingbox import chord_length
-from Centroid import SpanwiseCentroidY
+from GlobalMomentofInertia import Ixx
+from Moment_of_Inertia import chord_length
+from Centroid import SpanwiseCentroidY, y_spanwise
 
 
 x, Llst, xnew, f, xdist = liftdistribution(filename, rho, v, span, accuracy,WC*9.81,n)
@@ -102,7 +102,7 @@ plt.hlines(-5,0,40)
 
 plt.show()'''
 BendingStress=[]
-fy = SpanwiseCentroidY(stringer_distribution)
+fy = y_spanwise
 
 def y(x):
     if n >= 0:
@@ -112,7 +112,7 @@ def y(x):
 i=0
 while i < len(a):
   
-    BendingStress.append(abs((Moment[i]*y(a[i]))/(10**6*Ixx_in_y(a[i]))))
+    BendingStress.append(abs((Moment[i]*y(a[i]))/(10**(-6)*Ixx(a[i]))))
     i +=1
 
 g = sp.interpolate.interp1d(a,BendingStress,kind="linear", fill_value="extrapolate")
@@ -120,7 +120,7 @@ i=0
 safty_margine = []
 while i < len(a):
     if BendingStress[i] >= 0.001:
-        safty_margine.append((sigma_y/BendingStress[i]))
+        safty_margine.append((1000*sigma_y/BendingStress[i]))
     else:
         safty_margine.append(safty_margine[-1])
     i += 1
@@ -132,10 +132,10 @@ plt.xlabel("spanwise location [m]")
 plt.show()
 print("bendingstress:",BendingStress[0])
 plt.plot(a,safty_margine)
-plt.title("Tension safty margin diagram")
+plt.title("Tension safety margin diagram")
 plt.grid(b=None,which='Major',axis='both')
-plt.ylabel("Safty margin [-]")
+plt.ylabel("Safety margin [-]")
 plt.xlabel("spanwise location [m]")
-plt.ylim(0,15)
+plt.ylim(-1,6)
 plt.show()
 
