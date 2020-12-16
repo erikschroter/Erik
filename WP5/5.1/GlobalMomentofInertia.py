@@ -71,7 +71,6 @@ def Ixx (y_span):
 
 
 
-
 listResolution = 80
 xList = []
 yList = []
