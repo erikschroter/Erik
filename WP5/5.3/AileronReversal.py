@@ -91,7 +91,7 @@ def Aileron_effectiveness(Vfreestream, altitude, Span_in_y, Ailerontype):
     Cy = (CentroidY(stringer_distribution, Span_in_y))/1000
 
 
-    e = ((Cx/ (chord_length(Span_in_y)) + 0.15) -0.25)     # Cx position relative to chord + front spar distance - quarter chord
+    e = -((Cx/ (chord_length(Span_in_y)) + 0.15) -0.25)     # Cx position relative to chord + front spar distance - quarter chord
     c = chord_length(Span_in_y)
 
     ae = (0.5* rho* V**2* S* c* dCmdE* dCLdal+ K* dCLdE)/((K- 0.5* rho* V**2* S* c* e* dCLdal)*dCLdE)        #Change 1 by actual dCm/dE & dCL/dE from Xfoil
@@ -103,7 +103,7 @@ def Aileron_effectiveness_graph(Span_in_y, Ailerontype): #Ailerontype: low-speed
     Vlst = []
     ae_sea_lst = []
     ae_cruise_lst = []
-    for v in range (50, 300):
+    for v in range (50, 500):
         Vlst.append(v)
         ae_sea_lst.append(Aileron_effectiveness(v, 0, Span_in_y, Ailerontype))
         ae_cruise_lst.append(Aileron_effectiveness(v, 31000, Span_in_y, Ailerontype))
