@@ -86,7 +86,7 @@ def Aileron_effectiveness(Vfreestream, altitude, Span_in_y, Ailerontype):
 
     J = TCJ(Span_in_y)
     K = G * J
-    V = Vfreestream * math.cos(math.radians(28.77))
+    V = Vfreestream
     Cx = (CentroidX(stringer_distribution, Span_in_y))/1000
     Cy = (CentroidY(stringer_distribution, Span_in_y))/1000
 
@@ -103,7 +103,7 @@ def Aileron_effectiveness_graph(Span_in_y, Ailerontype): #Ailerontype: low-speed
     Vlst = []
     ae_sea_lst = []
     ae_cruise_lst = []
-    for v in range (50, 500):
+    for v in range (50, 450):
         Vlst.append(v)
         ae_sea_lst.append(Aileron_effectiveness(v, 0, Span_in_y, Ailerontype))
         ae_cruise_lst.append(Aileron_effectiveness(v, 31000, Span_in_y, Ailerontype))
