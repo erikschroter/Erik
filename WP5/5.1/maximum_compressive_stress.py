@@ -64,9 +64,10 @@ import matplotlib.pyplot as plt
 from InertialLoading import inertialForce
 
 from liftdistribution import liftdistribution
-from Moment_of_Inertia_Wingbox import Ixx_in_y
-from Moment_of_Inertia_Wingbox import chord_length
-from Centroid import SpanwiseCentroidY
+from GlobalMomentofInertia import Ixx
+from Top_Bottom_Skin_Buckling import Top_Bottom_Skin_Buckling
+from Rib_Sections_Definition import sections
+from Centroid import y_spanwise
 
 
 x, Llst, xnew, f, xdist = liftdistribution(filename, rho, v, span, accuracy,WC*9.81,n)
@@ -103,22 +104,44 @@ plt.hlines(-5,0,40)
 
 plt.show()'''
 BendingStress=[]
-fy = SpanwiseCentroidY(stringer_distribution)
+Column_BendingStress = []
+critical_bottom_stresses_function, critical_top_stresses_function, y_critical_bottom_stresses_function, y_critical_top_stresses_function = Top_Bottom_Skin_Buckling(sections, stringer_distribution)
+
 
 def y(x):
     if n >= 0:
-        print('top in compression')
-        return (wtvcl * chord_length(x/34.96))-fy(x)
+        # print('top in compression')
+        return y_critical_top_stresses_function(x)
     else:
-        print('bottom in compression')
-        return fy(x)
+        # print('bottom in compression')
+        return y_critical_bottom_stresses_function(x)
 i=0
 while i < len(a):
-  
-    BendingStress.append(abs((Moment[i]*y(a[i]))/(10**6*Ixx_in_y(a[i]))))
+    BendingStress.append(abs((Moment[i]*y(a[i]))/(10**(-6)*Ixx(a[i]))))
+    i +=1
+
+taperRatio = 0.3 #[]
+rootChord = 11.95 #[m]
+wingSpan = 69.92 #[m]
+
+def localChord(spanValue):
+    localChord = rootChord - (rootChord - taperRatio * rootChord) / (wingSpan / 2) * spanValue
+    return localChord
+
+def y_column(x):
+    if n >= 0:
+        # print('top in compression')
+        return 134.7 * localChord(x) - y_spanwise(x)
+    else:
+        # print('bottom in compression')
+        return y_spanwise(x)
+i=0
+while i < len(a):
+    Column_BendingStress.append(abs((Moment[i]*y_column(a[i]))/(10**(-6)*Ixx(a[i]))))
     i +=1
 
 maximum_compressive_stress_bottom = sp.interpolate.interp1d(a,BendingStress,kind="linear", fill_value="extrapolate")
+column_maximum_compressive_stress_bottom = sp.interpolate.interp1d(a,Column_BendingStress,kind="linear", fill_value="extrapolate")
 
 """
 
