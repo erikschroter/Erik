@@ -25,7 +25,7 @@ OEW = 147780.3631 # kg
 
 Thrust_Setting = 100  # from 0 to 100 in percent
 Weight_Setting = MTOW * 9.81  # N
-n_Setting = -1.5
+n_Setting = 3.75
 altitude = 0  # ft
 
 alt = altitude * 0.3048

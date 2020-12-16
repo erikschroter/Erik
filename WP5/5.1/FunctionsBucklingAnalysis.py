@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-Runtime_forever=False
+Runtime_forever=True
 import os
 import sys
 import matplotlib.pyplot as plt
@@ -12,8 +12,12 @@ from Rib_Sections_Definition import sections
 
 directory = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))+"\\WP4\\4.1"
 sys.path.insert(-1,directory)
-from shearInWebs import maxShear
-    
+from shearInWebs import maxShear, scipyMaxShear
+from Shear_from_torque import shear_stress_from_torque_positive_function as shear_stress_torq_front, shear_stress_from_torque_negative_function as shear_stress_torq_rear
+
+import scipy as sp
+from scipy import integrate
+from scipy.interpolate import interp1d
 import numpy as np
 
 """
@@ -121,7 +125,8 @@ for i in range(1, len(sections)):
         print("iteration ", i, "section width ", round(y_section, 1))
     y_midspan = (y_section / 2) + sections[i-1] # m
     
-    y_mid_seg_lst.append(y_midspan)
+    y_mid_seg_lst.append(y_midspan-(y_section/2))
+    y_mid_seg_lst.append(y_midspan+(y_section/2)-0.01)
     
     h_f = FrontRearSpar(y_midspan)[0]*1000 # mm
     h_r = FrontRearSpar(y_midspan)[1]*1000 # mm
@@ -159,12 +164,59 @@ for i in range(1, len(sections)):
     elif y_section*1000 < h_r:
         tau_cr_r = WebBucklingdef(t_r, y_section*1000, k_sr, E, v)/10**6 # MPa
 
-    tau_cr_flst.append(round(tau_cr_f,2))
-    tau_cr_rlst.append(round(tau_cr_r,2))
+    tau_cr_flst.append(round(tau_cr_f, 2))
+    tau_cr_flst.append(round(tau_cr_f, 2))
+    tau_cr_rlst.append(round(tau_cr_r, 2))
+    tau_cr_rlst.append(round(tau_cr_r, 2))
 
 if WebPrint==True:
     print("Web buckling: \n Sections: ", sections, "\n Front Spar: ", tau_cr_flst, "\n Rear Spar: ", tau_cr_rlst)
 
+# Margin of Safety
+
+web_buckling_critical_f = interp1d(y_mid_seg_lst, tau_cr_flst, kind="linear", fill_value="extrapolate")
+web_buckling_critical_r = interp1d(y_mid_seg_lst, tau_cr_rlst, kind="linear", fill_value="extrapolate")
+
+y = 0
+y_list = []
+Web_Margin_of_Safety_List_Front = []
+Web_Margin_of_Safety_List_Rear = []
+for i in range(int(wingSpan/2*100)):
+    Maximum_Stress_from_shear = scipyMaxShear(y)
+    Maximum_Stress_from_torque_front = shear_stress_torq_front(y)
+    Maximum_Stress_from_torque_rear = shear_stress_torq_rear(y)
+    Critical_Web_Buckling_Front = 10**6 * web_buckling_critical_f(y)
+    Critical_Web_Buckling_Rear = 10**6 * web_buckling_critical_r(y)
+    y_list.append(y)
+    Web_Margin_of_Safety_List_Front.append(Critical_Web_Buckling_Front/(Maximum_Stress_from_shear+Maximum_Stress_from_torque_front))
+    Web_Margin_of_Safety_List_Rear.append(Critical_Web_Buckling_Rear/(Maximum_Stress_from_shear-Maximum_Stress_from_torque_rear))
+    y = y + 0.01
+
+web_buckling_margin_of_safety_f = interp1d(y_list, Web_Margin_of_Safety_List_Front, kind="linear", fill_value="extrapolate")
+web_buckling_margin_of_safety_r = interp1d(y_list, Web_Margin_of_Safety_List_Rear, kind="linear", fill_value="extrapolate")
+
+print(web_buckling_margin_of_safety_f)
+print(web_buckling_margin_of_safety_r)
+
+# Plotting
+
+plt.plot(y_list, Web_Margin_of_Safety_List_Rear, "b")
+plt.plot(y_list, Web_Margin_of_Safety_List_Front, "r")
+
+# plot formatting
+
+plt.title('Web Margin of Safety (blue rear, red front)')
+
+plt.xlabel('Spanwise location [m]')
+plt.ylabel('Web Margin of safety')
+
+plt.grid(True, which='both')
+plt.axhline(y=0, color='k')
+plt.ylim(-1,6)
+
+plt.show()
+
+# Plotting
 
 plt.plot(y_mid_seg_lst, tau_cr_flst, "r")
 plt.plot(y_mid_seg_lst, tau_cr_rlst, "b")
@@ -202,9 +254,6 @@ if Runtime_forever==True:
     plt.plot(y, critical_bottom_stresses_function(y)/(1000*maximum_compressive_stress_bottom(y)), "b")
     plt.plot(y, critical_top_stresses_function(y)/(1000*maximum_compressive_stress_top(y)), "r")
     
-    
-    MoSdef(critical_bottom_stresses_function(y),(1000*maximum_compressive_stress_bottom(y)))
-    MoSdef(critical_top_stresses_function(y), (1000*maximum_compressive_stress_top(y)))
     # plot formatting
     
     plt.title('Margin of safety for skin buckling stresses (blue bottom, red top)')
@@ -223,7 +272,7 @@ if Runtime_forever==True:
 # =============================================================================
 
 sweepAngleWing = 28.77 * m.pi / 180 #rads
-LStringer = 6.99 / m.cos(sweepAngleWing)
+LStringer = 6.99 / np.cos(sweepAngleWing)
 
 Ixx = Ixx(0)
 
