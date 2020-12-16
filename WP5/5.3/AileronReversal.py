@@ -35,24 +35,11 @@ dCLdE = 5.6526
 dCmdE = -0.90846
 S = 543.25
 
-def Vr(Span_in_y, altitude, Ailerontype): #Altitude: Only 31000 or 0. AIlerontype: 'low' or 'high' (speed)
+def Vr(Span_in_y, altitude): #Only 31000 or 0
     if altitude == 31000:
         rho = 0.441653
-        if Ailerontype == 'low':
-            dCLdE = 5.652636854
-            dCmdE = -0.908459494
-        if Ailerontype == 'high':
-            dCLdE = 5.613813799
-            dCmdE = -0.892930272
-
     if altitude == 0:
         rho = 1.225
-        if Ailerontype == 'low':
-            dCLdE = 5.69922452
-            dCmdE = -0.916224105
-        if Ailerontype == 'high':
-            dCLdE = 5.644872243
-            dCmdE = -0.908459494
 
     J = TCJ(Span_in_y)
     K = G * J
@@ -63,25 +50,12 @@ def Vr(Span_in_y, altitude, Ailerontype): #Altitude: Only 31000 or 0. AIlerontyp
 
 stringer_distribution = [(14,14,6.99),(12,12,13.98),(10,10,20.98),(8,8,27.97),(6,6,34.96)]  # from root to tip, (top, bottom)
 
-#Altitude Only 31000 or 0. #aileron type low /high
-def Aileron_effectiveness(Vfreestream, altitude, Span_in_y, Ailerontype):
+def Aileron_effectiveness(Vfreestream, altitude, Span_in_y): #Altitude Only 31000 or 0
     if altitude == 31000:
         rho = 0.441653
-        if Ailerontype == 'low':
-            dCLdE = 5.652636854
-            dCmdE = -0.908459494
-        if Ailerontype == 'high':
-            dCLdE = 5.613813799
-            dCmdE = -0.892930272
 
     if altitude == 0:
         rho = 1.225
-        if Ailerontype == 'low':
-            dCLdE = 5.69922452
-            dCmdE = -0.916224105
-        if Ailerontype == 'high':
-            dCLdE = 5.644872243
-            dCmdE = -0.908459494
 
 
     J = TCJ(Span_in_y)
@@ -91,22 +65,26 @@ def Aileron_effectiveness(Vfreestream, altitude, Span_in_y, Ailerontype):
     Cy = (CentroidY(stringer_distribution, Span_in_y))/1000
 
 
+<<<<<<< HEAD
     e = -((Cx/ (chord_length(Span_in_y)) + 0.15) -0.25)     # Cx position relative to chord + front spar distance - quarter chord
+=======
+    e = -((Cx/ (chord_length(Span_in_y)*1000) + 0.15) -0.25)     # Cx position relative to chord + front spar distance - quarter chord
+>>>>>>> parent of 6850c3c... Merge branch 'main' of https://github.com/erikschroter/Erik into main
     c = chord_length(Span_in_y)
 
     ae = (0.5* rho* V**2* S* c* dCmdE* dCLdal+ K* dCLdE)/((K- 0.5* rho* V**2* S* c* e* dCLdal)*dCLdE)        #Change 1 by actual dCm/dE & dCL/dE from Xfoil
 
     return ae
 
-def Aileron_effectiveness_graph(Span_in_y, Ailerontype): #Ailerontype: low-speed or high-speed, input 'low' or 'high'
+def Aileron_effectiveness_graph(Span_in_y):
 
     Vlst = []
     ae_sea_lst = []
     ae_cruise_lst = []
     for v in range (50, 500):
         Vlst.append(v)
-        ae_sea_lst.append(Aileron_effectiveness(v, 0, Span_in_y, Ailerontype))
-        ae_cruise_lst.append(Aileron_effectiveness(v, 31000, Span_in_y, Ailerontype))
+        ae_sea_lst.append(Aileron_effectiveness(v, 0, Span_in_y))
+        ae_cruise_lst.append(Aileron_effectiveness(v, 31000, Span_in_y))
 
     plt.plot(Vlst, ae_sea_lst, 'b')
     plt.plot(Vlst, ae_cruise_lst, 'r')
@@ -121,10 +99,13 @@ def Aileron_effectiveness_graph(Span_in_y, Ailerontype): #Ailerontype: low-speed
     plt.show()
 
 
-print('low-speed aileron cruise', Vr(28, 31000, 'low'))
-print('low-speed aileron sea', Vr(28, 0, 'low'))
-print('high-speed aileron cruise', Vr(13, 31000, 'high'))
-print('high-speed aileron sea', Vr(13, 0, 'high'))
+print('low-speed aileron cruise', Vr(28, 31000))
+print('low-speed aileron sea', Vr(28, 0))
+print('high-speed aileron cruise', Vr(13, 31000))
+print('high-speed aileron sea', Vr(13, 0))
 
-Aileron_effectiveness_graph(28, 'low')     #Low speed ailerons
-Aileron_effectiveness_graph(13, 'high')     #High speed ailerons
+Aileron_effectiveness_graph(28)     #Low speed ailerons
+Aileron_effectiveness_graph(13)     #High speed ailerons
+
+
+
