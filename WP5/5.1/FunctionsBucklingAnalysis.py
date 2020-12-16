@@ -325,7 +325,7 @@ if Runtime_forever==True:
     
     plt.grid(True, which='both')
     plt.axhline(y=0, color='k')
-    plt.ylim(-1, 6)
+    plt.ylim(0, 30)
     
     plt.show()
 

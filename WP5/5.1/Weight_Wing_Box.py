@@ -96,6 +96,7 @@ def Wing_Box_Weight(stringer_distribution, sections):
         length_stringer = m.sqrt(preliminary_length_stringer**2 + vertical_stringer_displacement**2)
         total_stringers_length = total_stringers_length + length_stringer
     # Cross-section stringer and final stringer volume and weight
+    print("Total length of stringers is ", total_stringers_length/1000, "m")
     A_stringer = h_stringer * t_stringer + 2 * a_stringer * t_stringer
     volume_stringers = A_stringer * total_stringers_length
     weight_stringers = volume_stringers * density_aluminium

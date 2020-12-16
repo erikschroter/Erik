@@ -69,7 +69,7 @@ def Ixx (y_span):
     return Ixx
 
 
-
+"""
 
 listResolution = 80
 xList = []
@@ -78,7 +78,7 @@ yList = []
 for i in range(0, round(wingSpan / 2) * listResolution - 3):
     xList.append(i/listResolution)
     yList.append(Ixx(i / listResolution))
-"""
+
 plt.title('Moment of Inertia')
 plt.ylabel('Ixx [mm^4]')
 plt.xlabel('Span [m]')
