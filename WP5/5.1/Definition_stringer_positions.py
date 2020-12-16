@@ -18,9 +18,9 @@ t_wing_box_spar_cap = 14.5
 a_wing_box_spar_cap = 110 #width
 
 # stringer dimensions
-a_stringer = 120
-h_stringer = 55 #max 210
-t_stringer = 3
+a_stringer = 50
+h_stringer = 100 #max 210
+t_stringer = 8
 
 
 def Definition_stringer_position(stringer_distribution, spanwise_position):
