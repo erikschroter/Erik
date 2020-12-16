@@ -80,7 +80,7 @@ def localChord2(spanValue):
 avgShear = []
 spanValue = []
 maxShear = []
-k_v = 1.5
+k_v = 1.2448
 for i in range (0, len(totalsheer)):
     localChord = localChord2(i /10)
     FrontSpar = 0.1347 * localChord

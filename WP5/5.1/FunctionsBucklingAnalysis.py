@@ -117,8 +117,11 @@ t_f = t_wing_box_spar_cap # mm # CHANGE IN DEFINITION STRINGER POSITION FILE
 t_r = t_wing_box_spar_cap # mm
 
 y_mid_seg_lst = []
+
 tau_cr_flst = []
 tau_cr_rlst = []
+
+y_section_lst = []
 
 for i in range(1, len(sections)):
     y_section = sections[i] - sections[i-1] # m
@@ -128,6 +131,12 @@ for i in range(1, len(sections)):
     
     y_mid_seg_lst.append(y_midspan-(y_section/2))
     y_mid_seg_lst.append(y_midspan+(y_section/2)-0.01)
+    
+# =============================================================================
+#     FOR COLUMN BUCKLING
+    y_section_lst.append(y_section)
+    y_section_lst.append(y_section)
+# =============================================================================
     
     h_f = FrontRearSpar(y_midspan)[0]*1000 # mm
     h_r = FrontRearSpar(y_midspan)[1]*1000 # mm
@@ -273,37 +282,58 @@ if Runtime_forever==True:
 # =============================================================================
 
 sweepAngleWing = 28.77 * m.pi / 180  # rads
-LStringer = 6.99 / np.cos(sweepAngleWing)
+LStringer = y_section_lst / np.cos(sweepAngleWing)
 
-Ixx = Ixx(0)
 Ixx_stringer = h_stringer ** 3 * t_stringer / 12 + 2 * a_stringer * t_stringer** 3 / 12 + 2 * a_stringer * t_stringer * (h_stringer/2 + t_stringer/2)**2
 
 bucklingStress = ColBucklingdef(1, 68.9 * 10 ** 9, Ixx_stringer * (10 ** -12), LStringer)
 
+
+col_buckling_critical = interp1d(y_mid_seg_lst, bucklingStress, kind="linear", fill_value="extrapolate")
+
+y = 0
+y_list = []
+col_buckling_lst_top = []
+col_buckling_lst_bottom = []
+
 if Runtime_forever==True:
 
-    # Creating plot list
-
-    y = [0]
-    for i in range(round(wingSpan / 2 * 100)):
-        new_value = y[i] + 0.01
-        y.append(new_value)
-
-    plt.plot(y, bucklingStress / (column_maximum_compressive_stress_bottom(y)), "b")
-    plt.plot(y, bucklingStress / (column_maximum_compressive_stress_top(y)), "r")
-
+    for i in range(int(wingSpan/2*100)):
+        Failure_col_buckling = col_buckling_critical(y)
+        
+        Applied_col_bottom = column_maximum_compressive_stress_bottom(y)
+        Applied_col_top = column_maximum_compressive_stress_top(y)
+        y_list.append(y)
+        col_buckling_lst_top.append(Failure_col_buckling/Applied_col_top)
+        col_buckling_lst_bottom.append(Failure_col_buckling/Applied_col_bottom)
+        y = y + 0.01
+    
+    col_buckling_margin_of_safety_top = interp1d(y_list, col_buckling_lst_top, kind="linear", fill_value="extrapolate")
+    col_buckling_margin_of_safety_bottom = interp1d(y_list, col_buckling_lst_bottom, kind="linear", fill_value="extrapolate")
+    
+    # Plotting
+    
+    plt.plot(y_list, col_buckling_lst_bottom, "b")
+    plt.plot(y_list, col_buckling_lst_top, "r")
+    
     # plot formatting
-
+    
     plt.title('Margin of safety for column buckling (blue bottom, red top)')
-
+    
     plt.xlabel('Spanwise location [m]')
     plt.ylabel('Margin of safety')
-
+    
     plt.grid(True, which='both')
     plt.axhline(y=0, color='k')
     plt.ylim(-1, 6)
-
+    
     plt.show()
+
+
+# =============================================================================
+# Design options
+# =============================================================================
+
 
 print("\n\nDESIGN OPTION: \n\n t_spar: ", t_wing_box_spar_cap, "||| rib sections: ", sections, "||| stringer distances: ", stringer_distribution, "||| width stringer: ", a_stringer, "||| height stringer: ", h_stringer, "||| t_stringer: ", t_stringer, "||| t_skin: ", t_wing_box_skin, "||| LStringer: ", LStringer)
 
