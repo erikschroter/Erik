@@ -42,8 +42,11 @@ W_uc_MLG = 7_569.349
 wtvcl = 0.1347
 #tensile yield stress [MPA]
 <<<<<<< HEAD
+<<<<<<< HEAD
 sigma_y = 276
 =======
+=======
+>>>>>>> parent of 100ee0b... WEIGHTS FIXED
 sigma_y = 310
 >>>>>>> parent of 100ee0b... WEIGHTS FIXED
 
