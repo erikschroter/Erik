@@ -67,7 +67,7 @@ def Ixx (y_span):
     return Ixx
 
 
-"""
+
 
 
 listResolution = 80
