@@ -15,10 +15,10 @@ accuracy = 41
  
 
 #Maximum takeoff weight [kg]
-MTOW = 291_509.2
+MTOW = 304636
 
 #Operating empty weight [kg]
-OEW = 141_412.4
+OEW = 147780
 #Maximum zero fuel weight [kg]
 MZFW = 161394.73
 
@@ -33,19 +33,11 @@ n=-1.5
 WC = MTOW
 # WC_second = MZFW
 
-#Engine weight for 2 engines [kg]
-EngineWeight = 20_87.986
-
-#Undercarriage weight for MLG only [kg]
-W_uc_MLG = 7_569.349
-
 #Wingbox thickness versus cord length
 wtvcl = 0.1347
-#tensile yield stress [MPA]
-sigma_y = 276
+#tensile ULTIMATE stress [MPA]
+sigma_y = 310
 
-#Wing weight including mounts and spoilers [kg]
-WingWeight = 3210.55
 
 import numpy as np
 from scipy import integrate

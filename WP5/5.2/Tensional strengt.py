@@ -35,21 +35,9 @@ WC = MZFW
 
 #Wingbox thickness versus cord lengt
 wtvcl = 0.1347
-<<<<<<< HEAD
-#tensile yield stress [MPA]
-<<<<<<< HEAD
-<<<<<<< HEAD
-sigma_y = 276
-=======
-=======
->>>>>>> parent of 100ee0b... WEIGHTS FIXED
-sigma_y = 310
->>>>>>> parent of 100ee0b... WEIGHTS FIXED
-=======
+
 #tensile ULTIMATE stress [MPA]
 sigma_y = 310
-
->>>>>>> parent of 52c9fa3... Merge branch 'main' of https://github.com/erikschroter/Erik into main
 
 import numpy as np
 from scipy import integrate
