@@ -5,6 +5,7 @@ Created on Mon Nov 30 14:22:34 2020
 @author: michi
 """
 
+E = 8.9*(10**9)
 dt=0.1
 filename = 'MainWing_a0.00_v10.00ms.csv'
 rho = 0.4416
@@ -14,10 +15,10 @@ accuracy = 41
  
 
 #Maximum takeoff weight [kg]
-MTOW = 304636
+MTOW = 291_509.2
 
 #Operating empty weight [kg]
-OEW = 147780
+OEW = 141_412.4
 #Maximum zero fuel weight [kg]
 MZFW = 161394.73
 
@@ -31,33 +32,40 @@ n=4.65
 #critical weight
 #WC = MTOW
 WC = MZFW
+#Engine weight for 2 engines [kg]
+EngineWeight = 20_87.986
 
+#Undercarriage weight for MLG only [kg]
+W_uc_MLG = 7_569.349
 
 #Wingbox thickness versus cord lengt
 wtvcl = 0.1347
-#tensile ULTIMATE stress [MPA]
-sigma_y = 310
+#tensile yield stress [MPA]
+sigma_y = 276
 
-
+#Wing weight including mounts and spoilers [kg]
+WingWeight = 3210.55
+#stringer distribution
+stringer_distribution = [(14,14),(12,12),(10,10),(8,8),(6,6)]
 import numpy as np
 from scipy import integrate
 import sys
 import matplotlib.patches as mpatches
 import os
-directory = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))+"\\WP5\\5.1"
-sys.path.insert(-1,directory)
 directory = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))+"\\WP4\\4.1"
 sys.path.insert(-1,directory)
 directory = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))+"\\WP4\\4.2"
+sys.path.insert(-1,directory)
+directory = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))+"\\WP5\\5.1"
 sys.path.insert(-1,directory)
 import scipy as sp
 import matplotlib.pyplot as plt
 from InertialLoading import inertialForce
 
 from liftdistribution import liftdistribution
-from GlobalMomentofInertia import Ixx
-from Moment_of_Inertia import chord_length
-from Centroid import SpanwiseCentroidY, y_spanwise
+from Moment_of_Inertia_Wingbox import Ixx_in_y
+from Moment_of_Inertia_Wingbox import chord_length
+from Centroid import SpanwiseCentroidY
 
 
 x, Llst, xnew, f, xdist = liftdistribution(filename, rho, v, span, accuracy,WC*9.81,n)
@@ -94,7 +102,7 @@ plt.hlines(-5,0,40)
 
 plt.show()'''
 BendingStress=[]
-fy = y_spanwise
+fy = SpanwiseCentroidY(stringer_distribution)
 
 def y(x):
     if n >= 0:
@@ -104,7 +112,7 @@ def y(x):
 i=0
 while i < len(a):
   
-    BendingStress.append(abs((Moment[i]*y(a[i]))/(10**(-6)*Ixx(a[i]))))
+    BendingStress.append(abs((Moment[i]*y(a[i]))/(10**6*Ixx_in_y(a[i]))))
     i +=1
 
 g = sp.interpolate.interp1d(a,BendingStress,kind="linear", fill_value="extrapolate")
@@ -112,7 +120,7 @@ i=0
 safty_margine = []
 while i < len(a):
     if BendingStress[i] >= 0.001:
-        safty_margine.append((1000*sigma_y/BendingStress[i]))
+        safty_margine.append((sigma_y/BendingStress[i]))
     else:
         safty_margine.append(safty_margine[-1])
     i += 1
@@ -124,10 +132,10 @@ plt.xlabel("spanwise location [m]")
 plt.show()
 print("bendingstress:",BendingStress[0])
 plt.plot(a,safty_margine)
-plt.title("Tension safety margin diagram")
+plt.title("Tension safty margin diagram")
 plt.grid(b=None,which='Major',axis='both')
-plt.ylabel("Safety margin [-]")
+plt.ylabel("Safty margin [-]")
 plt.xlabel("spanwise location [m]")
-plt.ylim(-1,6)
+plt.ylim(0,15)
 plt.show()
 

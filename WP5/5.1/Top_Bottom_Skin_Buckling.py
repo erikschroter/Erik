@@ -1,19 +1,13 @@
 # -*- coding: utf-8 -*-
+
 import matplotlib.pyplot as plt
-#%%
 from Definition_stringer_positions import t_wing_box_skin, stringer_distribution
-#%%
 from Buckling_Coefficient_Figures import figure_19_c_simply_supported_function
-#%%
 from Distance_stringers import Distance_Stringers
-#%%
 from scipy.interpolate import interp1d
-#%%
 import sys
-#%%
 sys.setrecursionlimit(10 ** 7)
-#%%
-#%%
+
 """
 Created on Thursday Dec 10 16:56:32 2020
 
@@ -23,7 +17,7 @@ Created on Thursday Dec 10 16:56:32 2020
 taperRatio = 0.3  # []
 rootChord = 11.95  # [m]
 wingSpan = 69.92  # [m]
-#%%
+
 # =============================================================================
 # Top and Bottom panel buckling (Reference from reader page 680)
 # =============================================================================
@@ -41,8 +35,6 @@ t = t_wing_box_skin  # mm
 def Top_Bottom_Skin_Buckling(section, stringer_distribution):
     critical_bottom_stresses = []
     critical_top_stresses = []
-    critical_y_bottom_stresses = []
-    critical_y_top_stresses = []
 
     # Define the critical skin stresses for all inter-rib positions
 
@@ -57,8 +49,6 @@ def Top_Bottom_Skin_Buckling(section, stringer_distribution):
 
         top_stresses = []
         bottom_stresses = []
-        y_top_stresses = []
-        y_bottom_stresses = []
         critical_top_stress = 0
         critical_bottom_stress = 0
 
@@ -68,10 +58,7 @@ def Top_Bottom_Skin_Buckling(section, stringer_distribution):
             a = 1000 * y_section
             k_c = figure_19_c_simply_supported_function(a / b)
             top_stresses.append((3.14159265 ** 2 * k_c * E / (12 * (1 - v ** 2)) * (t / b) ** 2))
-            y_top_stresses.append(distance_top_stringers[n][1])
-        number_top = top_stresses.index(min(top_stresses))
         critical_top_stress = min(top_stresses)
-        critical_y_top_stress = y_top_stresses[number_top]
 
         # Calculate bottom skin panel stresses for all possible locations
         for n in range(len(distance_bottom_stringers)):
@@ -79,27 +66,16 @@ def Top_Bottom_Skin_Buckling(section, stringer_distribution):
             a = 1000 * y_section
             k_c = figure_19_c_simply_supported_function(a / b)
             bottom_stresses.append((3.14159265 ** 2 * k_c * E / (12 * (1 - v ** 2)) * (t / b) ** 2))
-            y_bottom_stresses.append(distance_bottom_stringers[n][1])
-        number_bottom = bottom_stresses.index(min(bottom_stresses))
         critical_bottom_stress = min(bottom_stresses)
-        critical_y_bottom_stress = y_bottom_stresses[number_bottom]
 
         # Determine most critical buckling stress for top and bottom skin panel in inter-rib section
         critical_bottom_stresses.append(critical_bottom_stress)
         critical_top_stresses.append(critical_top_stress)
-        critical_y_bottom_stresses.append(critical_y_bottom_stress)
-        critical_y_top_stresses.append(critical_y_top_stress)
 
     # Define lists for final interpolation
     spanwise_location_stress = []
     bottom_stress_list = []
     top_stress_list = []
-    y_bottom_stress_list = []
-    y_top_stress_list = []
-
-    root_chord = 11.95  # [m]
-    tip_chord = 3.59  # [m]
-    span = 69.92  # [m]
 
     for i in range(len(section) - 1):
         spanwise_location_stress.append(section[i])
@@ -108,30 +84,21 @@ def Top_Bottom_Skin_Buckling(section, stringer_distribution):
         bottom_stress_list.append(critical_bottom_stresses[i])
         top_stress_list.append(critical_top_stresses[i])
         top_stress_list.append(critical_top_stresses[i])
-        y_bottom_stress_list.append(critical_y_bottom_stresses[i] * (1000 * (root_chord - (root_chord - tip_chord) * section[i] / (span / 2))))
-        y_bottom_stress_list.append(critical_y_bottom_stresses[i] * (1000 * (root_chord - (root_chord - tip_chord) * (section[i + 1] - 0.001) / (span / 2))))
-        y_top_stress_list.append(critical_y_top_stresses[i] * (1000 * (root_chord - (root_chord - tip_chord) * section[i] / (span / 2))))
-        y_top_stress_list.append(critical_y_top_stresses[i] * (1000 * (root_chord - (root_chord - tip_chord) * (section[i + 1] - 0.001) / (span / 2))))
 
     # Obtain functions for critical top and bottom skin panel buckling
     critical_bottom_stresses_function = interp1d(spanwise_location_stress, bottom_stress_list, kind="linear",
                                                  fill_value="extrapolate")
     critical_top_stresses_function = interp1d(spanwise_location_stress, top_stress_list, kind="linear",
                                               fill_value="extrapolate")
-    y_critical_bottom_stresses_function = interp1d(spanwise_location_stress, y_bottom_stress_list, kind="linear",
-                                              fill_value="extrapolate")
-    y_critical_top_stresses_function = interp1d(spanwise_location_stress, y_top_stress_list, kind="linear",
-                                              fill_value="extrapolate")
 
-    return critical_bottom_stresses_function, critical_top_stresses_function, y_critical_bottom_stresses_function, y_critical_top_stresses_function
-#%%
+    return critical_bottom_stresses_function, critical_top_stresses_function
 
 
-
-sections = [0, 4, 6, 6.99, 11, 11.5, 12, 14, 14.5, 20.98, 22.1, 24, 27.97, 32, 33.2, 34.96]  # INPUT SECTIONS!
-critical_bottom_stresses_function, critical_top_stresses_function, y_critical_bottom_stresses_function, y_critical_top_stresses_function = Top_Bottom_Skin_Buckling(sections, stringer_distribution)
-# Creating plot list
+# critical_bottom_stresses_function, critical_top_stresses_function = Top_Bottom_Skin_Buckling(sections,
+#                                                                                             stringer_distribution)
 """
+# Creating plot list
+
 y = [0]
 for i in range(round(wingSpan / 2 * 100)):
     new_value = y[i] + 0.01
