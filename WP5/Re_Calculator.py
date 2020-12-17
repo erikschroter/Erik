@@ -9,4 +9,3 @@ def Re(V,L,alt):
     nu = mu / rho
     Re = (V * L) / nu
     return Re
-print(Re( 203.6, 5.254, 31000*.3048))

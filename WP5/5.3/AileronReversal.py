@@ -30,17 +30,11 @@ b4 = 14
 
 G = 26 * 10**9
 
-dCLdal = 6.304
-dCLdE_highspeed_cruise = 5.613813799
-dCmdE_highspeed_cruise = -0.892930272
-dCLdE_lowspeed_cruise = 5.652636854
-dCmdE_lowspeed_cruise =-0.908459494
-dCLdE_highspeed_sealevel =5.644872243
-dCmdE_highspeed_sealevel =-0.908459494
-dCLdE_lowspeed_sealevel =5.69922452
-dCmdE_lowspeed_sealevel =-0.916224105
+dCLdal = 3.5
+dCLdE = 0.8
+dCmdE = -0.25
 
-S = 543.25
+S = 30
 
 def Vr(Span_in_y, altitude): #Only 31000 or 0
     if altitude == 31000:
@@ -48,8 +42,8 @@ def Vr(Span_in_y, altitude): #Only 31000 or 0
     if altitude == 0:
         rho = 1.225
     J = TCJ(Span_in_y)
-    K = G * J
-    c = chord_length(Span_in_y)
+    K = 1.93 * 10**6
+    c = 3
 
     VR = ((-K * dCLdE) / (0.5* rho* S* c* dCmdE* dCLdal))**0.5
     return VR
@@ -63,24 +57,25 @@ def Aileron_effectiveness(Vfreestream, altitude, Span_in_y): #Altitude Only 3100
         rho = 1.225
 
     J = TCJ(Span_in_y)
-    K = G * J
+    K = 1.93 * 10**6
     V = Vfreestream * math.cos(math.radians(28.77))
     Cx = (CentroidX(stringer_distribution, Span_in_y))/1000
     Cy = (CentroidY(stringer_distribution, Span_in_y))/1000
 
-    e = Cx/ chord_length(Span_in_y)+ 0.15- 0.25      # Cx position relative to chord + front spar distance - quarter chord
-    c = chord_length(Span_in_y)
+    e = 0.25
+    c = 3
 
     ae = (0.5* rho* V**2* S* c* dCmdE* dCLdal+ K* dCLdE)/((K- 0.5* rho* V**2* S* c* e* dCLdal)*dCLdE)        #Change 1 by actual dCm/dE & dCL/dE from Xfoil
 
     return ae
+print(Aileron_effectiveness(150, 0,0))
 
 def Aileron_effectiveness_graph(Span_in_y = 28):
 
     Vlst = []
     ae_sea_lst = []
     ae_cruise_lst = []
-    for v in range (50, 300):
+    for v in range (0, 150):
         Vlst.append(v)
         ae_sea_lst.append(Aileron_effectiveness(v, 0, Span_in_y))
         ae_cruise_lst.append(Aileron_effectiveness(v, 31000, Span_in_y))
