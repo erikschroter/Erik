@@ -147,4 +147,4 @@ def Removing_Stringers(stringer_positions, stringer_distribution, spanwise_posit
     return stringer_positions
 
 
-# print(Definition_stringer_position(stringer_distribution, 14))
+print(Definition_stringer_position(stringer_distribution, 0))
