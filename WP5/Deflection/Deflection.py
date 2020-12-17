@@ -51,7 +51,7 @@ while i < len(a):
     if i % 10 == 0:
         print("bending moment calculation: (1/2) ", round(100 * a[i] / xdist), "%")
     i += 1
-directory = os.path.dirname(os.path.dirname(__file__))+"\\WP5\\5.1"
+directory = os.path.dirname(os.path.dirname(__file__))+"\\5.1"
 sys.path.insert(-1, directory)
 from GlobalMomentofInertia import Ixx
 i = 1
