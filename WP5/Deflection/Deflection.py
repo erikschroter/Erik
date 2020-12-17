@@ -32,6 +32,7 @@ directory = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))+"\\WP4\\
 sys.path.insert(-1, directory)
 from liftdistribution import liftdistribution
 from InertialLoading import inertialForce
+from GlobalMomentofInertia import Ixx
 x, Llst, xnew, f, xdist = liftdistribution(filename, rho, v, span, accuracy, MTOW * 9.81, n)
 a = [0]
 Aerosheer = [-sp.integrate.quad(f, 0, 0)[0] + sp.integrate.quad(f, 0, xdist)[0]]
@@ -51,9 +52,7 @@ while i < len(a):
     if i % 10 == 0:
         print("bending moment calculation: (1/2) ", round(100 * a[i] / xdist), "%")
     i += 1
-directory = os.path.dirname(os.path.dirname(__file__))+"\\5.1"
-sys.path.insert(-1, directory)
-from GlobalMomentofInertia import Ixx
+
 i = 1
 Deflectioncalculation = [0]
 print(Moment)
